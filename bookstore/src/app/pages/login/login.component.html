@@ -1,4 +1,5 @@
-<main id="login-component" [ngStyle]="{'background-image':'url(assets/1.jpg)'}">
+<main id="login-component">
+
   <div class="login-wrapper">
     <div class="bookly-logo">
       <span>Bookly</span>
@@ -26,4 +27,7 @@
 
     <app-backdrop-loader *ngIf="isLogingIn"></app-backdrop-loader>
   </div>
+
+  <div [ngStyle]="{'background-image':'url(assets/' + currentImageIndex + '.jpg)'}" class="animated-background"></div>
+  
 </main>
