@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserInterfaceService } from '../../services/UserInterfaceService';
 import { interval } from 'rxjs';
+import { AuthService } from 'src/app/services/AuthService';
 
 const imagesLimit = 5;
 const animationDuration = 10000;
@@ -13,7 +14,6 @@ const animationDuration = 10000;
 export class LoginComponent implements OnInit, OnDestroy {
   username = '';
   password = '';
-  isLogingIn = false;
 
   currentImageIndex = 1;
   animationInterval = interval(animationDuration).subscribe(() => {
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   errors: { [key: string]: string } = {};
 
-  constructor(private uiService: UserInterfaceService) { }
+  constructor(private uiService: UserInterfaceService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -31,9 +31,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this[e.target.name] = e.target.value;
   }
 
-  handleLogingIn(e: any) {
+  handleLogIn(e: any) {
     e.preventDefault();
-    this.isLogingIn = true;
+    this.authService.isLogingIn.next(true);
+    this.authService.logIn(this.username, this.password);
   }
 
   ngOnDestroy() {

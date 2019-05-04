@@ -7,7 +7,7 @@
       <p>Fill in your login and password if you want to use the service</p>
     </div>
 
-    <form id="login-form" (submit)="handleLogingIn($event)">
+    <form id="login-form" (submit)="handleLogIn($event)">
 
       <mat-form-field class="login-form-element">
         <input name="username" (input)="handleChange($event)" matInput placeholder="Username" value="">
@@ -25,7 +25,7 @@
       <button (click)="uiService.openRegisterForm()" id="sign-up-btn" type="button" mat-button color="primary">Sign Up</button>
     </form>
 
-    <app-backdrop-loader *ngIf="isLogingIn"></app-backdrop-loader>
+    <app-backdrop-loader *ngIf="authService.isLogingIn | async"></app-backdrop-loader>
   </div>
 
   <div [ngStyle]="{'background-image':'url(assets/' + currentImageIndex + '.jpg)'}" class="animated-background"></div>

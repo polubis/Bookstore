@@ -7,10 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BackdropLoaderComponent implements OnInit {
   @Input() loaderSize = 'medium';
-  constructor() { 
-    console.log(this.loaderSize);
-
-  }
 
   ngOnInit() {
   }

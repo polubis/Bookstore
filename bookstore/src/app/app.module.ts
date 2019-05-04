@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule, MatDialogModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule,
+  MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -30,6 +31,7 @@ import { RegisterComponent } from './containers/register/register.component';
     HttpClientModule,
     MatButtonModule,
     MatInputModule,
+    MatSnackBarModule,
     MatDialogModule,
     MatStepperModule,
     MatTabsModule,

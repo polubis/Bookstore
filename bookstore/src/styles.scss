@@ -37,3 +37,12 @@ p {
 .relative {
   position: relative;
 }
+
+.warn-snackbar {
+  background: $warn !important;
+  color: $white !important;
+
+  .mat-simple-snackbar-action {
+    color: $white !important;
+  }
+}
