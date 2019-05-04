@@ -1,0 +1,39 @@
+@import './colors.scss';
+
+body, html {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+* { 
+  box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+p {
+  font-weight: 300;
+  letter-spacing: 1.1px;
+  line-height: 22px;
+  color: $font-grey;
+}
+
+.close-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  color: $font;
+  cursor: pointer;
+
+  svg {
+    fill: $font;
+  }
+}
+
+.relative {
+  position: relative;
+}

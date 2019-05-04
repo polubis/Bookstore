@@ -1,0 +1,29 @@
+<main id="login-component" [ngStyle]="{'background-image':'url(assets/1.jpg)'}">
+  <div class="login-wrapper">
+    <div class="bookly-logo">
+      <span>Bookly</span>
+      <mat-icon color="primary">local_library</mat-icon>
+      <p>Fill in your login and password if you want to use the service</p>
+    </div>
+
+    <form id="login-form" (submit)="handleLogingIn($event)">
+
+      <mat-form-field class="login-form-element">
+        <input name="username" (input)="handleChange($event)" matInput placeholder="Username" value="">
+      </mat-form-field>
+      <mat-form-field class="login-form-element">
+        <input name="password" (input)="handleChange($event)" matInput placeholder="Password" value="">
+      </mat-form-field>
+
+      <button id="sign-in-btn" type="submit" mat-flat-button color="primary">
+        Sign In
+      </button>
+
+      <span class="or-space">OR</span>
+
+      <button (click)="uiService.openRegisterForm()" id="sign-up-btn" type="button" mat-button color="primary">Sign Up</button>
+    </form>
+
+    <app-backdrop-loader *ngIf="isLogingIn"></app-backdrop-loader>
+  </div>
+</main>
