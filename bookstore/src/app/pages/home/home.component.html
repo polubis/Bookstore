@@ -98,9 +98,7 @@
     <app-slider [sliderHeight]='340' [elementWidth]='250' [elementMarginRight]='45'>
       <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let recommendedBook of booksService.recommendedBooks | async"
         class="book-cart">
-        <div class="book-image-wrapper">
-          <img src="{{recommendedBook.pictureName}}" />
-        </div>
+        <img src="{{recommendedBook.pictureName}}" />
       </div>
     </app-slider>
   </section>
