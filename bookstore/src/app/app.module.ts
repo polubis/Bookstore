@@ -15,6 +15,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { BackdropLoaderComponent } from './components/backdrop-loader/backdrop-loader.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { RegisterComponent } from './containers/register/register.component';
+import { SearcherComponent } from './components/searcher/searcher.component';
+import { BooksSliderComponent } from './components/books-slider/books-slider.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { RegisterComponent } from './containers/register/register.component';
     HomeComponent,
     BackdropLoaderComponent,
     LoaderComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearcherComponent,
+    BooksSliderComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,51 @@
-<p>
-  home works!
-</p>
+<header id='home-page-header'>
+
+  <nav>
+    <div class="page-logo">
+      <mat-icon id='company-logo'>local_library</mat-icon>
+      <span class="company-name">Bookly</span>
+    </div>
+    <app-searcher></app-searcher>
+    <div class="btn-holder">
+      <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
+      <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
+    </div>
+
+  </nav>
+
+  <div class="social-icons">
+    <div class="svg-wrapper" id='instagram-icon'>
+      <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="instagram" class="svg-inline--fa fa-instagram fa-w-14"
+        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path fill="currentColor" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+      </svg>
+    </div>
+    <div class="svg-wrapper" id='facebook-icon'>
+      <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="facebook-f" class="svg-inline--fa fa-facebook-f fa-w-9"
+        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512">
+        <path fill="currentColor" d="M215.8 85H264V3.6C255.7 2.5 227.1 0 193.8 0 124.3 0 76.7 42.4 76.7 120.3V192H0v91h76.7v229h94V283h73.6l11.7-91h-85.3v-62.7c0-26.3 7.3-44.3 45.1-44.3z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div class="page-description">
+    <h1>Znajdź swoje ulubione książki <br> w najniższej cenie</h1>
+    <p>Witryna oferuję zaawansowany system wyszukiwania, który pozwoli Ci znaleźć konkretną pozycję
+      w szybkie i wygodny sposób. Skorzystaj z łatwego obsłudze koszyka i złóż zamówienie poprzez 
+      specjalny formularz
+    </p>
+  </div>
+
+  <div class="slider-wrapper">
+    <app-books-slider [title]="'Polecane na szybko'">
+
+    </app-books-slider>
+  </div>
+  
+
+</header>
+
+<main id="home-page-content">
+  
+  
+</main>

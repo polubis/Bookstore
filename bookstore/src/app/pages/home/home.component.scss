@@ -1,0 +1,144 @@
+@import '../../../colors.scss';
+
+#home-page-header {
+  display: flex;
+  flex-flow: column;
+  padding: 15px 45px;
+  background-image: url('../../../assets/home-page.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  box-shadow: $shadow;
+
+  .social-icons {
+    position: absolute;
+    bottom: 15px;
+    right: 45px;
+    display: flex;
+    align-items: center;
+    
+    .svg-wrapper {
+      border: 1px solid $white;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      display: flex;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: .3s background-color;
+
+      &:hover {
+        background-color: $white;
+        svg path {
+          fill: $font;
+        }
+      }
+
+      &::before {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 1px;
+        background: $white;
+        position: absolute;
+        left: -46px;
+      } 
+      svg {
+        width: 22px;
+        height: 22px;
+        path {
+          fill: $white;
+        }
+      }
+  
+    }
+  
+    #instagram-icon {
+      margin-right: 16px;
+    }
+  }
+
+  
+
+  &::before {
+    content: '';
+    background: rgba(0,0,0,.20);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  nav {
+    display: flex;
+    z-index: 1;
+    align-items: center;
+    justify-content: space-between;
+
+    .page-logo {
+      color: $white;
+      display: flex;
+      align-items: center;
+      
+      .company-name {
+        font-weight: 300;
+        letter-spacing: 1.1px;
+        margin-left: 12.5px;
+      }
+
+      .company-logo {
+        font-size: 32px;
+        height: 32px;
+        width: 32px; 
+      }
+    }
+
+    .btn-holder {
+      display: flex;
+      align-items: center;
+
+      #sign-in-btn {
+        background: $white;
+        margin-right: 25px;
+      }
+
+      #sign-up-btn {
+        border: 1px solid $white;
+        color: $white;
+      }
+    }
+  }
+
+  .page-description {
+    width: 1080px;
+    margin: 150px auto 150px auto;
+    z-index: 1;
+
+    h1, p{
+      text-shadow: $shadow;
+      text-align: center;
+    }
+
+    h1 {
+      color: $white;
+      font-size: 48px;
+
+
+    }
+    p {
+      width: 750px;
+      color: $white;
+      margin: 10px auto 0 auto;
+    }
+  }
+
+  .slider-wrapper {
+    position: absolute;
+    bottom: -40px;
+    z-index: 2;
+    left: 60px;
+
+  }
+}
