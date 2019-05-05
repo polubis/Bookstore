@@ -6,7 +6,7 @@ export class Book {
     public kindOfBookName: string,
     public price: number,
     public description: string,
-    public pictureBook: string,
+    public pictureName: string,
     public id: string,
   ) {
   }

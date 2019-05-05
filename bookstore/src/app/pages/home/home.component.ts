@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private uiService: UserInterfaceService, private booksService: BooksService) { }
 
   ngOnInit() {
-    this.booksService.getBooksRecommendedBooks({ });
+    this.booksService.getRecommendedBooks({ });
   }
 
 }

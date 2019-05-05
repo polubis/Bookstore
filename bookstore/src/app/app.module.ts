@@ -16,6 +16,7 @@ import { BackdropLoaderComponent } from './components/backdrop-loader/backdrop-l
 import { LoaderComponent } from './components/loader/loader.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { SearcherComponent } from './components/searcher/searcher.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SearcherComponent } from './components/searcher/searcher.component';
     LoaderComponent,
     RegisterComponent,
     SearcherComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule,

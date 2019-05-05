@@ -1,0 +1,41 @@
+@import '../../../colors.scss';
+
+$dark-slider: rgba(24,33,48,1);
+
+.slider {
+  background: $dark-slider;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+
+  .slider-btn {
+    width: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $primary;
+    border-radius: 0;
+    border: none;
+
+    mat-icon {
+      font-size: 42px;
+      height: 42px;
+      width: 42px;
+    }
+  }
+
+  .slider-btn-left {
+      
+  } 
+
+  .slider-btn-right {
+  }
+
+
+  .slider-fluid-wrapper {
+    width: 1200px;
+    overflow: hidden;
+    display: flex;
+    padding: 60px 0;
+  }
+}

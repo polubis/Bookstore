@@ -1,0 +1,12 @@
+<div class='slider'>
+  <button class='slider-btn slider-btn-left' mat-button>
+    <mat-icon id='company-logo'>arrow_left</mat-icon>
+  </button>
+  <div [style.height]="sliderHeight" class='slider-fluid-wrapper'>
+    <ng-content>
+    </ng-content>
+  </div>
+  <button class='slider-btn slider-btn-right' mat-button>
+    <mat-icon id='company-logo'>arrow_right</mat-icon>
+  </button>
+</div>

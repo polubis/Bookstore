@@ -92,18 +92,17 @@
 
   </section>
 
+  <h2 class="home-section-title">Najlepiej ocenione</h2>
 
-  <section id='recommended'>
-    <h2 class="home-section-title">Najlepiej ocenione</h2>
-
-    <div id="recommended-books">
-      <div *ngFor="let recommendedBook of booksService.recommendedBooks | async" class="recommended-book">
-        {{recommendedBook.name}}
+  <section id='recommended-books'>
+    <app-slider [sliderHeight]='340' [elementWidth]='250' [elementMarginRight]='45'>
+      <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let recommendedBook of booksService.recommendedBooks | async"
+        class="book-cart">
+        <div class="book-image-wrapper">
+          <img src="{{recommendedBook.pictureName}}" />
+        </div>
       </div>
-    </div>
-
+    </app-slider>
   </section>
-
-
 
 </main>
