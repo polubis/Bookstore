@@ -11,3 +11,13 @@ export class Book {
   ) {
   }
 }
+
+export interface Books {
+  currentPage: number;
+  firstRowOnPage: number;
+  lastRowOnPage: number;
+  pageCount: number;
+  pageSize: number;
+  results: Book[];
+  rowCount: number;
+}

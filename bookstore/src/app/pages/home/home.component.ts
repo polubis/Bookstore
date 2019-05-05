@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Book } from 'src/app/models/entities/Book';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
+import { BooksService } from 'src/app/services/BooksService';
 
 @Component({
   selector: 'app-home',
@@ -9,12 +10,10 @@ import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 })
 export class HomeComponent implements OnInit {
 
-  recentBooks: Book[] = [
-  ];
-
-  constructor(private uiService: UserInterfaceService) { }
+  constructor(private uiService: UserInterfaceService, private booksService: BooksService) { }
 
   ngOnInit() {
+    this.booksService.getBooksRecommendedBooks({ });
   }
 
 }

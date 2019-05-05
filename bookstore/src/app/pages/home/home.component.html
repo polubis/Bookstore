@@ -5,7 +5,6 @@
       <mat-icon id='company-logo'>local_library</mat-icon>
       <span class="company-name">Bookly</span>
     </div>
-    <app-searcher></app-searcher>
     <div class="btn-holder">
       <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
       <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
@@ -34,6 +33,9 @@
       w szybki i wygodny sposób. Skorzystaj z łatwego obsłudze koszyka i złóż zamówienie poprzez
       specjalny formularz
     </p>
+    <div class="searcher-wrapper">
+      <app-searcher></app-searcher>
+    </div>
   </div>
 
 </header>
@@ -69,7 +71,8 @@
       <div class="jumbo">
         <h3>Inteligente podpowiedzi</h3>
         <mat-icon>timeline</mat-icon>
-        <article>Filtruj książki po rodzajach i wykorzystuj podpowiedzi, które wygeneruje dla Ciebie system na bazie preferencji</article>
+        <article>Filtruj książki po rodzajach i wykorzystuj podpowiedzi, które wygeneruje dla Ciebie system na bazie
+          preferencji</article>
       </div>
 
       <div class="jumbo">
@@ -81,12 +84,26 @@
       <div class="jumbo">
         <h3>Komentarze i opinie</h3>
         <mat-icon>comment</mat-icon>
-        <article>Oceń przeczytaną książkę i dodaj opinie na jej temat. Może być obszerna jak recenzja lub zawierać się w kilku słowach</article>
+        <article>Oceń przeczytaną książkę i dodaj opinie na jej temat. Może być obszerna jak recenzja lub zawierać się
+          w kilku słowach</article>
       </div>
 
     </div>
 
+  </section>
+
+
+  <section id='recommended'>
+    <h2 class="home-section-title">Najlepiej ocenione</h2>
+
+    <div id="recommended-books">
+      <div *ngFor="let recommendedBook of booksService.recommendedBooks | async" class="recommended-book">
+        {{recommendedBook.name}}
+      </div>
+    </div>
 
   </section>
+
+
 
 </main>

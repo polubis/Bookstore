@@ -113,8 +113,11 @@
 
   .page-description {
     width: 1080px;
-    margin: 150px auto 150px auto;
+    margin: 125px auto 125px auto;
     z-index: 1;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 
     h1, p{
       text-shadow: $shadow;
@@ -132,13 +135,14 @@
       color: $white;
       margin: 10px auto 0 auto;
     }
+
+    .searcher-wrapper {
+      margin-top: 40px;
+      width: 450px;
+    }
   }
 }
 
-#home-page-content {
-
- 
-}
 
 #basic-informations {
   background: $grey-background;
@@ -181,5 +185,43 @@
       }
     }
 
+  }
+}
+
+$recommended-books: #212121;
+
+#recommended {
+  margin-bottom: 100px;
+  #recommended-books {
+    background: $recommended-books;
+    color: $white;
+    padding: 24px;
+  }
+}
+
+.home-section-title {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 45px 0;
+  letter-spacing: 1.1px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before, &::after {
+    content: '';
+    display: block;
+    height: 2px; 
+    width: 75px;
+    background: $primary;
+  }
+
+  &::before {
+    margin-right: 30px;
+
+  }
+  &::after {
+    margin-left: 30px;
   }
 }

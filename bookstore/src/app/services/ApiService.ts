@@ -11,8 +11,9 @@ type RequestTypes = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
 type AccountEndpoints = 'accounts/login' | 'accounts/register';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
+type BooksEndpoints = 'books';
 
-type Endpoints = AccountEndpoints | AddressEndpoints;
+type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints;
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +39,8 @@ export class ApiService {
 
   extractErrorMessage = (err: HttpErrorResponse): string => this.statusesResponsesMap[err.status] || err.error.errors[0];
 
-  execute = (restUrl: Endpoints, type: RequestTypes = 'get', payload: any): Observable<any> => {
-    const path = url + restUrl;
+  execute = (restUrl: Endpoints, type: RequestTypes = 'get', payload?: any, params = ''): Observable<any> => {
+    const path = url + restUrl + params;
     const req: Observable<any> = this.requestTypesMap[type](path, payload);
 
     return req.pipe(
