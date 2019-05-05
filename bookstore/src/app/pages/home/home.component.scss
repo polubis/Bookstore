@@ -133,12 +133,53 @@
       margin: 10px auto 0 auto;
     }
   }
+}
 
-  .slider-wrapper {
-    position: absolute;
-    bottom: -40px;
-    z-index: 2;
-    left: 60px;
+#home-page-content {
+
+ 
+}
+
+#basic-informations {
+  background: $grey-background;
+  border-bottom: 1px solid $border-color;
+
+  .jumbos {
+    width: 1080px;
+    margin: auto;
+    display: flex;
+    padding-top: 100px;
+    flex-flow: wrap;
+    justify-content: space-between;
+
+    .jumbo {
+      display: flex;
+      align-items: center;
+      flex-flow: column;
+      margin-bottom: 100px;
+      width: 30%;
+
+      h3 {
+        font-weight: 500;
+      }
+
+      & > mat-icon {
+        font-size: 42px;
+        height: 42px;
+        width: 42px;
+        margin: 15px 0;
+      }
+
+      #arrow-down-btn {
+        margin: auto;
+      }
+
+      article {
+        text-align: center;
+        font-weight: 300;
+        line-height: 21px; 
+      }
+    }
 
   }
 }
