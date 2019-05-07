@@ -18,6 +18,8 @@ import { RegisterComponent } from './containers/register/register.component';
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ErrorPlaceholderComponent } from './components/error-placeholder/error-placeholder.component';
+import { CutTextPipe } from './helpers/cut-text-pipe';
+import { StarsRateComponent } from './components/stars-rate/stars-rate.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ErrorPlaceholderComponent } from './components/error-placeholder/error-
     SearcherComponent,
     SliderComponent,
     ErrorPlaceholderComponent,
+    CutTextPipe,
+    StarsRateComponent
   ],
   imports: [
     BrowserModule,

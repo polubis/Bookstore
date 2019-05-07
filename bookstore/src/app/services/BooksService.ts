@@ -35,6 +35,7 @@ export class BooksService {
     this.apiService.execute('books/bestrating', 'get', {}, `?numberOfBooks=${numberOfBooks}`)
       .subscribe(
         (value: RequestResponse<Book[]>) => {
+          console.log(value.successResult);
           this.recommendedBooks.next({
             isLoading: false,
             error: null,

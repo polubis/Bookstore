@@ -1,0 +1,14 @@
+$star-color: #ffbe00;
+
+.stars-rate {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin-right: 6px;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    color: $star-color;
+  }
+}

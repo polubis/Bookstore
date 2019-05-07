@@ -200,10 +200,78 @@
       transform: scale(1.4);
     }
 
+    &:hover .book-overlay {
+      transform: translateY(0);
+    }
+
+    .book-overlay {
+      animation-delay: 3s;
+      transition: .4s transform $transition;
+      height: 100%;
+      width: 100%;
+      transform: translateY(360px);
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: rgba(0,0,0,.76);
+      color: $white;
+      z-index: 1;
+      padding: 20px 20px 15px 20px;
+
+      .title {
+        font-size: 18px;
+        font-weight: 400;
+        color: $primary-light;
+        letter-spacing: 1.1px;
+      }
+
+      .author {
+        font-size: 16px;
+        margin-top: 5px;
+        text-transform: capitalize;
+      }
+
+      .description {
+        margin: 10px 0 25px 0;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 19px;
+        letter-spacing: 1.1px;
+        position: relative;
+        
+        &::before {
+          content: '';
+          bottom: -12.5px;
+          width: 100px;
+          height: 2px;
+          background: $white;
+          position: absolute;
+          left: 0;
+        }
+      }
+
+      .add-to-bucket {
+        margin-top: auto;
+        display: block;
+        color: $primary-light;
+        font-size: 12px;
+        font-weight: 300;
+        letter-spacing: 1.1px;
+        text-transform: uppercase;
+
+        mat-icon {
+          height: 20px;
+          width: 20px;
+          font-size: 20px;
+          margin-right: 5px;
+        }
+      }
+    }
+
     img {
       width: 100%;
       max-width: 100%;
-      transition: 1s transform;
+      transition: 1s transform $transition;
       height: 100%;
       transform: scale(1);
       object-fit: cover;

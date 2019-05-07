@@ -50,3 +50,12 @@ p {
 .clickable {
   cursor: pointer;
 }
+
+.flex-col {
+  display: flex;
+  flex-flow: column;
+}
+
+.flex {
+  display: flex;
+}
