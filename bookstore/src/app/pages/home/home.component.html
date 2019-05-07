@@ -95,8 +95,15 @@
   <h2 class="home-section-title">Najlepiej ocenione</h2>
 
   <section id='recommended-books'>
-    <app-slider [sliderHeight]='340' [elementWidth]='250' [elementMarginRight]='45'>
-      <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let recommendedBook of booksService.recommendedBooks | async"
+    <app-slider 
+      [loading]="recommendedBooks.isLoading"
+      [error]="recommendedBooks.error" 
+      [sliderHeight]='340' 
+      [elementWidth]='250' 
+      [elementMarginRight]='45'
+    >
+      <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" 
+        *ngFor="let recommendedBook of recommendedBooks.data"
         class="book-cart">
         <img src="{{recommendedBook.pictureName}}" />
       </div>

@@ -17,6 +17,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { RegisterComponent } from './containers/register/register.component';
 import { SearcherComponent } from './components/searcher/searcher.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { ErrorPlaceholderComponent } from './components/error-placeholder/error-placeholder.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SliderComponent } from './components/slider/slider.component';
     RegisterComponent,
     SearcherComponent,
     SliderComponent,
+    ErrorPlaceholderComponent,
   ],
   imports: [
     BrowserModule,

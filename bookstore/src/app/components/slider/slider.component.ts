@@ -9,6 +9,8 @@ export class SliderComponent implements OnInit {
   @Input() elementWidth: string;
   @Input() elementMarginRight: string;
   @Input() sliderHeight: string;
+  @Input() error: boolean;
+  @Input() loading: boolean;
 
   constructor() { }
 

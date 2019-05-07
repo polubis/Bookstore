@@ -9,7 +9,6 @@ import { MatDialogRef } from '@angular/material';
 export class RegisterComponent implements OnInit {
   isCreatingAccount = false;
 
-
   constructor(private dialogRef: MatDialogRef<RegisterComponent>) {}
 
   ngOnInit() {

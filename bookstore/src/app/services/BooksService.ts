@@ -3,13 +3,15 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
 import { Book, Books } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
+import { DataEnhancer } from '../models/others/DataEnhancer';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
 
-  recommendedBooks = new BehaviorSubject<Book[]>([]);
+  recommendedBooks = new BehaviorSubject<DataEnhancer<Book>>({ isLoading: true, data: [] });
 
   constructor(private apiService: ApiService) {
 
@@ -29,20 +31,25 @@ export class BooksService {
 
   getRecommendedBooks(searchConfig: any) {
     const params = `?page=${1}&pageSize=${10}`;
+    this.recommendedBooks.next({ isLoading: true, error: null, data: [] });
 
     this.apiService.execute('books', 'get', {}, params)
       .subscribe(
         (value: RequestResponse<Books>) => {
           console.log(value.successResult.results.map((book: Book, index) => {
-            return {...book, pictureName: this.pictures[index] || ''};
+            return { ...book, pictureName: this.pictures[index] || '' };
           }));
-          this.recommendedBooks.next(
-            value.successResult.results.map((book: Book, index) => {
-              return {...book, pictureName: this.pictures[index] || ''};
+
+          this.recommendedBooks.next({
+            isLoading: false,
+            error: null,
+            data: value.successResult.results.map((book: Book, index) => {
+              return { ...book, pictureName: this.pictures[index] || '' };
             })
-          );
+          });
         },
-        error => {
+        ({message, code}) => {
+          this.recommendedBooks.next({ isLoading: false, error: { message, code }, data: []});
         }
       );
   }

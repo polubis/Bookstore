@@ -37,6 +37,8 @@ export class ApiService {
     500: 'Ups, coś poszło nie tak'
   };
 
+  snackBarBlackList = ['books'];
+
   extractErrorMessage = (err: HttpErrorResponse): string => this.statusesResponsesMap[err.status] || err.error.errors[0];
 
   execute = (restUrl: Endpoints, type: RequestTypes = 'get', payload?: any, params = ''): Observable<any> => {
@@ -45,12 +47,17 @@ export class ApiService {
 
     return req.pipe(
       catchError((err: HttpErrorResponse) => {
+        const useSnackbar = this.snackBarBlackList.find(item => item === restUrl) === null;
         const message = this.extractErrorMessage(err);
-        this.snackBar.open(message, 'CLOSE', {
-          duration: 5000,
-          panelClass: ['warn-snackbar']
-        });
-        throw err;
+
+        if (useSnackbar) {
+          this.snackBar.open(message, 'CLOSE', {
+            duration: 5000,
+            panelClass: ['warn-snackbar']
+          });
+        }
+
+        throw { message, code: err.status };
       })
     );
   }
