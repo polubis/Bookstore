@@ -5,6 +5,7 @@ import { BooksService } from 'src/app/services/BooksService';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Subscription } from 'rxjs';
 import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
+import { BucketService } from 'src/app/services/BucketService';
 
 @AutoUnsubscribe()
 @Component({
@@ -16,7 +17,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   sub: Subscription;
   recommendedBooks: DataEnhancer<Book[]>;
 
-  constructor(private uiService: UserInterfaceService, private booksService: BooksService) { }
+  constructor(
+    private uiService: UserInterfaceService,
+    private booksService: BooksService,
+    private bucketService: BucketService
+  ) { }
 
   ngOnInit() {
     this.booksService.getRecommendedBooks();

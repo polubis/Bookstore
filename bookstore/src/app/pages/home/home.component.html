@@ -116,7 +116,7 @@
 
           <app-stars-rate [rate]="4.25"></app-stars-rate>
 
-          <button mat-button class="add-to-bucket">
+          <button (click)="bucketService.addBookToBucket(recommendedBook)" mat-button class="add-to-bucket">
             <mat-icon>add_shopping_cart</mat-icon>
             Do koszyka
           </button>
