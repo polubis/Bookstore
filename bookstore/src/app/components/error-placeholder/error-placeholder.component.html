@@ -1,4 +1,9 @@
 <div class="error-placeholder">
-  <span class="error-title">OOPS</span>
-  <span class="message">{{error.code}}. {{error.message}}</span>
+  <span class="code">
+    {{error.code}}
+  </span>
+  <span class="sub-message">Wystąpił problem podczs interakcji z serwerem</span>
+  <span class="message">{{error.message}}</span>
+
+  <button mat-stroked-button>Odśwież</button>
 </div>

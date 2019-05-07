@@ -7,25 +7,55 @@
   right: 0;
   top: 0;
   bottom: 0;
-  background: #182130;
+  background: $dark;
   display: flex;
   align-items: center;
   flex-flow: column;
   justify-content: center;
 
-  .error-title {
-    font-size: 76px;
-    letter-spacing: 1.1px;
-    margin-bottom: 10px;
+  .code {
+    font-size: 72px;
+    color: red;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+
+    &::before, &::after {
+      content: '';
+      background: red;
+      width: 24px;
+      height: 2px;
+    }
+
+    &::before {
+      margin-right: 15px;
+    }
+
+    &::after {
+      margin-left: 15px;
+    }
+  }
+
+  span {
+    line-height: 22.5px;
+    text-align: center;
+  }
+
+  .sub-message {
+    font-weight: 300;
+    font-size: 16px;
+    margin: 15px 0;
   }
 
   .message {
-    margin: 0 auto;
-    padding: 12.5px;
-    letter-spacing: 1.1px;
-    left: 0;
-    right: 0;
-    bottom: -22px;
-    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+  }
+
+  button {
+    border: 1px solid $white;
+    color: $white;
+    margin-top: 34px;
+    width: 150px;
   }
 }

@@ -14,12 +14,12 @@ import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   sub: Subscription;
-  recommendedBooks: DataEnhancer<Book>;
+  recommendedBooks: DataEnhancer<Book[]>;
 
   constructor(private uiService: UserInterfaceService, private booksService: BooksService) { }
 
   ngOnInit() {
-    this.booksService.getRecommendedBooks({});
+    this.booksService.getRecommendedBooks();
     this.sub = this.booksService.recommendedBooks.subscribe(books => {
       this.recommendedBooks = books;
     });

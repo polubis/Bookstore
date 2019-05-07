@@ -11,7 +11,7 @@ type RequestTypes = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
 type AccountEndpoints = 'accounts/login' | 'accounts/register';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
-type BooksEndpoints = 'books';
+type BooksEndpoints = 'books' | 'books/bestrating';
 
 type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints;
 

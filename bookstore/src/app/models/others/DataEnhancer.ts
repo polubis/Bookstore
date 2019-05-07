@@ -4,5 +4,5 @@ export interface DataEnhancer<T> {
     message: string;
     code: number;
   };
-  data: T | T[];
+  data: T;
 }
