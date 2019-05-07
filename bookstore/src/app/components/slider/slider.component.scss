@@ -1,12 +1,11 @@
 @import '../../../colors.scss';
 
-$dark-slider: rgba(24,33,48,1);
-
 .slider {
   background: $dark-slider;
   color: $white;
   display: flex;
   justify-content: space-between;
+  position: relative;
 
   .slider-btn {
     width: 66px;
@@ -36,6 +35,7 @@ $dark-slider: rgba(24,33,48,1);
     width: 1200px;
     overflow: hidden;
     display: flex;
+    margin: 0 auto;
     padding: 60px 0;
   }
 }

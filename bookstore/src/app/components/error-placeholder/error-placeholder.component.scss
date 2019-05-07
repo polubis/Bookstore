@@ -1,6 +1,31 @@
+@import '../../../colors.scss';
+
 .error-placeholder {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #182130;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-flow: column;
+  justify-content: center;
+
+  .error-title {
+    font-size: 76px;
+    letter-spacing: 1.1px;
+    margin-bottom: 10px;
+  }
+
+  .message {
+    margin: 0 auto;
+    padding: 12.5px;
+    letter-spacing: 1.1px;
+    left: 0;
+    right: 0;
+    bottom: -22px;
+    text-align: center;
+  }
 }
