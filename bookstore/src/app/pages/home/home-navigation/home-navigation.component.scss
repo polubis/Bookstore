@@ -1,0 +1,66 @@
+@import '../../../../colors.scss';
+
+.filled-nav {
+  &::before {
+    transform: translateY(0);
+  }
+}
+
+nav {
+  display: flex;
+  z-index: 10;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 15px 45px;
+  width: 100%;
+
+  &::before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background: $primary;
+    box-shadow: $shadow;
+    top: 0;
+    right: 0;
+    transform: translateY(-100px);
+    transition: .2s transform $transition;
+  }
+
+  .page-logo {
+    color: $white;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    
+    .company-name {
+      font-weight: 300;
+      letter-spacing: 1.1px;
+      margin-left: 12.5px;
+    }
+
+    .company-logo {
+      font-size: 32px;
+      height: 32px;
+      width: 32px; 
+    }
+  }
+
+  .btn-holder {
+    display: flex;
+    align-items: center;
+
+    #sign-in-btn {
+      background: $white;
+      margin-right: 25px;
+    }
+
+    #sign-up-btn {
+      border: 1px solid $white;
+      color: $white;
+    }
+  }
+}

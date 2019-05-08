@@ -21,6 +21,7 @@ import { ErrorPlaceholderComponent } from './components/error-placeholder/error-
 import { CutTextPipe } from './helpers/cut-text-pipe';
 import { StarsRateComponent } from './components/stars-rate/stars-rate.component';
 import { BucketPanelComponent } from './components/bucket-panel/bucket-panel.component';
+import { HomeNavigationComponent } from './pages/home/home-navigation/home-navigation.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BucketPanelComponent } from './components/bucket-panel/bucket-panel.com
     ErrorPlaceholderComponent,
     CutTextPipe,
     StarsRateComponent,
-    BucketPanelComponent
+    BucketPanelComponent,
+    HomeNavigationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<nav [class]="navigationClass">
+  <div class="page-logo">
+    <mat-icon id='company-logo'>local_library</mat-icon>
+    <span class="company-name">Bookly</span>
+  </div>
+  <div class="btn-holder">
+    <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
+    <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
+  </div>
+</nav>

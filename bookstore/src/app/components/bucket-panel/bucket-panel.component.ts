@@ -15,7 +15,6 @@ export class BucketPanelComponent implements OnInit {
   }
 
   calculateScrolledContent() {
-    // console.log(window.scrollY, window.innerHeight);
     const percentage = Math.floor(((window.scrollY + window.innerHeight) / document.body.offsetHeight) * 100);
     const scrolledContent = percentage >= 100 ? 100 : percentage;
     return scrolledContent;
