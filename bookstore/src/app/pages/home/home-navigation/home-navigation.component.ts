@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { debounceEvent } from '../../../helpers/debounce-decorator';
+import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 
 @Component({
   selector: 'app-home-navigation',
@@ -10,7 +11,7 @@ export class HomeNavigationComponent implements OnInit {
 
   navigationClass: string = this.calcClass();
 
-  constructor() { }
+  constructor(private uiService: UserInterfaceService) { }
 
   ngOnInit() {
   }

@@ -20,7 +20,6 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ErrorPlaceholderComponent } from './components/error-placeholder/error-placeholder.component';
 import { CutTextPipe } from './helpers/cut-text-pipe';
 import { StarsRateComponent } from './components/stars-rate/stars-rate.component';
-import { BucketPanelComponent } from './components/bucket-panel/bucket-panel.component';
 import { HomeNavigationComponent } from './pages/home/home-navigation/home-navigation.component';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { HomeNavigationComponent } from './pages/home/home-navigation/home-navig
     ErrorPlaceholderComponent,
     CutTextPipe,
     StarsRateComponent,
-    BucketPanelComponent,
     HomeNavigationComponent
   ],
   imports: [

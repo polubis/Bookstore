@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Book } from 'src/app/models/entities/Book';
-import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { BooksService } from 'src/app/services/BooksService';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Subscription } from 'rxjs';
@@ -18,7 +17,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   recommendedBooks: DataEnhancer<Book[]>;
 
   constructor(
-    private uiService: UserInterfaceService,
     private booksService: BooksService,
     private bucketService: BucketService
   ) { }
