@@ -1,5 +1,18 @@
 @import '../../../colors.scss';
 
+.searcher-focused {
+  &::before {
+    transform: translateX(0);
+  }
+}
+
+.searcher-not-focused {
+  &::before {
+    transform: translateX(-100%);
+  }
+
+}
+
 .searcher-wrapper {
   display: flex;
   align-items: center;
@@ -8,6 +21,20 @@
   border: 1px solid $white;
   border-radius: 4px;
   box-shadow: $shadow;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.24);
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transition: .3s transform $transition;
+  }
 
   input { 
     width: calc(100% - 40px);

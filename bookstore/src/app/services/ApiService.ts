@@ -39,7 +39,7 @@ export class ApiService {
     500: 'Ups, coś poszło nie tak'
   };
 
-  snackBarBlackList = ['books', 'books/newest', 'books/bestrating'];
+  snackBarBlackList = ['books/newest', 'books/bestrating'];
 
   extractErrorMessage = (err: HttpErrorResponse): string => {
     if (this.statusesResponsesMap.hasOwnProperty(err.status)) {

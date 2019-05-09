@@ -3,6 +3,8 @@
 .loader {
   animation: .8s animate-loader $transition infinite;
   border-radius: 50%;
+  z-index: 2;
+
   @keyframes animate-loader {
     from {
       transform: rotate(0);
@@ -27,4 +29,12 @@
 .loader__small {
   width: 16px;
   height: 16px;
+}
+
+.for__searcher {
+  position: absolute;
+  right: 15px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
 }

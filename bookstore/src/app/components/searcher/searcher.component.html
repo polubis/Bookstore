@@ -1,4 +1,6 @@
-<div class="searcher-wrapper">
+<div [class]="animationClass">
   <mat-icon id="search-icon">search</mat-icon>
-  <input placeholder="Wpisz nazwę książki..." />
+  <input (input)="onInput($event)" (focus)="onFocus()" (blur)="onBlur()" placeholder="Wpisz nazwę książki..." />
+
+  <app-loader *ngIf="isLoading" [size]="'small'" [positionSet]="'searcher'"></app-loader>
 </div>

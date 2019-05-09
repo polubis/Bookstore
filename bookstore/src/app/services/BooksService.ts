@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
-import { Book } from '../models/entities/Book';
+import { Book, BookQuery, BooksFilterConfig } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
@@ -14,10 +14,9 @@ export class BooksService {
 
   recommendedBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
   newestBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
+  foundBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: false, data: [] });
 
-  constructor(private apiService: ApiService) {
-
-  }
+  constructor(private apiService: ApiService) { }
   pictures = {
     0: '../../assets/got.jpg',
     1: '../../assets/lotr.jpg',
@@ -45,8 +44,8 @@ export class BooksService {
             })
           });
         },
-        ({message, code}: ServerError) => {
-          this.recommendedBooks.next({ isLoading: false, error: { message, code }, data: []});
+        ({ message, code }: ServerError) => {
+          this.recommendedBooks.next({ isLoading: false, error: { message, code }, data: [] });
         }
       );
   }
@@ -65,8 +64,34 @@ export class BooksService {
             })
           });
         },
-        ({message, code}: ServerError) => {
-          this.newestBooks.next({ isLoading: false, error: { message, code }, data: []});
+        ({ message, code }: ServerError) => {
+          this.newestBooks.next({ isLoading: false, error: { message, code }, data: [] });
+        }
+      );
+  }
+
+  getBooks(
+    { page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId }: BooksFilterConfig,
+    onSuccess: () => void = () => {}, onFailure: () => void = () => {}
+  ) {
+    this.foundBooks.next({ isLoading: true, error: null, data: [] });
+    const bookQuery = new BookQuery(page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId);
+
+    this.apiService.execute('books', 'get', {}, bookQuery.query)
+      .subscribe(
+        (value: RequestResponse<Book[]>) => {
+          this.foundBooks.next({
+            isLoading: false,
+            error: null,
+            data: value.successResult.map((book: Book, index) => {
+              return { ...book, pictureName: this.pictures[index] || '' };
+            })
+          });
+          onSuccess();
+        },
+        ({ message, code }: ServerError) => {
+          this.foundBooks.next({ isLoading: false, error: { message, code }, data: [] });
+          onFailure();
         }
       );
   }
