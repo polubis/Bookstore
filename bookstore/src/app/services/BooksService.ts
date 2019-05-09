@@ -4,6 +4,7 @@ import { ApiService } from './ApiService';
 import { Book } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
+import { ServerError } from '../models/others/ServerError';
 
 
 @Injectable({
@@ -12,6 +13,7 @@ import { DataEnhancer } from '../models/others/DataEnhancer';
 export class BooksService {
 
   recommendedBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
+  newestBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
 
   constructor(private apiService: ApiService) {
 
@@ -35,7 +37,6 @@ export class BooksService {
     this.apiService.execute('books/bestrating', 'get', {}, `?numberOfBooks=${numberOfBooks}`)
       .subscribe(
         (value: RequestResponse<Book[]>) => {
-          console.log(value.successResult);
           this.recommendedBooks.next({
             isLoading: false,
             error: null,
@@ -44,8 +45,28 @@ export class BooksService {
             })
           });
         },
-        ({message, code}) => {
+        ({message, code}: ServerError) => {
           this.recommendedBooks.next({ isLoading: false, error: { message, code }, data: []});
+        }
+      );
+  }
+
+  getNewestBooks(numberOfBooks = 15) {
+    this.newestBooks.next({ isLoading: true, error: null, data: [] });
+
+    this.apiService.execute('books/newest', 'get', {}, `?numberOfBooks=${numberOfBooks}`)
+      .subscribe(
+        (value: RequestResponse<Book[]>) => {
+          this.newestBooks.next({
+            isLoading: false,
+            error: null,
+            data: value.successResult.map((book: Book, index) => {
+              return { ...book, pictureName: this.pictures[index] || '' };
+            })
+          });
+        },
+        ({message, code}: ServerError) => {
+          this.newestBooks.next({ isLoading: false, error: { message, code }, data: []});
         }
       );
   }

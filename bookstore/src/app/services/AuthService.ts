@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LoggedUser } from '../models/entities/LoggedUser';
 import { ApiService } from './ApiService';
+import { User } from '../models/entities/User';
+import { ServerError } from '../models/others/ServerError';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,7 @@ export class AuthService {
         }
       );
   }
+
+  createAccount = (user: User) => this.apiService.execute('accounts/register', 'post', user);
 
 }

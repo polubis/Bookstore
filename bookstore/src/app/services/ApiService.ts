@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { ServerError } from '../models/others/ServerError';
 
 const url = environment.api;
 
@@ -11,9 +12,10 @@ type RequestTypes = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
 type AccountEndpoints = 'accounts/login' | 'accounts/register';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
-type BooksEndpoints = 'books' | 'books/bestrating';
+type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest';
+type KindsEndpoints = 'kindOfBooks';
 
-type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints;
+type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints | KindsEndpoints;
 
 @Injectable({
   providedIn: 'root'
@@ -37,9 +39,21 @@ export class ApiService {
     500: 'Ups, coś poszło nie tak'
   };
 
-  snackBarBlackList = ['books'];
+  snackBarBlackList = ['books', 'books/newest', 'books/bestrating'];
 
-  extractErrorMessage = (err: HttpErrorResponse): string => this.statusesResponsesMap[err.status] || err.error.errors[0];
+  extractErrorMessage = (err: HttpErrorResponse): string => {
+    if (this.statusesResponsesMap.hasOwnProperty(err.status)) {
+      return this.statusesResponsesMap[err.status];
+    }
+    const { errors }: any = err.error;
+    if (Array.isArray(errors)) {
+      return errors[0];
+    } else {
+      const errorKeys = Object.keys(errors);
+      const firstErrorGroup: string[] = errors[errorKeys[0]];
+      return firstErrorGroup[0];
+    }
+  }
 
   execute = (restUrl: Endpoints, type: RequestTypes = 'get', payload?: any, params = ''): Observable<any> => {
     const path = url + restUrl + params;
@@ -47,9 +61,8 @@ export class ApiService {
 
     return req.pipe(
       catchError((err: HttpErrorResponse) => {
-        const useSnackbar = this.snackBarBlackList.find(item => item === restUrl) === null;
+        const useSnackbar = this.snackBarBlackList.find(item => item === restUrl) === undefined;
         const message = this.extractErrorMessage(err);
-
         if (useSnackbar) {
           this.snackBar.open(message, 'CLOSE', {
             duration: 5000,
@@ -57,7 +70,7 @@ export class ApiService {
           });
         }
 
-        throw { message, code: err.status };
+        throw { message, code: err.status } as ServerError;
       })
     );
   }

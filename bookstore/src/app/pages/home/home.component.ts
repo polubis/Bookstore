@@ -13,8 +13,10 @@ import { BucketService } from 'src/app/services/BucketService';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  sub: Subscription;
+  recSub: Subscription;
+  newSub: Subscription;
   recommendedBooks: DataEnhancer<Book[]>;
+  newestBooks: DataEnhancer<Book[]>;
 
   constructor(
     private booksService: BooksService,
@@ -23,8 +25,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.booksService.getRecommendedBooks();
-    this.sub = this.booksService.recommendedBooks.subscribe(books => {
+    this.booksService.getNewestBooks();
+    this.recSub = this.booksService.recommendedBooks.subscribe(books => {
       this.recommendedBooks = books;
+    });
+    this.newSub = this.booksService.newestBooks.subscribe(books => {
+      this.newestBooks = books;
     });
   }
 
