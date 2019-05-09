@@ -1,0 +1,24 @@
+<aside>
+
+  <nav class="left-nav">
+    <button routerLink="/admin" matTooltip="Statystyki" mat-button>
+      <mat-icon>trending_up</mat-icon>
+    </button>
+    <button routerLink="/admin/books" matTooltip="Książki" mat-button>
+      <mat-icon>view_week</mat-icon>
+    </button>
+    <button routerLink="/admin/books-kinds" matTooltip="Gatunki" mat-button>
+      <mat-icon>local_offer</mat-icon>
+    </button>
+    <button routerLink="/admin/authors" matTooltip="Autorzy" mat-button>
+      <mat-icon>group</mat-icon>
+    </button>
+    <button routerLink="/admin/orders" matTooltip="Zamówienia" mat-button>
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+
+    <span class="hightlight" [style.transform]="'translateY(' + actualHightlightDistance * 64 + 'px)'">
+    </span>
+  </nav>
+
+</aside>

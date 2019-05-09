@@ -1,0 +1,30 @@
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { debounceTime } from 'rxjs/operators';
+
+const hightLightConfig = {
+  '/admin': 0,
+  '/admin/books': 1,
+  '/admin/books-kinds': 2,
+  '/admin/authors': 3,
+  '/admin/orders': 4
+};
+
+@Component({
+  selector: 'app-side-nav',
+  templateUrl: './side-nav.component.html',
+  styleUrls: ['./side-nav.component.scss']
+})
+export class SideNavComponent implements OnInit {
+  actualHightlightDistance = 0;
+
+  constructor(private router: Router) {
+    this.router.events.pipe(debounceTime(50)).subscribe(({ urlAfterRedirects }: NavigationEnd) => {
+        this.actualHightlightDistance = hightLightConfig[urlAfterRedirects];
+    });
+  }
+
+  ngOnInit() {
+  }
+
+}

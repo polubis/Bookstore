@@ -1,0 +1,50 @@
+@import '../../../colors.scss';
+
+#admin-dashboard {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  padding: 50px;
+  background: #2d3a4f;
+}
+
+.top-nav {
+  padding: 15px 20px;
+  background: #313d51;
+  color: $white;
+  border-bottom: 1px solid #2d3a4f;
+  box-shadow: $shadow;
+
+  .page-logo {
+    display: flex;
+    align-items: center;
+
+    .company-name {
+      font-weight: 300;
+      letter-spacing: 1.1px;
+      margin-left: 12.5px;
+    }
+  
+    .company-logo {
+      font-size: 32px;
+      height: 32px;
+      width: 32px; 
+    }
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  min-height: calc(100vh - 156px);
+  color: $white;
+  box-shadow: $shadow;
+
+}
+
+main {
+  padding: 20px;
+  background: #454d5d;
+  width: 100%;
+
+}

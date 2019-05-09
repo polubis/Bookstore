@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,13 @@ import { ErrorPlaceholderComponent } from './components/error-placeholder/error-
 import { CutTextPipe } from './helpers/cut-text-pipe';
 import { StarsRateComponent } from './components/stars-rate/stars-rate.component';
 import { HomeNavigationComponent } from './pages/home/home-navigation/home-navigation.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { SideNavComponent } from './pages/admin/side-nav/side-nav.component';
+import { StatsComponent } from './pages/admin/pages/stats/stats.component';
+import { BooksComponent } from './pages/admin/pages/books/books.component';
+import { BooksKindsComponent } from './pages/admin/pages/books-kinds/books-kinds.component';
+import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
+import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +43,14 @@ import { HomeNavigationComponent } from './pages/home/home-navigation/home-navig
     ErrorPlaceholderComponent,
     CutTextPipe,
     StarsRateComponent,
-    HomeNavigationComponent
+    HomeNavigationComponent,
+    AdminComponent,
+    SideNavComponent,
+    StatsComponent,
+    BooksComponent,
+    BooksKindsComponent,
+    AuthorsComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,11 +61,12 @@ import { HomeNavigationComponent } from './pages/home/home-navigation/home-navig
     MatSnackBarModule,
     MatDialogModule,
     MatStepperModule,
+    MatTooltipModule,
     MatTabsModule,
     MatIconModule,
     MatToolbarModule,
     MatCardModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

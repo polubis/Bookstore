@@ -2,11 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { BooksService } from 'src/app/services/BooksService';
-import { Subject, of, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { debounceTime, tap, filter, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
-import { Book } from 'src/app/models/entities/Book';
+import { debounceTime, tap, filter, distinctUntilChanged } from 'rxjs/operators';
 
 @AutoUnsubscribe()
 @Component({
@@ -35,8 +33,12 @@ export class SearcherComponent implements OnInit, OnDestroy {
     .subscribe((searchTitle: string) => {
       this.booksService.getBooks(
         { page: 1, pageSize: 15, searchTitle },
-        () => this.isLoading = false,
-        () => this.isLoading = false
+        () => {
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+        }
       );
     });
   }

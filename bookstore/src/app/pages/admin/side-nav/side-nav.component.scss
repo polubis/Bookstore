@@ -1,0 +1,39 @@
+@import '../../../../colors.scss';
+
+aside {
+  background: #3c4556;
+  height: 100%;
+  padding-top: 50px;
+  border-right: 1px solid #334059;
+  
+  .left-nav {
+    display: flex;
+    flex-flow: column;
+    position: relative;
+
+    button {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      z-index: 1;
+      border-radius: 0;
+
+      .mat-button-focus-overlay {
+        border-radius: 0;
+      }
+    }
+
+    .hightlight {
+      top: 0;
+      left: 0;
+      width: 64px;
+      height: 64px;
+      background: #334059;
+      transition: .3s transform $transition;
+      position: absolute;
+    }
+  }
+}
