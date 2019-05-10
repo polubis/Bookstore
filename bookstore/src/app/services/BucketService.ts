@@ -10,45 +10,54 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class BucketService {
+  bucket = new BehaviorSubject<Bucket>(this.readBucketFromCookie());
 
   constructor(private apiService: ApiService, private cookieService: CookieService) {
-
   }
 
-  bucket = new BehaviorSubject<Bucket>(this.readBucketFromCookie());
   private readBucketFromCookie(): Bucket {
-    const bucketAsString: string = this.cookieService.get('bucket');
-    return bucketAsString ? JSON.parse(bucketAsString) : {};
+    const bucketAsString: string | undefined = this.cookieService.get('bucket');
+    return bucketAsString ? JSON.parse(bucketAsString) : { size: 0, cost: 0, items: {} };
   }
 
   addBookToBucket(newBook: Book) {
-    this.bucket.pipe(take(1)).subscribe((currBucket: Bucket) => {
-      if (currBucket.hasOwnProperty(newBook.id)) {
+    this.bucket.pipe(take(1)).subscribe(({ size, cost, items }: Bucket) => {
+      if (items.hasOwnProperty(newBook.id)) {
         this.bucket.next({
-          ...currBucket,
-          [newBook.id]: {
-            ...currBucket[newBook.id], quantity: currBucket[newBook.id].quantity + 1
+          size: ++size,
+          cost: cost + newBook.price,
+          items: {
+            ...items,
+            [newBook.id]: {
+              ...items[newBook.id], quantity: ++items[newBook.id].quantity
+            }
           }
         });
       } else {
-        this.bucket.next({ ...currBucket, [newBook.id]: { book: newBook, quantity: 1 }, });
+        this.bucket.next({
+          size: ++size,
+          cost: cost + newBook.price,
+          items: {
+            ...items,
+            [newBook.id]: { book: newBook, quantity: 1 }
+          }
+        });
       }
     });
   }
 
   removeBookFromBucket(bookId: number) {
-    this.bucket.pipe(take(1)).subscribe((currBucket: Bucket) => {
-      const newBucket = { ...currBucket };
-      delete newBucket[bookId];
+    this.bucket.pipe(take(1)).subscribe(({ size, cost, items }: Bucket) => {
+      const newBucket = { size: --size, cost: cost - 20, items: { ...items } };
+      delete newBucket.items[bookId];
 
       this.bucket.next(newBucket);
     });
   }
 
   saveBucketAsCookie() {
-    this.bucket.pipe(take(1)).subscribe((currBucket: Bucket) => {
-      console.log('siema');
-      this.cookieService.set('bucket', JSON.stringify(currBucket));
+    this.bucket.pipe(take(1)).subscribe((bucket: Bucket) => {
+      this.cookieService.set('bucket', JSON.stringify(bucket));
     });
   }
 }

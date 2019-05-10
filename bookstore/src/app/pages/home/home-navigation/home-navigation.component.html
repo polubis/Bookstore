@@ -3,12 +3,26 @@
     <mat-icon id='company-logo'>local_library</mat-icon>
     <span class="company-name">Bookly</span>
   </div>
-  <div class="btn-holder">
+
+  <div class="navigation-links">
+    <button mat-button id="to-library-btn">
+      <mat-icon>account_balance</mat-icon>
+      Książki
+    </button>
+    <button mat-button id="authors-btn">
+      <mat-icon>group</mat-icon>
+      Autorzy
+    </button>
+    <button mat-button id="bucket-btn" class="flex-row">
+      <mat-icon class="shopping-icon">shopping_cart</mat-icon>
+      Koszyk
+      <span *ngIf="size > 0"> | {{size}} | {{cost}} zł</span>
+    </button>
+  </div>
+
+  <div class="account-creation-links">
     <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
     <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
   </div>
 
-  <button mat-button id="bucket-btn">
-    <mat-icon class="shopping-icon">shopping_cart</mat-icon>
-  </button>
 </nav>

@@ -52,6 +52,11 @@ p {
   cursor: pointer;
 }
 
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
 .flex-col {
   display: flex;
   flex-flow: column;
