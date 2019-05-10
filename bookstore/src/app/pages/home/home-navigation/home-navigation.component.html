@@ -13,7 +13,7 @@
       <mat-icon>group</mat-icon>
       Autorzy
     </button>
-    <button mat-button id="bucket-btn" class="flex-row">
+    <button (click)="uiService.openOrderPopup()" mat-button id="bucket-btn" class="flex-row">
       <mat-icon class="shopping-icon">shopping_cart</mat-icon>
       Koszyk
       <span *ngIf="size > 0"> | {{size}} | {{cost}} zł</span>

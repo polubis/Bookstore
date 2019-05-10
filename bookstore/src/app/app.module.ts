@@ -29,6 +29,7 @@ import { BooksComponent } from './pages/admin/pages/books/books.component';
 import { BooksKindsComponent } from './pages/admin/pages/books-kinds/books-kinds.component';
 import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
 import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
+import { OrderPopupComponent } from './containers/order-popup/order-popup.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
     BooksKindsComponent,
     AuthorsComponent,
     OrdersComponent,
+    OrderPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,6 @@ import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterComponent]
+  entryComponents: [RegisterComponent, OrderPopupComponent]
 })
 export class AppModule { }
