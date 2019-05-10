@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.bucketService.bucket.subscribe(value => {
-      console.log(value);
     });
   }
 }

@@ -9,12 +9,13 @@ import { BooksComponent } from './pages/admin/pages/books/books.component';
 import { BooksKindsComponent } from './pages/admin/pages/books-kinds/books-kinds.component';
 import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
 import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
+import { AdmingGuard } from './helpers/admin-guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   {
-    path: 'admin', component: AdminComponent, children: [
+    canActivate: [AdmingGuard], path: 'admin', component: AdminComponent, children: [
       { path: '', component: StatsComponent },
       { path: 'books', component: BooksComponent },
       { path: 'books-kinds', component: BooksKindsComponent },

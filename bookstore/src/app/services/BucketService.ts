@@ -18,7 +18,6 @@ export class BucketService {
   bucket = new BehaviorSubject<Bucket>(this.readBucketFromCookie());
   private readBucketFromCookie(): Bucket {
     const bucketAsString: string = this.cookieService.get('bucket');
-    console.log(bucketAsString);
     return bucketAsString ? JSON.parse(bucketAsString) : {};
   }
 

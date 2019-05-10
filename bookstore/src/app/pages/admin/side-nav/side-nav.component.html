@@ -17,7 +17,11 @@
       <mat-icon>shopping_cart</mat-icon>
     </button>
 
-    <span class="hightlight" [style.transform]="'translateY(' + actualHightlightDistance * 64 + 'px)'">
+    <button (click)="authService.logout()" id="logout-btn" matTooltip="Wyloguj" mat-button>
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <span class="hightlight" [style.transform]="'translateY(' + focusedNavEl * 64 + 'px)'">
     </span>
   </nav>
 

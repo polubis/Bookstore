@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { debounceTime } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { AuthService } from 'src/app/services/AuthService';
 
 const hightLightConfig = {
   '/admin': 0,
@@ -19,12 +20,12 @@ const hightLightConfig = {
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit, OnDestroy {
-  actualHightlightDistance = 0;
+  focusedNavEl = 0;
   sub: Subscription;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.sub = this.router.events.pipe(debounceTime(50)).subscribe(({ urlAfterRedirects }: NavigationEnd) => {
-        this.actualHightlightDistance = hightLightConfig[urlAfterRedirects];
+        this.focusedNavEl = hightLightConfig[urlAfterRedirects];
     });
   }
 

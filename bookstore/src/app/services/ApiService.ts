@@ -10,7 +10,7 @@ const url = environment.api;
 
 type RequestTypes = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-type AccountEndpoints = 'accounts/login' | 'accounts/register';
+type AccountEndpoints = 'accounts/login' | 'accounts/register' | 'accounts/logout';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
 type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest';
 type KindsEndpoints = 'kindOfBooks';
