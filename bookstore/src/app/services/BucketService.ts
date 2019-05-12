@@ -64,6 +64,10 @@ export class BucketService {
     });
   }
 
+  clearBucket() {
+    this.bucket.next({ size: 0, cost: 0, items: {} });
+  }
+
   saveBucketAsCookie() {
     this.bucket.pipe(take(1)).subscribe((bucket: Bucket) => {
       this.cookieService.set('bucket', JSON.stringify(bucket));

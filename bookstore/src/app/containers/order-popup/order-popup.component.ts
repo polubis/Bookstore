@@ -8,7 +8,8 @@ import { Bucket } from 'src/app/models/entities/Bucket';
 import { map, tap } from 'rxjs/operators';
 import { Book } from 'src/app/models/entities/Book';
 import { OrdersService } from 'src/app/services/OrdersService';
-import { OrderItem } from 'src/app/models/entities/Order';
+import { OrderItem, Order } from 'src/app/models/entities/Order';
+import { RequestResponse } from 'src/app/models/others/RequestResponse';
 
 @AutoUnsubscribe()
 @Component({
@@ -27,6 +28,7 @@ export class OrderPopupComponent implements OnInit, OnDestroy {
   size: number;
   cost: number;
   isSavingOrder = false;
+  createdOrderDetails: Order | null = null;
 
   ngOnInit() {
     this.sub = this.bucketService.bucket.pipe(
@@ -45,7 +47,9 @@ export class OrderPopupComponent implements OnInit, OnDestroy {
   }
 
   closePopup() {
-    this.dialogRef.close();
+    if (!this.isSavingOrder) {
+      this.dialogRef.close();
+    }
   }
 
   createOrder() {
@@ -53,11 +57,14 @@ export class OrderPopupComponent implements OnInit, OnDestroy {
 
     this.ordersService.createOrder(this.orderItems)
       .subscribe(
-        value => {
+        ({ successResult: createdOrder }: RequestResponse<Order>) => {
           this.isSavingOrder = false;
+          this.createdOrderDetails = createdOrder;
+          this.bucketService.clearBucket();
         },
         () => {
           this.isSavingOrder = false;
+          this.createdOrderDetails = null;
         }
       );
   }

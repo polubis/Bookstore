@@ -45,6 +45,6 @@ export class BookQuery implements BooksFilterConfig {
     public printerId?: number
   ) {
 
-    this.query = `?page=${page}$pageSize=${pageSize}$searchTitle=${searchTitle}$sortOrder=${sortOrder}`;
+    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&sortOrder=${sortOrder}`;
   }
 }

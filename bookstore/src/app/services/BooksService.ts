@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
-import { Book, BookQuery, BooksFilterConfig } from '../models/entities/Book';
+import { Book, BookQuery, BooksFilterConfig, Books } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
@@ -79,11 +79,11 @@ export class BooksService {
 
     this.apiService.execute('books', 'get', {}, bookQuery.query)
       .subscribe(
-        (value: RequestResponse<Book[]>) => {
+        ({ successResult }: RequestResponse<Books>) => {
           this.foundBooks.next({
             isLoading: false,
             error: null,
-            data: value.successResult.map((book: Book, index) => {
+            data: successResult.results.map((book: Book, index) => {
               return { ...book, pictureName: this.pictures[index] || '' };
             })
           });

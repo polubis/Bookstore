@@ -17,6 +17,46 @@
 
   }
 
+  .order-succesfull-message {
+    width: 400px;
+    justify-content: center;
+    margin: auto;
+
+    p {
+      margin-bottom: 12px;
+    }
+
+    .information {
+      
+      &:last-of-type {
+        margin: 12px 0 8px 0;
+      }
+
+      span:first-of-type {
+        font-weight: 300;
+        margin-right: 5px;
+      }
+
+      span:last-of-type {
+        color: $primary;
+        font-weight: 500;
+
+      }
+    }
+
+    article {
+      margin: 8px 0 30px 0;
+      font-weight: 300;
+      line-height: 22px;
+    }
+
+    #close-btn {
+      background: $primary;
+      color: $white;
+      margin-right: auto;
+    }
+  }
+
   #book-order {
     padding: 40px 0;
 
