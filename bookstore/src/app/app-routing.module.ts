@@ -11,10 +11,11 @@ import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 import { AdmingGuard } from './helpers/admin-guard';
 import { BooksComponent } from './pages/admin/pages/books/books.component';
 import { LibraryComponent } from './pages/library/library.component';
+import { LogInGuard } from './helpers/auth-guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { canActivate: [LogInGuard], path: 'login', component: LoginComponent },
   { path: 'library', component: LibraryComponent },
   {
     canActivate: [AdmingGuard], path: 'admin', component: AdminComponent, children: [
