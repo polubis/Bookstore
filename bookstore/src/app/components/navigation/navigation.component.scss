@@ -31,6 +31,16 @@
 
 .normal-nav {
   background: $primary;
+
+  .user-nav-info {
+    div.user-first-last-name {
+      opacity: 1;
+    }
+
+    .user-avatar {
+      border-color: $white;
+    }
+  }
 }
 
 nav {
