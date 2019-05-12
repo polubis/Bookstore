@@ -28,7 +28,7 @@ export class ApiService {
 
   requestTypesMap = {
     get: (path, payload) => this.http.get(path, payload),
-    post: (path, payload, headers) => this.http.post(path, payload, { headers }),
+    post: (path, payload) => this.http.post(path, payload, { withCredentials: true }),
     put: (path, payload) => this.http.put(path, payload),
     patch: (path, payload) => this.http.patch(path, payload),
     delete: (path, payload) => this.http.delete(path, payload)
@@ -58,10 +58,7 @@ export class ApiService {
 
   execute = (restUrl: Endpoints, type: RequestTypes = 'get', payload?: any, params = ''): Observable<any> => {
     const path = url + restUrl + params;
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    const req: Observable<any> = this.requestTypesMap[type](path, payload, headers);
+    const req: Observable<any> = this.requestTypesMap[type](path, payload);
 
     return req.pipe(
       catchError((err: HttpErrorResponse) => {
