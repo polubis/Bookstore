@@ -6,14 +6,70 @@
     <mat-icon (click)="closePopup()" class="close-icon">close</mat-icon>
   </header>
 
-  <nav>
+  <ul id="book-order" class="flex-col" *ngIf="size; else emptyBucket">
 
-  </nav>
+    <li *ngFor="let orderItem of orderItems" class="order-item flex">
+      <figure>
+        <img [src]="orderItem.pictureName" />
+      </figure>
+      <div class="item-details flex-col">
+        <span class="book-name">{{orderItem.name}}</span>
+        <span class="book-author">{{orderItem.author}}</span>
 
-  <section></section>
+        <article class="book-description">{{orderItem.description | cut: 180}}</article>
+      </div>
 
-  <footer class="flex-row">
-    <button (click)="closePopup()" id="deny-btn" mat-button>Anuluj</button>
-    <button id="sign-in-btn" mat-flat-button>Zaloguj się</button>
+      <div class="cost-details flex-col">
+
+        <span class="sum-info">Suma za książki: {{orderItem.price * orderItem.quantity}} zł</span>
+
+        <span class="cost-info">
+          Ilość: {{orderItem.quantity}} szt
+        </span>
+
+        <span class="cost-info">
+          Cena za sztukę: {{orderItem.price}} zł
+        </span>
+
+
+        <div class="cost-operations flex-row">
+          <button (click)="bucketService.addBookToBucket(orderItem)" mat-stroked-button id='increase-quantity'>
+            Zwiększ ilość
+            <mat-icon>exposure_plus_1</mat-icon>
+          </button>
+          <button (click)="bucketService.removeBookFromBucket(orderItem)" mat-stroked-button id="decrease-quantity">
+            Zmniejsz ilość
+            <mat-icon>exposure_neg_1</mat-icon>
+          </button>
+        </div>
+
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #emptyBucket>
+    <p class="empty-bucket-message">
+      Twój koszyk jest pusty
+    </p>
+  </ng-template>
+
+  <footer *ngIf="size" class="flex-row">
+    <div class="summarize-container">
+      <span class="to-pay">Do zapłaty: </span>
+      <span class="cost">{{cost}} zł</span>
+    </div>
+
+    <div>
+      <button (click)="closePopup()" id="deny-btn" mat-button>Anuluj</button>
+
+      <button routerLink="/login" (click)="closePopup()" *ngIf="!(authService.loggedUser | async).isLoggedIn; else loggedIn"
+        class="confirm-button" mat-flat-button>Zaloguj się</button>
+
+      <ng-template #loggedIn>
+        <button class="confirm-button" mat-flat-button>Zamów</button>
+      </ng-template>
+    </div>
+
+
   </footer>
 </div>

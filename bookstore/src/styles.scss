@@ -12,8 +12,13 @@ body, html {
   box-sizing: border-box;
 }
 
-p, h1, h2, h3, h4, h5 {
+p, h1, h2, h3, h4, h5, figure, ul, ol {
   margin: 0;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
 }
 
 p {

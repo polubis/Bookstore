@@ -12,7 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
-  loggedUser = new BehaviorSubject<LoggedUser>(this.readLoggedUserFromCookie());
+  constructor(private apiService: ApiService, private router: Router, private cookieService: CookieService) {
+  }
 
   initiaLoggedUser: LoggedUser = {
     isLoggedIn: false,
@@ -22,13 +23,12 @@ export class AuthService {
     username: ''
   };
 
+  loggedUser = new BehaviorSubject<LoggedUser>(this.readLoggedUserFromCookie());
+
   isLogingIn = new BehaviorSubject(false);
 
-  constructor(private apiService: ApiService, private router: Router, private cookieService: CookieService) {
-  }
-
   private readLoggedUserFromCookie(): LoggedUser {
-    const loggedUserAsString: string = this.cookieService.get('loggedUser');
+    const loggedUserAsString: string | undefined = this.cookieService.get('loggedUser');
     return loggedUserAsString ? JSON.parse(loggedUserAsString) : this.initiaLoggedUser;
   }
 

@@ -22,6 +22,7 @@ export class UserInterfaceService {
 
   openOrderPopup() {
     const dialogConfig = new MatDialogConfig();
+
     this.dialog.open(OrderPopupComponent, dialogConfig);
   }
 }

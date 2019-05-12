@@ -5,6 +5,7 @@ import { Book } from '../models/entities/Book';
 import { take } from 'rxjs/operators';
 import { Bucket } from '../models/entities/Bucket';
 import { CookieService } from 'ngx-cookie-service';
+import { OrderItem } from '../models/entities/Order';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class BucketService {
     return bucketAsString ? JSON.parse(bucketAsString) : { size: 0, cost: 0, items: {} };
   }
 
-  addBookToBucket(newBook: Book) {
+  addBookToBucket(newBook: Book | OrderItem) {
     this.bucket.pipe(take(1)).subscribe(({ size, cost, items }: Bucket) => {
       if (items.hasOwnProperty(newBook.id)) {
         this.bucket.next({
@@ -46,10 +47,18 @@ export class BucketService {
     });
   }
 
-  removeBookFromBucket(bookId: number) {
+  removeBookFromBucket({ id: bookId, quantity, price }: OrderItem) {
     this.bucket.pipe(take(1)).subscribe(({ size, cost, items }: Bucket) => {
-      const newBucket = { size: --size, cost: cost - 20, items: { ...items } };
-      delete newBucket.items[bookId];
+      const newBucket = {
+        size: --size, cost: cost - price,
+        items: { ...items }
+      };
+
+      items[bookId].quantity = items[bookId].quantity - 1;
+
+      if (newBucket.items[bookId].quantity === 0) {
+        delete newBucket.items[bookId];
+      }
 
       this.bucket.next(newBucket);
     });

@@ -5,7 +5,6 @@
   min-height: 600px;
   max-width: 1200px;
   max-height: 700px;
-  justify-content: space-between;
 
   header {
     position: relative;
@@ -18,13 +17,121 @@
 
   }
 
+  #book-order {
+    padding: 40px 0;
+
+    .order-item {
+      margin-bottom: 40px;
+
+      figure {
+        position: relative;
+        height: 250px;
+        width: 160px;
+
+        img {
+          position: absolute;
+          flex-shrink: 0;
+          width: 100%;
+          top: 0;
+          left: 0;
+          object-fit: cover;
+        }
+      }
+      .item-details {
+        padding: 7.5px 28px;
+        max-width: 300px;
+        position: relative;
+
+        &::after {
+          content: '';
+          height: 100%;
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 1px;
+          background: $border-color;
+        }
+
+        .book-name {
+          font-size: 24px;
+          color: $primary;
+        }
+
+        .book-author {
+          font-size: 17px;
+          color: $primary;
+          margin: 8px 0 16px 0;
+        }
+
+        .book-description {
+          font-size: 16px;
+          font-weight: 300;
+          line-height: 20px;
+        }
+      }
+
+      .cost-details {
+        padding: 7.5px 28px;
+
+        span {
+          color: $primary;
+        }
+
+        .sum-info {
+          font-size: 24px;
+          margin-bottom: 12px;
+        }
+
+        .cost-info {
+          font-size: 18px;
+          color: $primary;
+          margin-bottom: 9px;
+        }
+
+        .cost-operations {
+          margin-top: auto;
+
+          #increase-quantity {
+            margin-right: 20px;
+          }
+        }
+
+      }
+
+    }
+  }
+
+  .empty-bucket-message {
+    margin: auto 0;
+    text-align: center;
+  }
+
   footer {
-    justify-content: flex-end;
+    justify-content: space-between;
+    margin: auto 0 25px 0;
+
+    .summarize-container {
+      span {
+        color: $primary;
+      }
+      .to-pay {
+        font-weight: 300;
+        font-size: 16px;
+      }
+      
+      .cost {
+        font-weight: 500;
+      }
+    } 
   
-    #sign-in-btn {
+    .confirm-button {
       background: $primary;
       color: $white;
       margin-left: 25px;
+
+      &:disabled {
+        background: $border-color;
+      }
     }
 
     #deny-btn { 
