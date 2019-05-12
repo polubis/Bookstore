@@ -47,7 +47,7 @@ export class BucketService {
     });
   }
 
-  removeBookFromBucket({ id: bookId, quantity, price }: OrderItem) {
+  removeBookFromBucket({ id: bookId, price }: OrderItem) {
     this.bucket.pipe(take(1)).subscribe(({ size, cost, items }: Bucket) => {
       const newBucket = {
         size: --size, cost: cost - price,

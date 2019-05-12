@@ -7,6 +7,8 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Bucket } from 'src/app/models/entities/Bucket';
 import { map, tap } from 'rxjs/operators';
 import { Book } from 'src/app/models/entities/Book';
+import { OrdersService } from 'src/app/services/OrdersService';
+import { OrderItem } from 'src/app/models/entities/Order';
 
 @AutoUnsubscribe()
 @Component({
@@ -17,12 +19,14 @@ import { Book } from 'src/app/models/entities/Book';
 export class OrderPopupComponent implements OnInit, OnDestroy {
 
   constructor(private dialogRef: MatDialogRef<OrderPopupComponent>,
-    private authService: AuthService, private bucketService: BucketService) { }
+    private authService: AuthService, private bucketService: BucketService,
+    private ordersService: OrdersService) { }
 
   sub: Subscription;
-  orderItems: Book | { quantity: number }[];
+  orderItems: OrderItem[];
   size: number;
   cost: number;
+  isSavingOrder = false;
 
   ngOnInit() {
     this.sub = this.bucketService.bucket.pipe(
@@ -35,14 +39,27 @@ export class OrderPopupComponent implements OnInit, OnDestroy {
           return { ...book, quantity };
         });
       })
-    ).subscribe((orderItems: Book | { quantity: number }[]) => {
-      console.log(orderItems);
+    ).subscribe((orderItems: OrderItem[]) => {
       this.orderItems = orderItems;
     });
   }
 
   closePopup() {
     this.dialogRef.close();
+  }
+
+  createOrder() {
+    this.isSavingOrder = true;
+
+    this.ordersService.createOrder(this.orderItems)
+      .subscribe(
+        value => {
+          this.isSavingOrder = false;
+        },
+        () => {
+          this.isSavingOrder = false;
+        }
+      );
   }
 
   ngOnDestroy() {}

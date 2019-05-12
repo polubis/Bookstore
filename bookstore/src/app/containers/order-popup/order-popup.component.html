@@ -62,14 +62,17 @@
     <div>
       <button (click)="closePopup()" id="deny-btn" mat-button>Anuluj</button>
 
-      <button routerLink="/login" (click)="closePopup()" *ngIf="!(authService.loggedUser | async).isLoggedIn; else loggedIn"
+      <button routerLink="/login" (click)="closePopup()" *ngIf="(authService.loggedUser | async).isLoggedIn; else loggedIn"
         class="confirm-button" mat-flat-button>Zaloguj się</button>
 
       <ng-template #loggedIn>
-        <button class="confirm-button" mat-flat-button>Zamów</button>
+        <button [disabled]="isSavingOrder" (click)="createOrder()" class="confirm-button" mat-flat-button>
+          Zamów
+        </button>
       </ng-template>
     </div>
 
 
   </footer>
+
 </div>
