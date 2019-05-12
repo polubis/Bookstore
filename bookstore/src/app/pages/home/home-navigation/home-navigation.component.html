@@ -20,9 +20,22 @@
     </button>
   </div>
 
-  <div class="account-creation-links">
-    <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
-    <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
+
+  <div *ngIf="loggedUser.isLoggedIn; else notLoggedIn" class="user-nav-info flex-row">
+    <div class="user-first-last-name flex-col">
+      <span>{{loggedUser.firstName}}</span>
+      <span>{{loggedUser.lastName}}</span>
+    </div>
+    <button mat-button class="user-avatar center-center">
+      <mat-icon>person</mat-icon>
+    </button>
   </div>
+
+  <ng-template #notLoggedIn>
+    <div class="account-creation-links">
+      <button routerLink="/login" id='sign-in-btn' mat-button>Logowanie</button>
+      <button (click)="uiService.openRegisterForm()" id='sign-up-btn' mat-stroked-button>Rejestracja</button>
+    </div>
+  </ng-template>
 
 </nav>

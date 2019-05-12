@@ -5,6 +5,8 @@ import { BucketService } from 'src/app/services/BucketService';
 import { Subscription } from 'rxjs';
 import { Bucket } from 'src/app/models/entities/Bucket';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { AuthService } from 'src/app/services/AuthService';
+import { LoggedUser } from 'src/app/models/entities/LoggedUser';
 
 @AutoUnsubscribe()
 @Component({
@@ -14,16 +16,23 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 })
 export class HomeNavigationComponent implements OnInit, OnDestroy {
   navigationClass: string = this.calcClass();
-  sub: Subscription;
+
+  authSub: Subscription;
+  loggedUser: LoggedUser;
+
+  bucketSub: Subscription;
   cost: number;
   size: number;
 
-  constructor(private uiService: UserInterfaceService, private bucketService: BucketService) { }
+  constructor(private uiService: UserInterfaceService, private bucketService: BucketService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.sub = this.bucketService.bucket.subscribe(({ cost, size }: Bucket) => {
+    this.bucketSub = this.bucketService.bucket.subscribe(({ cost, size }: Bucket) => {
       this.cost = cost;
       this.size = size;
+    });
+    this.authSub = this.authService.loggedUser.subscribe((loggedUser: LoggedUser) => {
+      this.loggedUser = loggedUser;
     });
   }
 

@@ -5,16 +5,22 @@
     transform: translateY(0);
   }
 
-  .page-logo {
+  .page-logo, .navigation-links {
     transform: translateX(15px);
   }
 
-  .navigation-links {
-    transform: translateX(15px); 
+  .account-creation-links, .user-nav-info {
+    transform: translateX(-15px);
   }
 
-  .account-creation-links {
-    transform: translateX(-15px);
+  .user-nav-info {
+    div.user-first-last-name {
+      opacity: 1;
+    }
+
+    .user-avatar {
+      border-color: $white;
+    }
   }
 
   #bucket-btn {
@@ -114,6 +120,39 @@ nav {
       color: $white;
     }
   }
-
   
+  .user-nav-info {
+    z-index: 1;
+    transform: translateX(0);
+    transition: .3s transform $transition;
+    margin-left: auto;
+    cursor: pointer;
+
+    .user-first-last-name {
+      font-weight: 300;
+      color: $white;
+      font-size: 14px;
+      line-height: 20px;
+      margin-right: 15px;
+      opacity: 0;
+      word-break: break-all;
+      transition: .3s opacity $transition;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      border: 1px solid transparent;
+      border-radius: 50%;
+      background: $primary;
+      min-width: unset;
+      line-height: unset;
+      padding: unset;
+  
+      mat-icon {
+        color: $white;
+      }
+  
+    }
+  }
 }
