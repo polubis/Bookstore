@@ -1,4 +1,4 @@
-@import '../../../../colors.scss';
+@import '../../../colors.scss';
 
 .filled-nav {
   &::before {
@@ -28,6 +28,11 @@
   }
 }
 
+
+.normal-nav {
+  background: $primary;
+}
+
 nav {
   display: flex;
   z-index: 10;
@@ -55,6 +60,7 @@ nav {
     color: $white;
     display: flex;
     align-items: center;
+    cursor: pointer;
     transform: translateX(0);
     transition: .3s transform $transition;
     z-index: 1;

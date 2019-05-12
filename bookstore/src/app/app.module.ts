@@ -30,6 +30,8 @@ import { BooksKindsComponent } from './pages/admin/pages/books-kinds/books-kinds
 import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
 import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 import { OrderPopupComponent } from './containers/order-popup/order-popup.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LibraryComponent } from './pages/library/library.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { OrderPopupComponent } from './containers/order-popup/order-popup.compon
     AuthorsComponent,
     OrdersComponent,
     OrderPopupComponent,
+    NavigationComponent,
+    LibraryComponent,
   ],
   imports: [
     BrowserModule,

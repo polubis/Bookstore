@@ -1,13 +1,13 @@
 <nav [class]="navigationClass">
-  <div class="page-logo">
+  <div routerLink="/" class="page-logo">
     <mat-icon id='company-logo'>local_library</mat-icon>
     <span class="company-name">Bookly</span>
   </div>
 
   <div class="navigation-links">
-    <button mat-button id="to-library-btn">
+    <button routerLink="/library" mat-button id="to-library-btn">
       <mat-icon>account_balance</mat-icon>
-      Książki
+      Biblioteka
     </button>
     <button mat-button id="authors-btn">
       <mat-icon>group</mat-icon>
