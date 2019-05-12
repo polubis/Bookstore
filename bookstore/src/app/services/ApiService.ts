@@ -27,11 +27,11 @@ export class ApiService {
   }
 
   requestTypesMap = {
-    get: (path, payload) => this.http.get(path, payload),
+    get: path => this.http.get(path, { withCredentials: true }),
     post: (path, payload) => this.http.post(path, payload, { withCredentials: true }),
-    put: (path, payload) => this.http.put(path, payload),
-    patch: (path, payload) => this.http.patch(path, payload),
-    delete: (path, payload) => this.http.delete(path, payload)
+    put: (path, payload) => this.http.put(path, payload, { withCredentials: true }),
+    patch: (path, payload) => this.http.patch(path, payload, { withCredentials: true }),
+    delete: path => this.http.delete(path, { withCredentials: true })
   };
 
   statusesResponsesMap = {
