@@ -1,0 +1,48 @@
+@import '../../../colors.scss';
+
+$table-header: #405e92;
+$tr-background: #626a770d;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    tr:first-of-type {
+      background: $table-header;
+      th {
+        color: $white;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $border-color;
+      &:nth-child(odd) {
+        background: $tr-background;
+      }
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+    }
+  }
+
+  tr {
+
+    th {
+      text-align: start;
+    }
+
+    th, td {
+      font-family: inherit;
+      padding: 15px;
+      font-weight: 400;
+    }
+
+    td {
+      width: 100px;
+    }
+  }
+}

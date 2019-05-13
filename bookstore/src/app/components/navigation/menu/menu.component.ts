@@ -14,7 +14,6 @@ export class MenuComponent implements OnInit {
   @Output() clickingSettings = new EventEmitter<void>();
   @Output() clickingLogout = new EventEmitter<void>();
 
-
   constructor() { }
 
   ngOnInit() {

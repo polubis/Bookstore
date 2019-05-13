@@ -8,17 +8,16 @@
 
   <div class="user-orders-body flex">
 
-    <app-loader *ngIf="orders.isLoading" [positionSet]="'modal'"></app-loader>
+    <app-loader *ngIf="isLoading" [positionSet]="'modal'"></app-loader>
 
-    <app-error-placeholder [error]="orders.error" *ngIf="orders.error"></app-error-placeholder>
+    <app-error-placeholder [error]="error" *ngIf="error"></app-error-placeholder>
 
-    <ul class="orders-list" *ngIf="!orders.isLoading && orders.data.results.length !== 0">
-      <li *ngFor="let order of orders.data.results">
-        {{order.id}}
-      </li>
-    </ul>
+    <div class="table-wrapper">
+      <app-table [headers]="tableHeaders" [keys]="tableKeys" [items]="orders" *ngIf="!isLoading && orders.length !== 0"></app-table>
+    </div>
 
-    <p *ngIf="!orders.isLoading && orders.data.results.length === 0" class="empty-bucket-message">Nie posiadasz jeszcze zamówień</p>
+    <p *ngIf="!isLoading && orders.length === 0" class="empty-bucket-message">Nie posiadasz jeszcze
+      zamówień</p>
 
   </div>
 

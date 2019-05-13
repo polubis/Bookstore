@@ -3,13 +3,13 @@
   height: 800px;
 
   .user-orders-body {
-    height: calc(100% - 45px);
+    min-height: calc(100% - 45px);
     position: relative;
+    padding-bottom: 20px;
 
-    .orders-list {
+    .table-wrapper {
       margin-top: 30px;
-
-
+      width: 100%;
     }
   }
 }
