@@ -15,6 +15,7 @@ import { LoggedUser } from 'src/app/models/entities/LoggedUser';
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   @Input() navigationClass = 'normal-nav';
+  isMenuOpen = true;
 
   authSub: Subscription;
   loggedUser: LoggedUser;
@@ -33,6 +34,10 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.authSub = this.authService.loggedUser.subscribe((loggedUser: LoggedUser) => {
       this.loggedUser = loggedUser;
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   ngOnDestroy() {}

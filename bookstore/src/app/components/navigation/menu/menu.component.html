@@ -1,0 +1,27 @@
+<div id='menu' class="flex-col">
+  <mat-icon (click)="closing.emit()" class="close-icon">close</mat-icon>
+
+  <p>Profil użytkownika</p>
+
+  <div mat-button class="user-menu-avatar center-center">
+    <mat-icon>person</mat-icon>
+  </div>
+
+  <span class="first-last-name">{{loggedUser.firstName}} {{loggedUser.lastName}}</span>
+  <span class="username">{{loggedUser.username}}</span>
+  <span *ngIf="loggedUser.email" class="email">{{loggedUser.email}}</span>
+
+  <button (click)="clickingOrders.emit()" id='orders-btn' mat-button>
+    <mat-icon>shopping_cart</mat-icon>
+    Zamówienia
+  </button>
+  <button (click)="clickingSettings.emit()" id='settings-btn' mat-button>
+    <mat-icon>settings</mat-icon>
+    Ustawienia
+  </button>
+  <button (click)="clickingLogout.emit()" id='logout-btn' mat-button>
+    <mat-icon>shopping_cart</mat-icon>
+    Wyloguj
+  </button>
+
+</div>

@@ -32,6 +32,9 @@ import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 import { OrderPopupComponent } from './containers/order-popup/order-popup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LibraryComponent } from './pages/library/library.component';
+import { MenuComponent } from './components/navigation/menu/menu.component';
+import { UserOrdersPopupComponent } from './containers/user-orders-popup/user-orders-popup.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { LibraryComponent } from './pages/library/library.component';
     OrderPopupComponent,
     NavigationComponent,
     LibraryComponent,
+    MenuComponent,
+    UserOrdersPopupComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +82,6 @@ import { LibraryComponent } from './pages/library/library.component';
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterComponent, OrderPopupComponent]
+  entryComponents: [RegisterComponent, OrderPopupComponent, UserOrdersPopupComponent]
 })
 export class AppModule { }

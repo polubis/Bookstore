@@ -1,0 +1,25 @@
+<div id="user-orders-popup">
+  <header class="modal-header">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Twoje dotychczasowe zamówienia</span>
+
+    <mat-icon (click)="dialogRef.close()" class="close-icon">close</mat-icon>
+  </header>
+
+  <div class="user-orders-body flex">
+
+    <app-loader *ngIf="orders.isLoading" [positionSet]="'modal'"></app-loader>
+
+    <app-error-placeholder [error]="orders.error" *ngIf="orders.error"></app-error-placeholder>
+
+    <ul class="orders-list" *ngIf="!orders.isLoading && orders.data.results.length !== 0">
+      <li *ngFor="let order of orders.data.results">
+        {{order.id}}
+      </li>
+    </ul>
+
+    <p *ngIf="!orders.isLoading && orders.data.results.length === 0" class="empty-bucket-message">Nie posiadasz jeszcze zamówień</p>
+
+  </div>
+
+</div>

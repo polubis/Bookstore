@@ -76,3 +76,27 @@ p {
   align-items: center;
   justify-content: center;
 }
+
+.modal-header {
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+
+  span {
+    margin-left: 14px;
+  }
+
+}
+
+.mat-dialog-container {
+  overflow-x: hidden !important;
+  overflow-y: auto;
+}
+
+.empty-message {
+  margin: auto 0;
+  text-align: center;
+  width: 100%;
+}

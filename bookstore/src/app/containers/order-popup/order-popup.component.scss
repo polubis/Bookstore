@@ -6,17 +6,6 @@
   max-width: 1200px;
   max-height: 700px;
 
-  header {
-    position: relative;
-    padding-bottom: 20px;
-    border-bottom: 1px solid $border-color;
-
-    span {
-      margin-left: 14px;
-    }
-
-  }
-
   .order-succesfull-message {
     width: 400px;
     justify-content: center;
@@ -140,11 +129,6 @@
       }
 
     }
-  }
-
-  .empty-bucket-message {
-    margin: auto 0;
-    text-align: center;
   }
 
   footer {

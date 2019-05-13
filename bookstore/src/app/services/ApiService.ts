@@ -14,7 +14,7 @@ type AccountEndpoints = 'accounts/login' | 'accounts/register' | 'accounts/logou
 type AddressEndpoints = 'addresses/add' | 'addresses/';
 type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest';
 type KindsEndpoints = 'kindOfBooks';
-type OrdersEndpoints = 'orders/submitOrder';
+type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders';
 
 type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints | KindsEndpoints | OrdersEndpoints;
 
