@@ -36,6 +36,7 @@ import { MenuComponent } from './components/navigation/menu/menu.component';
 import { UserOrdersPopupComponent } from './containers/user-orders-popup/user-orders-popup.component';
 import { TableComponent } from './components/table/table.component';
 import { ChangeUserDataPopupComponent } from './containers/change-user-data-popup/change-user-data-popup.component';
+import { BooksTableComponent } from './pages/admin/pages/books/books-table/books-table.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { ChangeUserDataPopupComponent } from './containers/change-user-data-popu
     UserOrdersPopupComponent,
     TableComponent,
     ChangeUserDataPopupComponent,
+    BooksTableComponent,
   ],
   imports: [
     BrowserModule,

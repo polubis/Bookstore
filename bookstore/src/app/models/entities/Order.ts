@@ -11,3 +11,11 @@ export interface Order {
   };
   totalPrice: 62;
 }
+
+export interface BooksTable {
+  key: 'id' | 'author' | 'averageOfRatings' | 'kindOfBook' | 'name' | 'pictureName' | 'price' | 'printer';
+  name: string;
+  sortable?: boolean;
+  icon?: string;
+}
+

@@ -1,0 +1,108 @@
+@import '../../../../../../colors.scss';
+
+.books-table-wrapper {
+  height: 100%;
+
+  nav {
+    height: 64px;
+    justify-content: space-between;
+    padding: 0 35px;
+  }
+
+  table {
+    border: none;
+    border-collapse: collapse;
+
+    tr {
+      height: 64px;
+    }
+
+    thead {
+      
+      tr {
+        height: 64px;
+
+        th {
+          text-align: center;
+
+          div {
+            justify-content: center;
+          }
+
+          .item--title {
+            font-weight: 300;
+          }
+    
+          .item--icon {
+            margin-left: 10px;
+            transition: .3s transform;
+            transform: rotate(0);
+          }
+  
+          .rotated {
+            transform: rotate(180deg);
+          }
+  
+          .colored {
+            color: #87e687;
+          }
+          
+          .mat-button-focus-overlay {
+            border-radius: 0;
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        margin-bottom: 20px;
+        cursor: pointer;
+
+        &:nth-child(odd) {
+          background: #3c4556;
+        }
+
+        &:hover {
+          td {
+            &:first-of-type::before, &:last-of-type::before {
+              opacity: 1;
+            }
+          }
+        }
+
+        td {
+          padding: 20px;
+          text-align: center;
+          position: relative;
+
+          &:first-of-type, &:last-of-type {
+            position: relative;
+            &::before {
+              content: '';
+              height: 100%;
+              width: 1px;
+              background: $white;
+              top: 0;
+              position: absolute;
+              opacity: 0;
+              transition: .1s opacity;
+            }
+          }
+
+          &:first-of-type::before {
+            left: 0;
+          }
+
+          &:last-of-type::before {
+            right: 0;
+          }
+        }
+
+        
+      }
+
+    }
+
+  }
+}

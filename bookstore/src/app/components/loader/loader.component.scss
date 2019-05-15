@@ -48,3 +48,7 @@
   margin: auto;
   
 }
+
+.for__table {
+  @extend .for__modal
+}

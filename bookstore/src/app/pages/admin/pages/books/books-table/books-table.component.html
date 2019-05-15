@@ -1,0 +1,38 @@
+<div *ngIf="!isLoading" class="books-table-wrapper flex-col">
+
+  <nav>
+
+  </nav>
+
+  <table>
+    <thead>
+      <tr>
+        <th *ngFor="let column of columns">
+          <button *ngIf="column.sortable" (click)="handleSorting(column.key)" mat-button>
+            <span class="item--title">{{column.name}}</span>
+            <mat-icon [ngClass]="{'rotated': (!sortingAscending && currentSortValue === column.key), 'item--icon': true, 'colored': currentSortValue === column.key}">
+              arrow_downward
+            </mat-icon>
+          </button>
+
+          <div *ngIf="!column.sortable" class="flex-row">
+            <span class="item--title">{{column.name}}</span>
+            <mat-icon *ngIf="column.icon" class="item--icon">{{column.icon}}</mat-icon>
+          </div>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td *ngFor="let column of columns">
+          {{item[column.key]}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<app-loader *ngIf="isLoading" [positionSet]="'table'"></app-loader>

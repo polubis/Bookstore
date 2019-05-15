@@ -1,15 +1,35 @@
-export class Book {
-  constructor(
-    public name: string,
-    public author: string,
-    public printer: string,
-    public kindOfBookName: string,
-    public price: number,
-    public description: string,
-    public pictureName: string,
-    public id: string,
-  ) {
-  }
+
+export interface Book {
+  name: string;
+  author: {
+    id: number;
+    name: string;
+  };
+  printer: {
+    id: number;
+    name: string;
+  };
+  kindOfBook: {
+    id: number;
+    name: string;
+  };
+  price: number;
+  description: string;
+  pictureName: string;
+  id: string;
+  averageOfRatings: number;
+}
+
+export interface SlimBook {
+  name: string;
+  author: string;
+  printer: string;
+  kindOfBookName: string;
+  price: number;
+  description: string;
+  pictureName: string;
+  id: string;
+  averageOfRatings: number;
 }
 
 export interface Books {
@@ -39,7 +59,7 @@ export class BookQuery implements BooksFilterConfig {
     public page = 1,
     public pageSize = 15,
     public searchTitle = '',
-    public sortOrder = 'asc',
+    public sortOrder = 'name_asc',
     public searchPrinter = '',
     public searchAuthor = '',
     public printerId?: number

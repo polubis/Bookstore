@@ -1,3 +1,1 @@
-<p>
-  books works!
-</p>
+<app-books-table (changing)="getBooksByFiltersChange($event)" [isLoading]="isLoadingBooks" [columns]="columns" [items]="books"></app-books-table>

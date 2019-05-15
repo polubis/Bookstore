@@ -70,14 +70,9 @@ export class BooksService {
       );
   }
 
-  getBooks(
-    { page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId }: BooksFilterConfig,
-    onSuccess: () => void = () => {}, onFailure: () => void = () => {}
-  ) {
+  findBooks(config: BooksFilterConfig, onSuccess: () => void = () => {}, onFailure: () => void = () => {}) {
     this.foundBooks.next({ isLoading: true, error: null, data: [] });
-    const bookQuery = new BookQuery(page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId);
-
-    this.apiService.execute('books', 'get', {}, bookQuery.query)
+    this.getBooks(config)
       .subscribe(
         ({ successResult }: RequestResponse<Books>) => {
           this.foundBooks.next({
@@ -96,4 +91,8 @@ export class BooksService {
       );
   }
 
+  getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId }: BooksFilterConfig) {
+    const bookQuery = new BookQuery(page, pageSize, searchTitle, sortOrder, searchAuthor, searchPrinter, printerId);
+    return this.apiService.execute('books', 'get', {}, bookQuery.query);
+  }
 }

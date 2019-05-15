@@ -31,7 +31,7 @@ export class SearcherComponent implements OnInit, OnDestroy {
       debounceTime(500)
     )
     .subscribe((searchTitle: string) => {
-      this.booksService.getBooks(
+      this.booksService.findBooks(
         { page: 1, pageSize: 15, searchTitle },
         () => {
           this.isLoading = false;
