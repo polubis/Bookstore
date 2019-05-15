@@ -11,6 +11,10 @@
   <span class="username">{{loggedUser.username}}</span>
   <span *ngIf="loggedUser.email" class="email">{{loggedUser.email}}</span>
 
+  <button *ngIf="loggedUser.role.includes('Administrator')" routerLink="/admin" id='admin-btn' mat-button>
+    <mat-icon>shield</mat-icon>
+    Panel administratora
+  </button>
   <button (click)="clickingOrders.emit()" id='orders-btn' mat-button>
     <mat-icon>shopping_cart</mat-icon>
     Zamówienia
