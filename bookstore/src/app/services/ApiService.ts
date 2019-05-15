@@ -10,13 +10,14 @@ const url = environment.api;
 
 type RequestTypes = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-type AccountEndpoints = 'accounts/login' | 'accounts/register' | 'accounts/logout';
+type AuthEndpoint = 'accounts/login' | 'accounts/register' | 'accounts/logout';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
 type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest';
 type KindsEndpoints = 'kindOfBooks';
 type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders';
+type AccountsEndpoints = 'accounts/updateUserData' | 'accounts/getUserData';
 
-type Endpoints = AccountEndpoints | AddressEndpoints | BooksEndpoints | KindsEndpoints | OrdersEndpoints;
+type Endpoints = AuthEndpoint | AddressEndpoints | BooksEndpoints | KindsEndpoints | OrdersEndpoints | AccountsEndpoints;
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class ApiService {
   statusesResponsesMap = {
     0: 'Brak internetu',
     401: 'Brak dostępu',
-    500: 'Ups, coś poszło nie tak'
+    405: 'Problem z ciałem zapytania',
+    500: 'Ups, coś poszło nie tak',
   };
 
   snackBarBlackList = ['books/newest', 'books/bestrating'];

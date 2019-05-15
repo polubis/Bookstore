@@ -31,7 +31,10 @@
         <mat-icon>person</mat-icon>
       </button>
 
-      <app-menu [loggedUser]="loggedUser" (clickingOrders)="uiService.openUserOrdersPopup(loggedUser.username)" (clickingLogout)="authService.logout()" (closing)="toggleMenu()" *ngIf="isMenuOpen"></app-menu>
+      <app-menu [loggedUser]="loggedUser" 
+      (clickingOrders)="uiService.openUserOrdersPopup(loggedUser.username)"
+      (clickingSettings)="uiService.openChangeUserDataPopup()" 
+      (clickingLogout)="authService.logout()" (closing)="toggleMenu()" *ngIf="isMenuOpen"></app-menu>
     </div>
 
   </div>

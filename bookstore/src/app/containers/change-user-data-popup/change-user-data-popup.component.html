@@ -1,0 +1,20 @@
+<form id='change-user-data-form' (submit)="handleUpdateLoggedUserData($event)">
+  <h2 class="popup-header" mat-dialog-title>
+    <mat-icon color="primary">settings</mat-icon>
+    <span>Change your account settings</span>
+    <mat-icon *ngIf="!isLoading" class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+  </h2>
+
+  <ng-container *ngIf="!isLoading">
+    <div class="dialog-content">
+      <mat-form-field *ngFor="let key of formKeys; let i = index">
+        <input [name]="key" [value]="accountFormData[key]" (input)="onChange($event)" matInput [placeholder]="formLabels[i]">
+      </mat-form-field>
+    </div>
+    <button [disabled]="isLoading" class="relative" id="save-btn" type="submit" mat-flat-button color="primary">
+      Save
+    </button>
+  </ng-container>
+
+  <app-loader *ngIf="isLoading" [positionSet]="'modal'"></app-loader>
+</form>

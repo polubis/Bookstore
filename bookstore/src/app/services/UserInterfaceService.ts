@@ -3,6 +3,7 @@ import { RegisterComponent } from '../containers/register/register.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { OrderPopupComponent } from '../containers/order-popup/order-popup.component';
 import { UserOrdersPopupComponent } from '../containers/user-orders-popup/user-orders-popup.component';
+import { ChangeUserDataPopupComponent } from '../containers/change-user-data-popup/change-user-data-popup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,11 @@ export class UserInterfaceService {
     dialogConfig.data = { username };
 
     this.dialog.open(UserOrdersPopupComponent, dialogConfig);
+  }
+
+  openChangeUserDataPopup() {
+    const dialogConfig = new MatDialogConfig();
+
+    this.dialog.open(ChangeUserDataPopupComponent, dialogConfig);
   }
 }

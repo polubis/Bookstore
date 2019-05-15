@@ -100,3 +100,18 @@ p {
   text-align: center;
   width: 100%;
 }
+
+h2.popup-header {
+  display: flex !important;
+  align-items: center;
+
+  mat-icon {
+    font-size: 32px;
+    height: 32px;
+    width: 32px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+}
