@@ -19,7 +19,7 @@ export class BooksTableComponent implements OnInit {
   sortingAscending = true;
 
   page: 1;
-  pageSize = 10;
+  pageSize = 9;
 
   constructor() { }
 

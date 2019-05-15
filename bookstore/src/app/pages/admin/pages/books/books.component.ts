@@ -30,7 +30,7 @@ export class BooksComponent implements OnInit {
   handleGetBooks(filters?: BooksFilterConfig) {
     this.isLoadingBooks = true;
 
-    this.booksService.getBooks(filters || { page: 1, pageSize: 25, sortOrder: 'name_asc' })
+    this.booksService.getBooks(filters || { page: 1, pageSize: 9, sortOrder: 'name_asc' })
     .subscribe(
       ({ successResult: booksData }: RequestResponse<Books>) => {
         this.books = booksData.results.map(({ id, name, pictureName, price, author, printer, kindOfBook, averageOfRatings }: Book) => {
