@@ -15,7 +15,7 @@ import { LoggedUser } from 'src/app/models/entities/LoggedUser';
 })
 export class NavigationComponent implements OnInit, OnDestroy {
   @Input() navigationClass = 'normal-nav';
-  isMenuOpen = true;
+  isMenuOpen = false;
 
   authSub: Subscription;
   loggedUser: LoggedUser;
