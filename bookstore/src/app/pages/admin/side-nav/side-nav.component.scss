@@ -3,8 +3,9 @@
 aside {
   background: #3c4556;
   height: 100%;
-  padding-top: 64px;
-  border-right: 1px solid #334059;
+  padding-top: 164px;
+  border-right: 1px solid hsl(219, 27%, 27%);
+  position: relative;
   
   .left-nav {
     display: flex;

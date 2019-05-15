@@ -1,4 +1,5 @@
 <aside>
+  <app-loader *ngIf="uiService.isLoadingOnAdmin | async" [size]="'average'" [positionSet]="'admin-side-bar'"></app-loader>
 
   <nav class="left-nav">
     <button routerLink="/admin" matTooltip="Statystyki" mat-button>

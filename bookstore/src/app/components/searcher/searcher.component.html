@@ -1,4 +1,4 @@
-<div [class]="animationClass">
+<div [class]="animationClass" [id]="'searcher__' + searcherType">
   <mat-icon id="search-icon">search</mat-icon>
   <input (input)="onInput($event)" (focus)="onFocus()" (blur)="onBlur()" placeholder="Wpisz nazwę książki..." />
 

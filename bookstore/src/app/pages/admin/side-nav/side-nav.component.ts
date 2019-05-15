@@ -4,6 +4,7 @@ import { debounceTime } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { AuthService } from 'src/app/services/AuthService';
+import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 
 const hightLightConfig = {
   '/admin': 0,
@@ -23,7 +24,7 @@ export class SideNavComponent implements OnInit, OnDestroy {
   focusedNavEl = 0;
   sub: Subscription;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private uiService: UserInterfaceService) {
     this.sub = this.router.events.pipe(debounceTime(50)).subscribe(({ urlAfterRedirects }: NavigationEnd) => {
         this.focusedNavEl = hightLightConfig[urlAfterRedirects];
     });

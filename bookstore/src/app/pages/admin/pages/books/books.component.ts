@@ -3,6 +3,7 @@ import { BooksService } from 'src/app/services/BooksService';
 import { Books, SlimBook, Book, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { RequestResponse } from 'src/app/models/others/RequestResponse';
 import { BooksTable } from 'src/app/models/entities/Order';
+import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 
 @Component({
   selector: 'app-books',
@@ -14,10 +15,10 @@ export class BooksComponent implements OnInit {
   isLoadingBooks: boolean;
   books: SlimBook[];
 
-  constructor(private booksService: BooksService) { }
+  constructor(private booksService: BooksService, private uiService: UserInterfaceService) { }
 
   columns: BooksTable[] = [
-    { key: 'id', name: '#' },
+    { key: 'id', name: 'Identyfikator' },
     { key: 'pictureName', name: 'Zdjęcie', icon: 'image' },
     { key: 'name', name: 'Nazwa', sortable: true },
     { key: 'author', name: 'Autor' },
@@ -29,6 +30,7 @@ export class BooksComponent implements OnInit {
 
   handleGetBooks(filters?: BooksFilterConfig) {
     this.isLoadingBooks = true;
+    this.uiService.isLoadingOnAdmin.next(true);
 
     this.booksService.getBooks(filters || { page: 1, pageSize: 9, sortOrder: 'name_asc' })
     .subscribe(
@@ -46,10 +48,12 @@ export class BooksComponent implements OnInit {
           } as SlimBook;
         });
         this.isLoadingBooks = false;
+        this.uiService.isLoadingOnAdmin.next(false);
       },
       (err) => {
         console.log(err);
         this.isLoadingBooks = false;
+        this.uiService.isLoadingOnAdmin.next(false);
       },
 
     );
@@ -60,7 +64,6 @@ export class BooksComponent implements OnInit {
   }
 
   getBooksByFiltersChange(filters: BooksFilterConfig) {
-    console.log(filters);
     this.handleGetBooks(filters);
   }
 

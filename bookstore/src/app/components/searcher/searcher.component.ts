@@ -17,6 +17,7 @@ export class SearcherComponent implements OnInit, OnDestroy {
   booksSub: Subscription;
   obs$ = new Subject<string>();
   @Input() isLoading = false;
+  @Input() searcherType: 'home' | 'admin' = 'home';
   @Output() initializing = new EventEmitter<void>();
   @Output() searching = new EventEmitter<string>();
 
@@ -24,7 +25,6 @@ export class SearcherComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.inputSub = this.obs$.pipe(
-      filter((v: string) => v.length > 2),
       distinctUntilChanged(),
       tap(() => {
         this.initializing.emit();

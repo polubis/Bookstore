@@ -1,10 +1,12 @@
-<div *ngIf="!isLoading" class="books-table-wrapper flex-col">
+<div class="books-table-wrapper flex-col">
 
-  <nav>
-
+  <nav class="flex-row">
+    <app-searcher (initializing)="initializeSearching()" (searching)="handleSearching($event)" [searcherType]="'admin'"></app-searcher>
+    <div class="other content">
+    </div>
   </nav>
 
-  <table>
+  <table [ngClass]="{'loading-table': isLoading}">
     <thead>
       <tr>
         <th *ngFor="let column of columns">
@@ -33,6 +35,3 @@
   </table>
 
 </div>
-
-
-<app-loader *ngIf="isLoading" [positionSet]="'table'"></app-loader>

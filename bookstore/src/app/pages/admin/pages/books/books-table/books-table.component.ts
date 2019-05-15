@@ -15,6 +15,8 @@ export class BooksTableComponent implements OnInit {
   @Input() isLoading: boolean;
   @Output() changing = new EventEmitter<BooksFilterConfig>();
 
+  isLoadingAtFilterChanging = false;
+
   currentSortValue = 'name';
   sortingAscending = true;
 
@@ -46,6 +48,21 @@ export class BooksTableComponent implements OnInit {
         page: this.page,
         pageSize: this.pageSize,
         sortOrder: `${this.currentSortValue}_${this.sortingAscending ? 'asc' : 'desc'}`
+      }
+    );
+  }
+
+  initializeSearching() {
+    this.isLoadingAtFilterChanging = true;
+  }
+
+  handleSearching(searchValue: string) {
+    this.changing.emit(
+      {
+        page: this.page,
+        pageSize: this.pageSize,
+        sortOrder: `${this.currentSortValue}_${this.sortingAscending ? 'asc' : 'desc'}`,
+        searchTitle: searchValue
       }
     );
   }
