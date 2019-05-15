@@ -1,7 +1,7 @@
 <header id='home-page-header'>
 
   <div class="navigation-placeholder"></div>
-  
+
   <app-home-navigation></app-home-navigation>
 
   <div class="social-icons">
@@ -26,13 +26,13 @@
       specjalny formularz
     </p>
     <div class="searcher-wrapper">
-      <app-searcher></app-searcher>
+      <app-searcher [isLoading]="isSearchingBooks" (initializing)="initializeSearching()" (searching)="handleSearchingBooks($event)"></app-searcher>
     </div>
   </div>
 
 </header>
 
-<main id="home-page-content"> 
+<main id="home-page-content">
 
   <section id="basic-informations">
 
@@ -116,30 +116,30 @@
   <h2 class="home-section-title">Ostatnio dodane</h2>
 
   <section>
-      <app-slider [loading]="newestBooks.isLoading" [error]="newestBooks.error" [sliderHeight]='340'
-        [elementWidth]='250' [elementMarginRight]='45'>
-        <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let newestBook of newestBooks.data"
-          class="book-cart">
-          <img src="{{newestBook.pictureName}}" />
-  
-          <div class="book-overlay flex-col">
-            <span class="title">{{newestBook.name}}</span>
-            <span class="author">{{newestBook.author}}</span>
-            <article class="description">
-              {{newestBook.description | cut: 80}}
-            </article>
-  
-            <app-stars-rate [rate]="4.25"></app-stars-rate>
-  
-            <button (click)="bucketService.addBookToBucket(newestBook)" mat-button class="add-to-bucket">
-              <mat-icon>add_shopping_cart</mat-icon>
-              Do koszyka
-            </button>
-            <!-- <span class="price">{{newestBook.price}}</span> -->
-          </div>
-  
+    <app-slider [loading]="newestBooks.isLoading" [error]="newestBooks.error" [sliderHeight]='340' [elementWidth]='250'
+      [elementMarginRight]='45'>
+      <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let newestBook of newestBooks.data"
+        class="book-cart">
+        <img src="{{newestBook.pictureName}}" />
+
+        <div class="book-overlay flex-col">
+          <span class="title">{{newestBook.name}}</span>
+          <span class="author">{{newestBook.author}}</span>
+          <article class="description">
+            {{newestBook.description | cut: 80}}
+          </article>
+
+          <app-stars-rate [rate]="4.25"></app-stars-rate>
+
+          <button (click)="bucketService.addBookToBucket(newestBook)" mat-button class="add-to-bucket">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Do koszyka
+          </button>
+          <!-- <span class="price">{{newestBook.price}}</span> -->
         </div>
-      </app-slider>
-    </section>
+
+      </div>
+    </app-slider>
+  </section>
 
 </main>

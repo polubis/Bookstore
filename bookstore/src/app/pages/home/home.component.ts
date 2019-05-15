@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   recommendedBooks: DataEnhancer<Book[]>;
   newestBooks: DataEnhancer<Book[]>;
 
+  isSearchingBooks = false;
+
   constructor(
     private booksService: BooksService,
     private bucketService: BucketService
@@ -34,6 +36,23 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {}
+  initializeSearching() {
+    this.isSearchingBooks = true;
+  }
+
+  handleSearchingBooks(searchTitle: string) {
+    this.booksService.findBooks(
+      { page: 1, pageSize: 15, searchTitle },
+      () => {
+        this.isSearchingBooks = false;
+      },
+      () => {
+        this.isSearchingBooks = false;
+      }
+    );
+  }
+
+
+  ngOnDestroy() { }
 
 }

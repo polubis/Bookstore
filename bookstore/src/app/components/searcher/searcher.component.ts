@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
-import { BooksService } from 'src/app/services/BooksService';
 import { Subject, Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { debounceTime, tap, filter, distinctUntilChanged } from 'rxjs/operators';
@@ -17,29 +16,23 @@ export class SearcherComponent implements OnInit, OnDestroy {
   inputSub: Subscription;
   booksSub: Subscription;
   obs$ = new Subject<string>();
-  isLoading = false;
+  @Input() isLoading = false;
+  @Output() initializing = new EventEmitter<void>();
+  @Output() searching = new EventEmitter<string>();
 
-  constructor(private uiService: UserInterfaceService, private booksService: BooksService) { }
+  constructor(private uiService: UserInterfaceService) { }
 
   ngOnInit() {
     this.inputSub = this.obs$.pipe(
       filter((v: string) => v.length > 2),
       distinctUntilChanged(),
       tap(() => {
-        this.isLoading = true;
+        this.initializing.emit();
       }),
       debounceTime(500)
     )
     .subscribe((searchTitle: string) => {
-      this.booksService.findBooks(
-        { page: 1, pageSize: 15, searchTitle },
-        () => {
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
+      this.searching.emit(searchTitle);
     });
   }
 
