@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
-import { Book, BookQuery, BooksFilterConfig, Books } from '../models/entities/Book';
+import { Book, BookQuery, BooksFilterConfig, Books, AddBookPayload } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
@@ -93,7 +93,19 @@ export class BooksService {
 
   getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, minPrice, maxPrice }: BooksFilterConfig) {
     const bookQuery = new BookQuery(page, pageSize, searchTitle, sortOrder, searchAuthor, searchPrinter, minPrice, maxPrice);
-    console.log(bookQuery.query);
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
+  }
+
+  addBook({ name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {
+    const book = new FormData();
+    book.set('name', name);
+    book.set('author', author);
+    book.set('price', price + '');
+    book.set('printer', printer);
+    book.set('kindOfBookName', kindOfBookName);
+    book.set('description', description);
+    book.set('pictureBook', pictureBook);
+
+    return this.apiService.execute('books/add', 'post', book, '');
   }
 }

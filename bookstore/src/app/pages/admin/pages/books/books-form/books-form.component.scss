@@ -3,18 +3,47 @@
 #books-form {
   background: $white;
   position: relative;
+  width: 640px;
 
   h2 {
     margin-bottom: 40px;
   }
 
-  .flex-row {
-    mat-form-field {
-      margin-right: 40px;
+
+  section {
+    display: flex;
+    justify-content: space-between;
+
+    .inputs-wrapper {
+      width: 40%;
+    }
+
+    .get-image-input {
+      align-items: center;
+      justify-content: center;
+      background: $grey-background;
+      margin: 20px;
+      width: 48%;
+      cursor: pointer;
+      border: 1px solid $border-color;
+      color: $primary;
+
+      span {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 300;
+        color: $font-grey;
+      }
     }
   }
 
+  textarea {
+    resize: none;
+    height: 100px;
+  }
+
   #book-btn {
-    margin-top: 40px;
+    display: block;
+    margin: 60px 0 0 auto;
   }
 }

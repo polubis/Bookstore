@@ -84,3 +84,12 @@ export class BookQuery implements BooksFilterConfig {
 export type BooksFilterKeys = 'page' | 'pageSize' | 'searchTitle' |
 'sortOrder' | 'searchAuthor' | 'searchPrinter' | 'minPrice' | 'maxPrice';
 
+export interface AddBookPayload {
+  name: string;
+  author: string;
+  printer: string;
+  kindOfBookName: string;
+  price: number;
+  description: string;
+  pictureBook: Blob | string;
+}
