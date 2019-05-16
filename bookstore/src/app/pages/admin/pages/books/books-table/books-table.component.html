@@ -1,13 +1,13 @@
 <div class="books-table-wrapper flex-col">
 
   <nav class="flex-row">
-    <app-searcher (initializing)="initializeSearching()" (searching)="handleSearching($event, switchRef)" [searcherType]="'admin'"></app-searcher>
-    <app-searcher-category-switcher #switchRef></app-searcher-category-switcher>
+    <app-searcher (searching)="handleSearching($event, switchRef)" [searcherType]="'admin'"></app-searcher>
+    <app-searcher-category-switcher #switchRef (changing)="handleCategoryChange($event)"></app-searcher-category-switcher>
     <div class="other content">
     </div>
   </nav>
 
-  <table [ngClass]="{'loading-table': isLoading}">
+  <table>
     <thead>
       <tr>
         <th *ngFor="let column of columns">

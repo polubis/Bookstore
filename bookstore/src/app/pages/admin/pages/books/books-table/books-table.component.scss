@@ -8,26 +8,12 @@
     padding: 0 45px;
   }
 
-  table.loading-table {
-    thead {
-      tr {
-        transform: translateY(-15px);
-      }
-
-      .item--title, .item--icon {
-        color: $font-grey;
-      }
-    }
-  }
-
   table {
     border: none;
     table-layout: fixed;
 
     tr {
       height: 64px;
-      transform: translateX(0);
-      transition: .2s transform;
     }
 
     thead {

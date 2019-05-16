@@ -49,7 +49,8 @@ export interface BooksFilterConfig {
   sortOrder?: string;
   searchPrinter?: string;
   searchAuthor?: string;
-  printerId?: number;
+  minPrice?: number;
+  maxPrice?: number;
 }
 
 export class BookQuery implements BooksFilterConfig {
@@ -62,9 +63,15 @@ export class BookQuery implements BooksFilterConfig {
     public sortOrder = 'name_asc',
     public searchAuthor = '',
     public searchPrinter = '',
-    public printerId?: number
+    public minPrice,
+    public maxPrice
   ) {
 
-    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
+    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${
+      searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
   }
 }
+
+export type BooksFilterKeys = 'page' | 'pageSize' | 'searchTitle' |
+'sortOrder' | 'searchAuthor' | 'searchPrinter' | 'minPrice' | 'maxPrice';
+
