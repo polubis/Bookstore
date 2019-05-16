@@ -31,7 +31,7 @@ export class BooksComponent implements OnInit {
   handleGetBooks(filters?: BooksFilterConfig) {
     this.isLoadingBooks = true;
     this.uiService.isLoadingOnAdmin.next(true);
-
+    console.log(filters);
     this.booksService.getBooks(filters || { page: 1, pageSize: 9, sortOrder: 'name_asc' })
     .subscribe(
       ({ successResult: booksData }: RequestResponse<Books>) => {

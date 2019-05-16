@@ -60,11 +60,11 @@ export class BookQuery implements BooksFilterConfig {
     public pageSize = 15,
     public searchTitle = '',
     public sortOrder = 'name_asc',
-    public searchPrinter = '',
     public searchAuthor = '',
+    public searchPrinter = '',
     public printerId?: number
   ) {
 
-    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&sortOrder=${sortOrder}`;
+    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
   }
 }

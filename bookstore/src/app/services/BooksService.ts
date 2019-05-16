@@ -93,6 +93,7 @@ export class BooksService {
 
   getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, printerId }: BooksFilterConfig) {
     const bookQuery = new BookQuery(page, pageSize, searchTitle, sortOrder, searchAuthor, searchPrinter, printerId);
+    console.log(bookQuery.query);
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
   }
 }

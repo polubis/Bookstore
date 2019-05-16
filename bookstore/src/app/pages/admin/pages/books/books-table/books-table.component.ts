@@ -20,7 +20,7 @@ export class BooksTableComponent implements OnInit {
   currentSortValue = 'name';
   sortingAscending = true;
 
-  page: 1;
+  page = 1;
   pageSize = 9;
 
   constructor() { }
@@ -56,14 +56,13 @@ export class BooksTableComponent implements OnInit {
     this.isLoadingAtFilterChanging = true;
   }
 
-  handleSearching(searchValue: string, categorySwitchReference: any) {
-    console.log(categorySwitchReference);
+  handleSearching(searchValue: string, { currentSelectedCategory }: { currentSelectedCategory: string }) {
     this.changing.emit(
       {
         page: this.page,
         pageSize: this.pageSize,
         sortOrder: `${this.currentSortValue}_${this.sortingAscending ? 'asc' : 'desc'}`,
-        searchTitle: searchValue
+        [currentSelectedCategory]: searchValue
       }
     );
   }
