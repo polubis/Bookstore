@@ -1,0 +1,20 @@
+@import '../../../../../../styles.scss';
+
+#books-form {
+  background: $white;
+  position: relative;
+
+  h2 {
+    margin-bottom: 40px;
+  }
+
+  .flex-row {
+    mat-form-field {
+      margin-right: 40px;
+    }
+  }
+
+  #book-btn {
+    margin-top: 40px;
+  }
+}

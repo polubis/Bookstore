@@ -1,0 +1,14 @@
+@import '../../../../../colors.scss';
+
+.books-operations {
+  position: absolute;
+  right: 45px;
+  top: -50px;
+
+  #add-new-book-btn {
+    font-size: 14px;
+    font-weight: 300;
+    background: none;
+    border-color: $white;
+  }
+}

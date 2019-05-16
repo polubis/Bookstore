@@ -38,6 +38,7 @@ import { TableComponent } from './components/table/table.component';
 import { ChangeUserDataPopupComponent } from './containers/change-user-data-popup/change-user-data-popup.component';
 import { BooksTableComponent } from './pages/admin/pages/books/books-table/books-table.component';
 import { SearcherCategorySwitcherComponent } from './components/searcher-category-switcher/searcher-category-switcher.component';
+import { BooksFormComponent } from './pages/admin/pages/books/books-form/books-form.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { SearcherCategorySwitcherComponent } from './components/searcher-categor
     ChangeUserDataPopupComponent,
     BooksTableComponent,
     SearcherCategorySwitcherComponent,
+    BooksFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,6 @@ import { SearcherCategorySwitcherComponent } from './components/searcher-categor
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterComponent, OrderPopupComponent, UserOrdersPopupComponent, ChangeUserDataPopupComponent]
+  entryComponents: [RegisterComponent, OrderPopupComponent, UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })
 export class AppModule { }
