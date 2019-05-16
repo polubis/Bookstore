@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, TemplateRef, ElementRef
 import { BooksFilterConfig } from 'src/app/models/entities/Book';
 import { FiltersService } from 'src/app/services/FiltersService';
 import { take } from 'rxjs/operators';
+import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 
 @Component({
   selector: 'app-books-table',
@@ -22,6 +23,7 @@ export class BooksTableComponent implements OnInit {
   ngOnInit() {
   }
 
+  @debounceEvent(150)
   handleSorting(sortKey: string) {
     if (this.currentSortValue === sortKey) {
       this.sortingAscending = !this.sortingAscending;
@@ -34,6 +36,7 @@ export class BooksTableComponent implements OnInit {
     );
   }
 
+  @debounceEvent(150)
   handleSearching(searchValue: string,
     { currentSelectedCategory }:
       { currentSelectedCategory: 'searchTitle' | 'searchAuthor' | 'searchPrinter' }
@@ -44,6 +47,7 @@ export class BooksTableComponent implements OnInit {
     );
   }
 
+  @debounceEvent(150)
   handleCategoryChange(currentSelectedCategory: 'searchTitle' | 'searchAuthor' | 'searchPrinter') {
     this.filterService.changeConfigForCategories(currentSelectedCategory);
   }

@@ -66,9 +66,18 @@ export class BookQuery implements BooksFilterConfig {
     public minPrice,
     public maxPrice
   ) {
-
-    this.query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${
+    let query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${
       searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
+
+    if (minPrice) {
+      query += `&minPrice=${minPrice}`;
+    }
+
+    if (maxPrice) {
+      query += `&maxPrice=${maxPrice}`;
+    }
+
+    this.query = query;
   }
 }
 

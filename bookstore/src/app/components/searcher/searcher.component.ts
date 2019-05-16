@@ -18,6 +18,7 @@ export class SearcherComponent implements OnInit, OnDestroy {
   obs$ = new Subject<string>();
   @Input() isLoading = false;
   @Input() searcherType: 'home' | 'admin' = 'home';
+  @Input() placeholder = 'Wpisz nazwę książki';
   @Output() initializing = new EventEmitter<void>();
   @Output() searching = new EventEmitter<string>();
 

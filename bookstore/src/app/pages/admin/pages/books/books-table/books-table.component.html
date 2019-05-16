@@ -1,7 +1,8 @@
 <div class="books-table-wrapper flex-col">
 
   <nav class="flex-row">
-    <app-searcher (searching)="handleSearching($event, switchRef)" [searcherType]="'admin'"></app-searcher>
+    <app-searcher [placeholder]="'Wpisz frazę do wyszukania...'"
+    (searching)="handleSearching($event, switchRef)" [searcherType]="'admin'"></app-searcher>
     <app-searcher-category-switcher #switchRef (changing)="handleCategoryChange($event)"></app-searcher-category-switcher>
     <div class="other content">
     </div>
