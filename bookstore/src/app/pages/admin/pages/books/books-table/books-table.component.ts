@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, EventEmitter, Output, TemplateRef, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BooksFilterConfig } from 'src/app/models/entities/Book';
 import { FiltersService } from 'src/app/services/FiltersService';
-import { take } from 'rxjs/operators';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 
 @Component({
@@ -51,4 +50,10 @@ export class BooksTableComponent implements OnInit {
   handleCategoryChange(currentSelectedCategory: 'searchTitle' | 'searchAuthor' | 'searchPrinter') {
     this.filterService.changeConfigForCategories(currentSelectedCategory);
   }
+
+  handleChangePrices(e: any, minPrice: number, maxPrice: number) {
+    e.preventDefault();
+    this.filterService.changePrices(minPrice, maxPrice);
+  }
+
 }

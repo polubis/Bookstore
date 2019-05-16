@@ -6,6 +6,18 @@
   nav {
     height: 100px;
     padding: 0 45px;
+
+    .price-filter {
+      margin-left: auto;
+
+      .mat-form-field {
+        margin-right: 25px;
+
+        .mat-hint {
+          color: $white !important;
+        }
+      }
+    }
   }
 
   table {
