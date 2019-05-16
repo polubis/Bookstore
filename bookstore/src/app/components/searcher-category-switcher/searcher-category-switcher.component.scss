@@ -1,0 +1,37 @@
+.switch-wrapper {
+  margin-left: 25px;
+  background: #313d51;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    transform: translateX(150px);
+    transition: .3s transform;
+    background: #334059;
+  }
+
+  .mat-button {
+    border-radius: 0;
+    width: 150px;
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+}
+
+div.switch-wrapper.searchTitle::before {
+  transform: translateX(0);
+}
+
+div.switch-wrapper.searchAuthor::before {
+  transform: translateX(150px);
+}
+
+div.switch-wrapper.searchPrinter::before {
+  transform: translateX(300px);
+}

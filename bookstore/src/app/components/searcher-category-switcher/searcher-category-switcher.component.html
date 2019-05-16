@@ -1,0 +1,5 @@
+<div [class]="'switch-wrapper' + ' ' + currentSelectedCategory">
+  <button (click)="changeSelectedCategory('searchTitle')" mat-button>Nazwa książki</button>
+  <button (click)="changeSelectedCategory('searchAuthor')" mat-button>Autor</button>
+  <button (click)="changeSelectedCategory('searchPrinter')" mat-button>Wydawnictwo</button>
+</div>

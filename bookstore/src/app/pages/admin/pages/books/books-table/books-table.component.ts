@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, TemplateRef, ElementRef } from '@angular/core';
 import { BooksFilterConfig } from 'src/app/models/entities/Book';
 
 const sortDataAttr = 'data-attr-sort-key';
@@ -56,7 +56,8 @@ export class BooksTableComponent implements OnInit {
     this.isLoadingAtFilterChanging = true;
   }
 
-  handleSearching(searchValue: string) {
+  handleSearching(searchValue: string, categorySwitchReference: any) {
+    console.log(categorySwitchReference);
     this.changing.emit(
       {
         page: this.page,

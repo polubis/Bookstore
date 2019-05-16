@@ -37,6 +37,7 @@ import { UserOrdersPopupComponent } from './containers/user-orders-popup/user-or
 import { TableComponent } from './components/table/table.component';
 import { ChangeUserDataPopupComponent } from './containers/change-user-data-popup/change-user-data-popup.component';
 import { BooksTableComponent } from './pages/admin/pages/books/books-table/books-table.component';
+import { SearcherCategorySwitcherComponent } from './components/searcher-category-switcher/searcher-category-switcher.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { BooksTableComponent } from './pages/admin/pages/books/books-table/books
     TableComponent,
     ChangeUserDataPopupComponent,
     BooksTableComponent,
+    SearcherCategorySwitcherComponent,
   ],
   imports: [
     BrowserModule,

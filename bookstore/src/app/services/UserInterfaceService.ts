@@ -4,14 +4,14 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { OrderPopupComponent } from '../containers/order-popup/order-popup.component';
 import { UserOrdersPopupComponent } from '../containers/user-orders-popup/user-orders-popup.component';
 import { ChangeUserDataPopupComponent } from '../containers/change-user-data-popup/change-user-data-popup.component';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInterfaceService {
 
-  isLoadingOnAdmin = new BehaviorSubject<boolean>(true);
+  isLoadingOnAdmin = new Subject<boolean>();
 
   constructor(private dialog: MatDialog) {}
 
