@@ -9,37 +9,43 @@
 
     <div class="flex-col inputs-wrapper">
       <mat-form-field>
-        <input [name]="'name'" (input)="onChangeInput($event)" matInput placeholder="Tytuł książki">
+        <input required [name]="'name'" (input)="onChangeInput($event)" matInput placeholder="Tytuł książki">
       </mat-form-field>
       <mat-form-field>
-        <input [name]="'author'" (input)="onChangeInput($event)" matInput placeholder="Autor">
+        <input required [name]="'author'" (input)="onChangeInput($event)" matInput placeholder="Autor">
       </mat-form-field>
       <mat-form-field>
-        <input [name]="'printer'" (input)="onChangeInput($event)" matInput placeholder="Wydawnictwo">
+        <input required [name]="'printer'" (input)="onChangeInput($event)" matInput placeholder="Wydawnictwo">
       </mat-form-field>
       <mat-form-field>
-        <input [name]="'kindOfBookName'" (input)="onChangeInput($event)" matInput placeholder="Gatunek">
+        <input required [name]="'kindOfBookName'" (input)="onChangeInput($event)" matInput placeholder="Gatunek">
       </mat-form-field>
       <mat-form-field>
-        <input min="0.01" max="5000" type="number" required [name]="'price'" (input)="onChangeInput($event)" matInput placeholder="Cena">
+        <input min="0" max="5000" type="number" required [name]="'price'" (input)="onChangeInput($event)" matInput
+          placeholder="Cena">
       </mat-form-field>
     </div>
 
     <div (click)="imageInput.click()" class="get-image-input flex-col">
-      <input type="file" [style.display]="'none'" #imageInput />
-      <span>Dodaj zdjęcie</span>
-      <mat-icon>image</mat-icon>
+      <input (input)="onChangeFileInput($event)" type="file" [style.display]="'none'" #imageInput />
+      <img *ngIf="pictureBookPreview; else emptyPictureBook" [src]="pictureBookPreview" />
+
+      <ng-template #emptyPictureBook>
+        <span>Dodaj zdjęcie</span>
+        <mat-icon>image</mat-icon>
+      </ng-template>
     </div>
 
   </section>
 
   <mat-form-field>
-    <textarea maxlength="256" minlength="100" #descRef (input)="onChangeInput($event)" [name]="'description'" matInput placeholder="Opis książki"></textarea>
+    <textarea #descRef (input)="onChangeInput($event)" [name]="'description'" matInput
+      placeholder="Opis książki"></textarea>
     <mat-hint [align]="start">Opis pozwala poznać detale książki - nie zdradzaj szczegółów</mat-hint>
     <mat-hint [align]="end">{{descRef.value.length}} / 256</mat-hint>
   </mat-form-field>
 
-  <button [disabled]="isSaving" class="relative" id="book-btn" type="submit" mat-flat-button color="primary">
+  <button [disabled]="isSaving || isAddingFile" class="relative" id="book-btn" type="submit" mat-flat-button color="primary">
     Create new book
   </button>
 </form>

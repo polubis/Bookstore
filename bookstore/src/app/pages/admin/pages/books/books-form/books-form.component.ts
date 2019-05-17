@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { BooksService } from 'src/app/services/BooksService';
 import { AddBookPayload } from 'src/app/models/entities/Book';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
@@ -12,6 +12,9 @@ import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 export class BooksFormComponent implements OnInit {
 
   isSaving = false;
+  isAddingFile = false;
+
+  pictureBookPreview: string | ArrayBuffer;
 
   booksFormData: AddBookPayload = {
     name: '',
@@ -23,9 +26,16 @@ export class BooksFormComponent implements OnInit {
     pictureBook: ''
   };
 
-  constructor(private dialogRef: MatDialogRef<BooksFormComponent>, private booksService: BooksService) { }
+  constructor(
+    private dialogRef: MatDialogRef<BooksFormComponent>,
+    private booksService: BooksService,
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public bookPayload: AddBookPayload) { }
 
   ngOnInit() {
+    if (this.bookPayload) {
+      this.booksFormData = { ...this.bookPayload };
+    }
   }
 
   @debounceEvent(100)
@@ -33,11 +43,19 @@ export class BooksFormComponent implements OnInit {
     this.booksFormData = { ...this.booksFormData, [target.name]: target.value };
   }
 
-  onChangeFileInput(e: any) {
-    this.booksFormData = {
-      ...this.booksFormData,
-      pictureBook: ''
+  onChangeFileInput({ target }: Event) {
+    this.isAddingFile = true;
+    const file = (target as HTMLInputElement).files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.booksFormData = {
+        ...this.booksFormData,
+        pictureBook: file
+      };
+      this.pictureBookPreview = reader.result;
+      this.isAddingFile = false;
     };
+    reader.readAsDataURL(file);
   }
 
   handleSubmit(e: any) {
@@ -46,11 +64,13 @@ export class BooksFormComponent implements OnInit {
     this.booksService.addBook(this.booksFormData)
       .subscribe(
         data => {
-          console.log(data);
-          this.isSaving = false;
+          this.snackBar.open('Pomyślnie dodano książkę', 'ZAMKNIJ', {
+            duration: 2000,
+            panelClass: ['succ-snackbar']
+          });
+          this.dialogRef.close();
         },
         err => {
-          console.log(err);
           this.isSaving = false;
         }
       );

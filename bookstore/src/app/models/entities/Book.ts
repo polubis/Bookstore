@@ -91,5 +91,5 @@ export interface AddBookPayload {
   kindOfBookName: string;
   price: number;
   description: string;
-  pictureBook: Blob | string;
+  pictureBook: File | string;
 }

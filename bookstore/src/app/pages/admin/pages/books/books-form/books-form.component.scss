@@ -28,6 +28,11 @@
       border: 1px solid $border-color;
       color: $primary;
 
+      img {
+        width: 100%;
+        
+      }
+
       span {
         margin-bottom: 10px;
         font-size: 18px;

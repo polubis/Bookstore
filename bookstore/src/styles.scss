@@ -53,6 +53,15 @@ p {
   }
 }
 
+.succ-snackbar {
+  background: $secondary !important;
+  color: $white !important;
+
+  .mat-simple-snackbar-action {
+    color: $white !important;
+  }
+}
+
 .clickable {
   cursor: pointer;
 }
