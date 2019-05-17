@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { BooksService } from 'src/app/services/BooksService';
-import { AddBookPayload } from 'src/app/models/entities/Book';
+import { AddBookPayload, Book } from 'src/app/models/entities/Book';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
+import { environment } from '../../../../../../environments/environment';
+import { RequestResponse } from 'src/app/models/others/RequestResponse';
 
 @Component({
   selector: 'app-books-form',
@@ -21,7 +23,7 @@ export class BooksFormComponent implements OnInit {
     author: '',
     printer: '',
     kindOfBookName: '',
-    price: 0,
+    price: '',
     description: '',
     pictureBook: ''
   };
@@ -34,7 +36,11 @@ export class BooksFormComponent implements OnInit {
 
   ngOnInit() {
     if (this.bookPayload) {
-      this.booksFormData = { ...this.bookPayload };
+      this.booksFormData = {
+        ...this.bookPayload,
+        pictureBook: this.bookPayload.pictureBook ?
+          `${environment.bookPicture}${this.bookPayload.pictureBook}` : ''
+      };
     }
   }
 
@@ -61,9 +67,9 @@ export class BooksFormComponent implements OnInit {
   handleSubmit(e: any) {
     e.preventDefault();
     this.isSaving = true;
-    this.booksService.addBook(this.booksFormData)
+    this.booksService.createBook(this.booksFormData)
       .subscribe(
-        data => {
+        ({ successResult: book }: RequestResponse<Book>) => {
           this.snackBar.open('Pomyślnie dodano książkę', 'ZAMKNIJ', {
             duration: 2000,
             panelClass: ['succ-snackbar']

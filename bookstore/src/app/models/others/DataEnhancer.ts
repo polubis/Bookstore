@@ -1,3 +1,4 @@
+
 export interface DataEnhancer<T> {
   isLoading?: boolean;
   error?: {
@@ -6,3 +7,4 @@ export interface DataEnhancer<T> {
   };
   data: T;
 }
+

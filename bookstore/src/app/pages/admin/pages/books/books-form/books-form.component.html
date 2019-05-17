@@ -9,26 +9,29 @@
 
     <div class="flex-col inputs-wrapper">
       <mat-form-field>
-        <input required [name]="'name'" (input)="onChangeInput($event)" matInput placeholder="Tytuł książki">
+        <input [value]="booksFormData.name" required [name]="'name'" (input)="onChangeInput($event)" matInput placeholder="Tytuł książki">
       </mat-form-field>
       <mat-form-field>
-        <input required [name]="'author'" (input)="onChangeInput($event)" matInput placeholder="Autor">
+        <input [value]="booksFormData.author" required [name]="'author'" (input)="onChangeInput($event)" matInput placeholder="Autor">
       </mat-form-field>
       <mat-form-field>
-        <input required [name]="'printer'" (input)="onChangeInput($event)" matInput placeholder="Wydawnictwo">
+        <input [value]="booksFormData.printer" required [name]="'printer'" (input)="onChangeInput($event)" matInput placeholder="Wydawnictwo">
       </mat-form-field>
       <mat-form-field>
-        <input required [name]="'kindOfBookName'" (input)="onChangeInput($event)" matInput placeholder="Gatunek">
+        <input [value]="booksFormData.kindOfBookName" required [name]="'kindOfBookName'" (input)="onChangeInput($event)" matInput placeholder="Gatunek">
       </mat-form-field>
       <mat-form-field>
-        <input min="0" max="5000" type="number" required [name]="'price'" (input)="onChangeInput($event)" matInput
+        <input [value]="booksFormData.price" min="0" max="5000" type="number" required [name]="'price'" (input)="onChangeInput($event)" matInput
           placeholder="Cena">
       </mat-form-field>
     </div>
 
     <div (click)="imageInput.click()" class="get-image-input flex-col">
       <input (input)="onChangeFileInput($event)" type="file" [style.display]="'none'" #imageInput />
-      <img *ngIf="pictureBookPreview; else emptyPictureBook" [src]="pictureBookPreview" />
+      <img 
+        *ngIf="pictureBookPreview; else emptyPictureBook" 
+        [src]="pictureBookPreview" 
+      />
 
       <ng-template #emptyPictureBook>
         <span>Dodaj zdjęcie</span>
@@ -39,7 +42,7 @@
   </section>
 
   <mat-form-field>
-    <textarea #descRef (input)="onChangeInput($event)" [name]="'description'" matInput
+    <textarea [value]="booksFormData.description" #descRef (input)="onChangeInput($event)" [name]="'description'" matInput
       placeholder="Opis książki"></textarea>
     <mat-hint [align]="start">Opis pozwala poznać detale książki - nie zdradzaj szczegółów</mat-hint>
     <mat-hint [align]="end">{{descRef.value.length}} / 256</mat-hint>

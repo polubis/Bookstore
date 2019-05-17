@@ -89,7 +89,7 @@ export interface AddBookPayload {
   author: string;
   printer: string;
   kindOfBookName: string;
-  price: number;
+  price: number | string;
   description: string;
   pictureBook: File | string;
 }

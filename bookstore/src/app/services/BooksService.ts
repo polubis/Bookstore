@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from './ApiService';
 import { Book, BookQuery, BooksFilterConfig, Books, AddBookPayload } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
-
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,8 @@ export class BooksService {
   newestBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
   foundBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: false, data: [] });
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+  }
   pictures = {
     0: '../../assets/got.jpg',
     1: '../../assets/lotr.jpg',
@@ -29,6 +30,12 @@ export class BooksService {
     9: '../../assets/2.jpg',
     10: '../../assets/2.jpg',
   };
+
+  getBooksSnapshot(): Observable<DataEnhancer<Book[]>> {
+    return this.foundBooks.pipe(
+      take(1)
+    );
+  }
 
   getRecommendedBooks(numberOfBooks = 15) {
     this.recommendedBooks.next({ isLoading: true, error: null, data: [] });
@@ -96,7 +103,7 @@ export class BooksService {
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
   }
 
-  addBook({ name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {
+  createBook({ name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {
     const book = new FormData();
     book.set('name', name);
     book.set('author', author);
