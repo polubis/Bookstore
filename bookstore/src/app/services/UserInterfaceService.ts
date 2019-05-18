@@ -6,6 +6,7 @@ import { UserOrdersPopupComponent } from '../containers/user-orders-popup/user-o
 import { ChangeUserDataPopupComponent } from '../containers/change-user-data-popup/change-user-data-popup.component';
 import { BehaviorSubject } from 'rxjs';
 import { BooksFormComponent } from '../pages/admin/pages/books/books-form/books-form.component';
+import { BookDetailsPopupComponent } from '../containers/book-details-popup/book-details-popup.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserInterfaceService {
 
   isLoadingOnAdmin = new BehaviorSubject<boolean>(true);
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) { }
 
   openRegisterForm() {
     const dialogConfig = new MatDialogConfig();
@@ -48,5 +49,12 @@ export class UserInterfaceService {
     const dialogConfig = new MatDialogConfig();
 
     this.dialog.open(BooksFormComponent, dialogConfig);
+  }
+
+  openBookDetailsPopup(id: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { id };
+
+    this.dialog.open(BookDetailsPopupComponent, dialogConfig);
   }
 }

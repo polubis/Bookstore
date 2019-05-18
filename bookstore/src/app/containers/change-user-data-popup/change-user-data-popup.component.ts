@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { AccountsService } from 'src/app/services/AccountsService';
-import { RequestResponse } from 'src/app/models/others/RequestResponse';
-import { Account } from 'src/app/models/entities/Account';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -34,7 +32,6 @@ export class ChangeUserDataPopupComponent implements OnInit, OnDestroy {
       });
     this.sub = this.accountsService.loggedUserAccountDetails.subscribe(({ data, isLoading }) => {
       this.isLoading = isLoading;
-      console.log(isLoading);
       if (data) {
         const { firstName, lastName, email, address, phoneNumber } = data;
         this.accountFormData = {

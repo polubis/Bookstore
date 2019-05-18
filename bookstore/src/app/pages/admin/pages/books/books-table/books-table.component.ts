@@ -2,6 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { BooksFilterConfig } from 'src/app/models/entities/Book';
 import { FiltersService } from 'src/app/services/FiltersService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
+import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 
 @Component({
   selector: 'app-books-table',
@@ -17,7 +18,7 @@ export class BooksTableComponent implements OnInit {
   currentSortValue = 'name';
   sortingAscending = true;
 
-  constructor(private filterService: FiltersService) { }
+  constructor(private uiService: UserInterfaceService, private filterService: FiltersService) { }
 
   ngOnInit() {
   }

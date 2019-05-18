@@ -1,7 +1,7 @@
 <form id='books-form' (submit)="handleSubmit($event)" class="flex-col">
   <h2 class="popup-header" mat-dialog-title>
     <mat-icon color="primary">account_balance</mat-icon>
-    <span>Create new book</span>
+    <span>Dodaj nową książkę</span>
     <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
   </h2>
 
@@ -49,6 +49,6 @@
   </mat-form-field>
 
   <button [disabled]="isSaving || isAddingFile" class="relative" id="book-btn" type="submit" mat-flat-button color="primary">
-    Create new book
+    Dodaj nową książkę
   </button>
 </form>

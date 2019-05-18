@@ -18,6 +18,8 @@ export class BooksService {
 
   adminBooks = new BehaviorSubject<SlimBook[]>([]);
 
+  bookDetailsCache = new BehaviorSubject<{[key: number]: DataEnhancer<Book>}>({});
+
   constructor(private apiService: ApiService) { }
   pictures = {
     0: '../../assets/got.jpg',
@@ -102,6 +104,23 @@ export class BooksService {
   getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, minPrice, maxPrice }: BooksFilterConfig) {
     const bookQuery = new BookQuery(page, pageSize, searchTitle, sortOrder, searchAuthor, searchPrinter, minPrice, maxPrice);
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
+  }
+
+  getBook(bookId: number) {
+    this.bookDetailsCache.next({
+      [bookId]: {
+        isLoading: true,
+        error: null,
+        data: null
+      }
+    });
+
+    // Finish here
+
+    this.apiService.execute('books', 'get', {}, `/${bookId}`)
+      .subscribe(value => {
+
+      });
   }
 
   createBook({ name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {

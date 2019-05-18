@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule,
-  MatDialogModule, MatSnackBarModule } from '@angular/material';
+import {
+  MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule,
+  MatDialogModule, MatSnackBarModule
+} from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -39,6 +41,7 @@ import { ChangeUserDataPopupComponent } from './containers/change-user-data-popu
 import { BooksTableComponent } from './pages/admin/pages/books/books-table/books-table.component';
 import { SearcherCategorySwitcherComponent } from './components/searcher-category-switcher/searcher-category-switcher.component';
 import { BooksFormComponent } from './pages/admin/pages/books/books-form/books-form.component';
+import { BookDetailsPopupComponent } from './containers/book-details-popup/book-details-popup.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,7 @@ import { BooksFormComponent } from './pages/admin/pages/books/books-form/books-f
     BooksTableComponent,
     SearcherCategorySwitcherComponent,
     BooksFormComponent,
+    BookDetailsPopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +94,7 @@ import { BooksFormComponent } from './pages/admin/pages/books/books-form/books-f
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [RegisterComponent, OrderPopupComponent, UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
+  entryComponents: [BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent, 
+    UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })
 export class AppModule { }

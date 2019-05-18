@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BooksService } from 'src/app/services/BooksService';
-import { Books, SlimBook, Book, BooksFilterConfig } from 'src/app/models/entities/Book';
+import { Books, SlimBook, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { RequestResponse } from 'src/app/models/others/RequestResponse';
 import { BooksTable } from 'src/app/models/entities/Order';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
