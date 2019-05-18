@@ -7,6 +7,7 @@ import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { FiltersService } from 'src/app/services/FiltersService';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { AdminBooksService } from './AdminBooksService';
 
 @AutoUnsubscribe()
 @Component({
@@ -23,12 +24,12 @@ export class BooksComponent implements OnInit, OnDestroy {
   constructor(
     private booksService: BooksService,
     private uiService: UserInterfaceService,
-    private filtersService: FiltersService
+    private filtersService: FiltersService,
+    private adminBooksService: AdminBooksService
   ) { }
 
   columns: BooksTable[] = [
     { key: 'id', name: 'Identyfikator' },
-    { key: 'pictureName', name: 'Zdjęcie', icon: 'image' },
     { key: 'name', name: 'Nazwa', sortable: true },
     { key: 'author', name: 'Autor' },
     { key: 'printer', name: 'Wydawnictwo' },
@@ -42,22 +43,11 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.booksService.getBooks(config)
       .subscribe(
         ({ successResult: booksData }: RequestResponse<Books>) => {
-          this.books = booksData.results.map(({ id, name, pictureName, price, author, printer, kindOfBook, averageOfRatings }: Book) => {
-            return {
-              id,
-              name,
-              price,
-              author: author.name,
-              pictureName,
-              printer: printer.name,
-              kindOfBookName: kindOfBook.name,
-              averageOfRatings
-            } as SlimBook;
-          });
+          this.adminBooksService.books.next(booksData.results
+            .map(book => this.adminBooksService.makeBookSlim(book)));
           this.uiService.isLoadingOnAdmin.next(false);
         },
-        (err) => {
-          console.log(err);
+        () => {
           this.uiService.isLoadingOnAdmin.next(false);
         },
 
@@ -70,5 +60,5 @@ export class BooksComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }

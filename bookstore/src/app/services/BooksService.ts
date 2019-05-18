@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiService } from './ApiService';
-import { Book, BookQuery, BooksFilterConfig, Books, AddBookPayload } from '../models/entities/Book';
+import { Book, BookQuery, BooksFilterConfig, Books, AddBookPayload, SlimBook } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
@@ -16,8 +16,9 @@ export class BooksService {
   newestBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
   foundBooks = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: false, data: [] });
 
-  constructor(private apiService: ApiService) {
-  }
+  adminBooks = new BehaviorSubject<SlimBook[]>([]);
+
+  constructor(private apiService: ApiService) { }
   pictures = {
     0: '../../assets/got.jpg',
     1: '../../assets/lotr.jpg',

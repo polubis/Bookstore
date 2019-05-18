@@ -1,6 +1,6 @@
 <div class="books-operations">
   <button (click)="uiService.openBooksForm()" id="add-new-book-btn" mat-stroked-button>
     Dodaj nową książkę
-</button>
+  </button>
 </div>
-<app-books-table [columns]="columns" [items]="books"></app-books-table>
+<app-books-table [columns]="columns" [items]="adminBooksService.books | async"></app-books-table>

@@ -5,6 +5,7 @@ import { AddBookPayload, Book } from 'src/app/models/entities/Book';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { environment } from '../../../../../../environments/environment';
 import { RequestResponse } from 'src/app/models/others/RequestResponse';
+import { AdminBooksService } from '../AdminBooksService';
 
 @Component({
   selector: 'app-books-form',
@@ -32,6 +33,7 @@ export class BooksFormComponent implements OnInit {
     private dialogRef: MatDialogRef<BooksFormComponent>,
     private booksService: BooksService,
     private snackBar: MatSnackBar,
+    private adminBooksService: AdminBooksService,
     @Inject(MAT_DIALOG_DATA) public bookPayload: AddBookPayload) { }
 
   ngOnInit() {
@@ -64,7 +66,7 @@ export class BooksFormComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  handleSubmit(e: any) {
+  handleSubmit(e: Event) {
     e.preventDefault();
     this.isSaving = true;
     this.booksService.createBook(this.booksFormData)
@@ -75,8 +77,9 @@ export class BooksFormComponent implements OnInit {
             panelClass: ['succ-snackbar']
           });
           this.dialogRef.close();
+          this.adminBooksService.addBook(book);
         },
-        err => {
+        () => {
           this.isSaving = false;
         }
       );
