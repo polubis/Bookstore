@@ -9,6 +9,27 @@
     margin-left: 0;
   }
 
+  .delete-book-confirmation {
+    align-items: center;
+    margin: auto;
+
+    p {
+      margin-bottom: 15px;
+    }
+    .flex-row {
+      justify-content: center;
+
+      .deny-btn {
+        background: $grey-background;
+        margin-right: 15px;
+      }
+      .confirm-btn {
+        background: $primary;
+        color: $white;
+      }
+    }
+  }
+
   .book-content-wrapper {
     padding: 25px 0 40px 0;
 

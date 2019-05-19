@@ -1,65 +1,79 @@
 <div id="book-details-popup" class="flex-col">
 
-  <h2 class="popup-header" mat-dialog-title>
-    <span>Szczegóły książki</span>
-    <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
-  </h2>
+  <app-loader *ngIf="isSaving" [positionSet]="'modal'"></app-loader>
 
-  <app-loader *ngIf="isLoading; else bookDetails" [positionSet]="'modal'"></app-loader>
+  <ng-container *ngIf="!wantDeleteBook">
+    <h2 class="popup-header" mat-dialog-title>
+      <span>Szczegóły książki</span>
+      <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+    </h2>
 
-  <ng-template #bookDetails>
-    <div class="book-wrapper flex-col">
+    <app-loader *ngIf="isLoading; else bookDetails" [positionSet]="'modal'"></app-loader>
 
-      <div class="book-content-wrapper flex">
-        <figure class="book-image">
-          <img [src]="'../../../assets/it.jpg'" />
-        </figure>
+    <ng-template #bookDetails>
+      <div class="book-wrapper flex-col">
 
-        <div class="book-details flex-col">
-          <p class="detail-name">{{book.name}}</p>
-          <div class="detail">
-            <span>Autor: </span>
-            <span>{{book.author}}</span>
+        <div class="book-content-wrapper flex">
+          <figure class="book-image">
+            <img [src]="'../../../assets/it.jpg'" />
+          </figure>
+
+          <div class="book-details flex-col">
+            <p class="detail-name">{{book.name}}</p>
+            <div class="detail">
+              <span>Autor: </span>
+              <span>{{book.author}}</span>
+            </div>
+            <div *ngIf="book.printer" class="detail">
+              <span>Wydawnictwo: </span>
+              <span>{{book.printer}}</span>
+            </div>
+            <div class="detail">
+              <span>Gatunek: </span>
+              <span>{{book.kindOfBook.name}}</span>
+            </div>
+
+            <div class="detail flex-col">
+              <span class="detail">Opis</span>
+              <article>
+                {{book.description ? book.description : 'Brak opisu dla tej książki'}}
+              </article>
+            </div>
+
+            <div class="cost-opinion">
+              <span>Cena: </span>
+              <span>{{book.price}} zł</span>
+            </div>
+            <div class="cost-opinion">
+              <span>Średnia ocen: </span>
+              <span>{{book.averageOfRatings}}</span>
+            </div>
           </div>
-          <div *ngIf="book.printer" class="detail">
-            <span>Wydawnictwo: </span>
-            <span>{{book.printer}}</span>
-          </div>
-          <div class="detail">
-            <span>Gatunek: </span>
-            <span>{{book.kindOfBook.name}}</span>
-          </div>
-
-          <div class="detail flex-col">
-            <span class="detail">Opis</span>
-            <article>
-              {{book.description ? book.description : 'Brak opisu dla tej książki'}}
-            </article>
-          </div>
-
-          <div class="cost-opinion">
-            <span>Cena: </span>
-            <span>{{book.price}} zł</span>
-          </div>
-          <div class="cost-opinion">
-            <span>Średnia ocen: </span>
-            <span>{{book.averageOfRatings}}</span>
-          </div>
-
-
         </div>
       </div>
-    </div>
 
-    <footer class="book-operations flex">
-      <button class="edit-book-btn" mat-flat-button>
-        <mat-icon>mode_edit</mat-icon>
-        Edytuj książkę
+      <footer class="book-operations flex">
+        <button class="edit-book-btn" mat-flat-button>
+          <mat-icon>mode_edit</mat-icon>
+          Edytuj książkę
+        </button>
+        <button (click)="toggleWantDeleteBook()" class="delete-book-btn" mat-flat-button>
+          <mat-icon>delete</mat-icon>
+          Usuń książkę
+        </button>
+      </footer>
+    </ng-template>
+  </ng-container>
+
+  <div *ngIf="wantDeleteBook && !isSaving" class="delete-book-confirmation flex-col">
+    <p>Czy jesteś pewien, że chcesz usunąć tę książkę ?</p>
+    <div class="flex-row">
+      <button (click)="toggleWantDeleteBook()" class="deny-btn" mat-button>
+        Anuluj
       </button>
-      <button class="delete-book-btn" mat-flat-button>
-        <mat-icon>delete</mat-icon>
-        Usuń książkę
+      <button (click)="handleDeleteBook()" class="confirm-btn" mat-button>
+        Potwierdź
       </button>
-    </footer>
-  </ng-template>
+    </div>
+  </div>
 </div>

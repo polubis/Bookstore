@@ -30,4 +30,13 @@ export class AdminBooksService {
       averageOfRatings
     };
   }
+
+  removeBook(bookId: number) {
+    this.books.pipe(take(1))
+      .subscribe(books => {
+        this.books.next(
+          books.filter(book => +book.id !== bookId)
+        );
+      });
+  }
 }

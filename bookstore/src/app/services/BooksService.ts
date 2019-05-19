@@ -134,4 +134,17 @@ export class BooksService {
 
     return this.apiService.execute('books/add', 'post', book, '');
   }
+
+  deleteBook(bookId: number) {
+    return this.apiService.execute('books', 'delete', {}, `/${bookId}`).pipe();
+  }
+
+  removeBookFromCache(bookId: number) {
+    this.bookDetailsCache.pipe(take(1))
+      .subscribe(cache => {
+        const copiedCache = { ...cache };
+        delete copiedCache[bookId];
+        this.bookDetailsCache.next(copiedCache);
+      });
+  }
 }

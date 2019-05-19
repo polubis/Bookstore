@@ -6,6 +6,7 @@ import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 import { ServerError } from 'src/app/models/others/ServerError';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { AdminBooksService } from 'src/app/pages/admin/pages/books/AdminBooksService';
 
 @Component({
   selector: 'app-book-details-popup',
@@ -19,10 +20,14 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   error: ServerError;
   sub: Subscription;
 
+  wantDeleteBook = false;
+  isSaving = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
     private dialogRef: MatDialogRef<BookDetailsPopupComponent>,
-    private booksService: BooksService) { }
+    private booksService: BooksService,
+    private adminBooksService: AdminBooksService) { }
 
   ngOnInit() {
     const bookId = this.data.id;
@@ -44,6 +49,28 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if (!this.sub.closed) {
+      this.sub.unsubscribe();
+    }
+  }
+
+  toggleWantDeleteBook() {
+    this.wantDeleteBook = !this.wantDeleteBook;
+  }
+
+  handleDeleteBook() {
+    this.isSaving = true;
+    this.booksService.deleteBook(this.data.id)
+      .subscribe(
+        () => {
+          this.sub.unsubscribe();
+          this.adminBooksService.removeBook(this.data.id);
+          this.booksService.removeBookFromCache(this.data.id);
+          this.dialogRef.close();
+        },
+        () => {
+          this.isSaving = false;
+        }
+      );
   }
 }

@@ -58,13 +58,11 @@ export class FiltersService {
       });
   }
 
-  changePrices(minPrice: number, maxPrice: number) {
-    if (minPrice || maxPrice) {
-      this.filtersConfig.pipe(take(1))
+  changePrices(minPrice: number = null, maxPrice: number = null) {
+    this.filtersConfig.pipe(take(1))
       .subscribe(config => {
         this.filtersConfig.next({ ...config, minPrice, maxPrice });
       });
-    }
   }
 
 }
