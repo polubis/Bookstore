@@ -11,7 +11,6 @@ export class AdminBooksService {
   books = new BehaviorSubject<SlimBook[]>([]);
 
   addBook(book: Book) {
-    console.log(book);
     this.books.pipe(take(1))
       .subscribe(books => {
         this.books.next([this.makeBookSlim(book), ...books]);

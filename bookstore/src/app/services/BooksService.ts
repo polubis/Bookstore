@@ -18,7 +18,7 @@ export class BooksService {
 
   adminBooks = new BehaviorSubject<SlimBook[]>([]);
 
-  bookDetailsCache = new BehaviorSubject<{[key: number]: DataEnhancer<Book>}>({});
+  bookDetailsCache = new BehaviorSubject<{ [key: number]: DataEnhancer<Book> }>({});
 
   constructor(private apiService: ApiService) { }
   pictures = {
@@ -34,10 +34,12 @@ export class BooksService {
     10: '../../assets/2.jpg',
   };
 
-  getBooksSnapshot(): Observable<DataEnhancer<Book[]>> {
-    return this.foundBooks.pipe(
-      take(1)
-    );
+
+  changeBooksCache(key: number, isLoading = true, error: ServerError = null, data: Book = null) {
+    this.bookDetailsCache.pipe(take(1))
+      .subscribe(cache => {
+        this.bookDetailsCache.next({ ...cache, [key]: { isLoading, error, data } });
+      });
   }
 
   getRecommendedBooks(numberOfBooks = 15) {
@@ -107,20 +109,17 @@ export class BooksService {
   }
 
   getBook(bookId: number) {
-    this.bookDetailsCache.next({
-      [bookId]: {
-        isLoading: true,
-        error: null,
-        data: null
-      }
-    });
-
-    // Finish here
+    this.changeBooksCache(bookId);
 
     this.apiService.execute('books', 'get', {}, `/${bookId}`)
-      .subscribe(value => {
-
-      });
+      .subscribe(
+        ({ successResult: book }: RequestResponse<Book>) => {
+          this.changeBooksCache(bookId, false, null, book);
+        },
+        error => {
+          this.changeBooksCache(bookId, false, error, null);
+        }
+      );
   }
 
   createBook({ name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {

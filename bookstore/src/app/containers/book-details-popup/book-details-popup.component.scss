@@ -1,5 +1,105 @@
+@import '../../../styles.scss';
+
 #book-details-popup {
   position: relative;
-  min-width: 1000px;
-  height: 500px;
+  height: 640px;
+  width: 700px;
+
+  .popup-header span {
+    margin-left: 0;
+  }
+
+  .book-content-wrapper {
+    padding: 25px 0 40px 0;
+
+    .book-image {
+      height: 400px;
+      width: 310px;
+      box-shadow: $shadow;
+      position: relative;
+  
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+
+    .book-details {
+      margin-left: 50px;
+      width: 310px;
+      
+      .detail-name {
+        font-size: 18px;
+        color: $primary;
+        margin-bottom: 15px;
+      }
+
+      .detail {
+        margin-bottom: 7.5px;
+        span {
+          font-size: 15px;
+        }
+        span:first-of-type {
+          font-weight: 300;
+          color: $font-grey;
+        }
+        span:last-of-type {
+          font-weight: 400;
+          color: $primary;
+        }
+      }
+
+      .detail.flex-col {
+        margin-top: 12px;
+
+        article {
+          font-weight: 300;
+          line-height: 20px;
+          font-size: 14px;
+        }
+      }
+
+      
+      .cost-opinion {
+        margin-top: 15px;
+
+        span {
+          font-size: 20px;
+        }
+
+        span:first-of-type {
+          font-size: 20px;
+        }
+
+        span:last-of-type {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .book-operations {
+    margin-top: auto;
+
+    button {
+      mat-icon {
+        margin-right: 5px;
+      }
+    }
+
+    .edit-book-btn {
+      background: $primary;
+      color: $white;
+      margin-right: 15px;
+    }
+
+    .delete-book-btn {
+      background: $warn;
+      color: $white;
+    }
+  }
 }
