@@ -139,8 +139,19 @@ export class BooksService {
     return this.apiService.execute('books', 'delete', {}, `/${bookId}`).pipe();
   }
 
-  editBook(bookId: number, book: AddBookPayload) {
-    return this.apiService.execute('books', 'patch', book, `/${bookId}`);
+  editBook(bookId: number, { name, author, price, printer, kindOfBookName, description, pictureBook }: AddBookPayload) {
+    const newBook = new FormData();
+    newBook.set('name', name);
+    newBook.set('author', author);
+    newBook.set('price', price + '');
+    newBook.set('printer', printer);
+    newBook.set('kindOfBookName', kindOfBookName);
+    newBook.set('description', description);
+    if (typeof pictureBook !== 'string') {
+      newBook.set('pictureBook', pictureBook);
+    }
+
+    return this.apiService.execute('books', 'patch', newBook, `/${bookId}`);
   }
 
   removeBookFromCache(bookId: number) {

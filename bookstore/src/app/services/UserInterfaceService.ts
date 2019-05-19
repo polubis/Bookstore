@@ -57,7 +57,7 @@ export class UserInterfaceService {
         description: book.description,
         pictureBook: book.pictureName
       };
-      dialogConfig.data = bookPayload;
+      dialogConfig.data = { bookPayload, bookId: book.id };
     }
 
     this.dialog.open(BooksFormComponent, dialogConfig);

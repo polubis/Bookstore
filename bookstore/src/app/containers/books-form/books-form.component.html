@@ -1,7 +1,7 @@
 <form id='books-form' (submit)="handleSubmit($event)" class="flex-col">
   <h2 class="popup-header" mat-dialog-title>
     <mat-icon color="primary">account_balance</mat-icon>
-    <span>{{bookPayload ? 'Edycja ksiązki ' + bookPayload.name : 'Dodaj nową książkę'}}</span>
+    <span>{{bookPayload ? 'Edycja ksiązki ' + bookPayload.bookPayload.name : 'Dodaj nową książkę'}}</span>
     <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
   </h2>
 
@@ -26,7 +26,7 @@
 
         <mat-form-field class="example-full-width">
           <mat-label>Gatunek</mat-label>
-          <mat-select #kindVal value="booksFormData.kindOfBookName" (selectionChange)="onChangeKind(kindVal.value)">
+          <mat-select [value]="booksFormData.kindOfBookName" (selectionChange)="onChangeKind(kindVal.value)">
             <mat-option *ngFor="let kind of kinds.data" [value]="kind.name">{{kind.name}}</mat-option>
           </mat-select>
         </mat-form-field>

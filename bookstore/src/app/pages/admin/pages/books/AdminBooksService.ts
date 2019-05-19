@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { SlimBook, Book } from 'src/app/models/entities/Book';
+import { SlimBook, Book, AddBookPayload } from 'src/app/models/entities/Book';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -14,6 +14,17 @@ export class AdminBooksService {
     this.books.pipe(take(1))
       .subscribe(books => {
         this.books.next([this.makeBookSlim(book), ...books]);
+      });
+  }
+
+  updateBook({ bookPayload, bookId }: { bookPayload: AddBookPayload, bookId: number }) {
+    this.books.pipe(take(1))
+      .subscribe(books => {
+        this.books.next(
+          books.map(book => {
+            return +book.id === bookId ? { ...book } : book;
+          })
+        );
       });
   }
 

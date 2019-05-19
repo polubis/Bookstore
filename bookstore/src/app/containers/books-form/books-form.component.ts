@@ -3,7 +3,6 @@ import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { BooksService } from 'src/app/services/BooksService';
 import { AddBookPayload, Book } from 'src/app/models/entities/Book';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
-import { environment } from '../../../environments/environment';
 import { RequestResponse } from 'src/app/models/others/RequestResponse';
 import { AdminBooksService } from 'src/app/pages/admin/pages/books/AdminBooksService';
 import { KindsService } from 'src/app/services/KindsService';
@@ -29,7 +28,7 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     kindOfBookName: new FormControl(''),
   });
 
-  pictureBookPreview: string | ArrayBuffer;
+  pictureBookPreview: string | File | ArrayBuffer;
 
   booksFormData: AddBookPayload = {
     name: '',
@@ -49,7 +48,7 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private adminBooksService: AdminBooksService,
     private kindsService: KindsService,
-    @Inject(MAT_DIALOG_DATA) public bookPayload: AddBookPayload) { }
+    @Inject(MAT_DIALOG_DATA) public bookPayload: { bookPayload: AddBookPayload, bookId: number }) { }
 
   ngOnInit() {
     this.kindsService.getKinds();
@@ -59,15 +58,8 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     });
 
     if (this.bookPayload) {
-      const pictureBook = this.bookPayload.pictureBook ?
-        `${environment.bookPicture}${this.bookPayload.pictureBook}` : '';
-
-      this.booksFormData = {
-        ...this.bookPayload,
-        pictureBook
-      };
-
-      this.pictureBookPreview = pictureBook;
+      this.booksFormData = { ...this.bookPayload.bookPayload };
+      this.pictureBookPreview = this.bookPayload.bookPayload.pictureBook;
     }
   }
 
@@ -103,6 +95,19 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     e.preventDefault();
     this.isSaving = true;
     if (this.bookPayload) {
+      this.booksService.editBook(this.bookPayload.bookId, this.booksFormData)
+        .subscribe(
+          (book) => {
+            console.log(book);
+            this.isSaving = false;
+            this.booksService.removeBookFromCache(this.bookPayload.bookId);
+            this.adminBooksService.updateBook(this.bookPayload);
+          },
+          () => {
+            this.isSaving = false;
+          }
+        );
+    } else {
       this.booksService.createBook(this.booksFormData)
         .subscribe(
           ({ successResult: book }: RequestResponse<Book>) => {
@@ -117,9 +122,6 @@ export class BooksFormComponent implements OnInit, OnDestroy {
             this.isSaving = false;
           }
         );
-    } else {
-      // this.booksService.editBook(this.bookPayload)
-      // Fixnac wys xzdjecia, dodac request, dodac uzupelnienie sie gatunku
     }
 
   }

@@ -27,7 +27,7 @@ export interface SlimBook {
   kindOfBookName: string;
   price: number;
   description: string;
-  pictureName: string;
+  pictureName: string | File;
   id: string;
   averageOfRatings: number;
 }
