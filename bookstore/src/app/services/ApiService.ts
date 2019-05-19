@@ -14,10 +14,12 @@ type AuthEndpoint = 'accounts/login' | 'accounts/register' | 'accounts/logout';
 type AddressEndpoints = 'addresses/add' | 'addresses/';
 type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest' | 'books/add';
 type KindsEndpoints = 'kindOfBooks' | 'kindOfBooks/add';
+type PrintersEndpoints = 'printers' | 'printers/add';
 type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders';
 type AccountsEndpoints = 'accounts/updateUserData' | 'accounts/getUserData';
 
-type Endpoints = AuthEndpoint | AddressEndpoints | BooksEndpoints | KindsEndpoints | OrdersEndpoints | AccountsEndpoints;
+type Endpoints = AuthEndpoint | AddressEndpoints |
+  BooksEndpoints | KindsEndpoints | OrdersEndpoints | AccountsEndpoints | PrintersEndpoints;
 
 @Injectable({
   providedIn: 'root'
