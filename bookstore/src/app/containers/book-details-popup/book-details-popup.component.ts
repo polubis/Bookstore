@@ -1,13 +1,13 @@
-import { Component, OnInit, Inject, OnDestroy, forwardRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatDialogConfig, MatDialog } from '@angular/material';
 import { BooksService } from 'src/app/services/BooksService';
-import { Book } from 'src/app/models/entities/Book';
+import { Book, AddBookPayload } from 'src/app/models/entities/Book';
 import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 import { ServerError } from 'src/app/models/others/ServerError';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AdminBooksService } from 'src/app/pages/admin/pages/books/AdminBooksService';
-import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
+import { BooksFormComponent } from '../books-form/books-form.component';
 
 @Component({
   selector: 'app-book-details-popup',
@@ -25,8 +25,8 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   isSaving = false;
 
   constructor(
-    @Inject(forwardRef(() => UserInterfaceService)) private uiService: UserInterfaceService,
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<BookDetailsPopupComponent>,
     private booksService: BooksService,
     private adminBooksService: AdminBooksService,
@@ -63,7 +63,21 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   }
 
   goToBookEdition() {
-    this.uiService.openBooksForm(this.book);
+    const dialogConfig = new MatDialogConfig();
+    const { book } = this as any;
+
+    const bookPayload: AddBookPayload = {
+      name: book.name,
+      author: book.author,
+      price: book.price,
+      printer: book.printer || '',
+      kindOfBookName: book.kindOfBook.name,
+      description: book.description,
+      pictureBook: book.pictureName
+    };
+    dialogConfig.data = { bookPayload, bookId: book.id };
+
+    this.dialog.open(BooksFormComponent, dialogConfig);
     this.dialogRef.close();
   }
 
