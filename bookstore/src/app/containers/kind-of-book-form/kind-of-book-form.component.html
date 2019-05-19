@@ -1,0 +1,16 @@
+
+<form id='kind-of-book-form' class="flex-col relative" (ngSubmit)="handleSubmit()" [formGroup]="kindOfBookForm"> 
+  <h2 class="popup-header" mat-dialog-title>
+    <span>{{printerPayload ? 'Edycja gatunku ' + printerPayload.printer : 'Dodaj gatunek'}}</span>
+    <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+  </h2>
+
+  <mat-form-field class="kind-of-book-name">
+    <input minlength="3" maxlength="30" formControlName="kindOfBookName" required matInput placeholder="Gatunek">
+  </mat-form-field>
+
+
+  <button [disabled]="isSaving || !kindOfBookForm.valid" class="confirm-button" type="submit" mat-flat-button color="primary">
+    {{kindOfBookPayload ? 'Zapisz zmiany' : 'Dodaj gatunek'}}
+  </button>
+</form>

@@ -43,6 +43,9 @@ import { SearcherCategorySwitcherComponent } from './components/searcher-categor
 import { BookDetailsPopupComponent } from './containers/book-details-popup/book-details-popup.component';
 import { BooksFormComponent } from './containers/books-form/books-form.component';
 import { UserInterfaceService } from './services/UserInterfaceService';
+import { KindOfBookFormComponent } from './containers/kind-of-book-form/kind-of-book-form.component';
+import { PrinterFormComponent } from './containers/printer-form/printer-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -76,6 +79,8 @@ import { UserInterfaceService } from './services/UserInterfaceService';
     SearcherCategorySwitcherComponent,
     BooksFormComponent,
     BookDetailsPopupComponent,
+    KindOfBookFormComponent,
+    PrinterFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,12 +97,15 @@ import { UserInterfaceService } from './services/UserInterfaceService';
     MatTabsModule,
     MatIconModule,
     MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     AppRoutingModule,
   ],
   providers: [CookieService, UserInterfaceService],
   bootstrap: [AppComponent],
-  entryComponents: [BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
+  entryComponents: [KindOfBookFormComponent, PrinterFormComponent,
+    BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
     UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })
 export class AppModule { }

@@ -8,6 +8,9 @@ import { FiltersService } from 'src/app/services/FiltersService';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { AdminBooksService } from './AdminBooksService';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { KindOfBookFormComponent } from 'src/app/containers/kind-of-book-form/kind-of-book-form.component';
+import { PrinterFormComponent } from 'src/app/containers/printer-form/printer-form.component';
 
 @AutoUnsubscribe()
 @Component({
@@ -25,7 +28,8 @@ export class BooksComponent implements OnInit, OnDestroy {
     private booksService: BooksService,
     private uiService: UserInterfaceService,
     private filtersService: FiltersService,
-    private adminBooksService: AdminBooksService
+    private adminBooksService: AdminBooksService,
+    private dialog: MatDialog
   ) { }
 
   columns: BooksTable[] = [
@@ -52,6 +56,16 @@ export class BooksComponent implements OnInit, OnDestroy {
         },
 
       );
+  }
+
+  openPrinterForm() {
+    const config = new MatDialogConfig();
+    this.dialog.open(KindOfBookFormComponent, config);
+  }
+
+  openKindOfBookForm() {
+    const config = new MatDialogConfig();
+    this.dialog.open(PrinterFormComponent, config);
   }
 
   ngOnInit() {

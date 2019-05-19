@@ -1,0 +1,15 @@
+<form id='printer-form' class="flex-col relative" (ngSubmit)="handleSubmit()" [formGroup]="printerForm">
+  <h2 class="popup-header" mat-dialog-title>
+    <span>{{printerPayload ? 'Edycja wydawnictwa ' + printerPayload.printer : 'Dodaj wydawnictwo'}}</span>
+    <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+  </h2>
+
+  <mat-form-field class="printer-name">
+    <input minlength="3" maxlength="30" formControlName="printer" required matInput placeholder="Wydawnictwo">
+  </mat-form-field>
+
+
+  <button [disabled]="isSaving || !printerForm.valid" class="confirm-button" type="submit" mat-flat-button color="primary">
+    {{printerPayload ? 'Zapisz zmiany' : 'Dodaj wydawnictwo'}}
+  </button>
+</form>
