@@ -5,6 +5,7 @@ import { RequestResponse } from '../models/others/RequestResponse';
 import { DataEnhancer } from '../models/others/DataEnhancer';
 import { ServerError } from '../models/others/ServerError';
 import { Kind } from '../models/entities/Kind';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +18,27 @@ export class KindsService {
 
   }
 
-  // getKinds() {
-  //   this.kinds.next({ isLoading: true, error: null, data: [] });
+  getKinds() {
+    this.kinds.pipe(take(1))
+      .subscribe(kinds => {
+        if (kinds.data.length === 0) {
+          this.kinds.next({ isLoading: true, error: null, data: [] });
 
-  //   this.apiService.execute('kindOfBooks')
-  //     .subscribe(
-  //       (value: RequestResponse<Kind[]>) => {
-  //         this.kinds.next({
-  //           isLoading: false,
-  //           error: null,
-  //           data: value.successResult
-  //         });
-  //       },
-  //       ({ message, code }: ServerError) => {
-  //         this.kinds.next({ isLoading: false, error: { message, code }, data: [] });
-  //       }
-  //     );
-  // }
+          this.apiService.execute('kindOfBooks')
+            .subscribe(
+              (value: RequestResponse<Kind[]>) => {
+                this.kinds.next({
+                  isLoading: false,
+                  error: null,
+                  data: value.successResult
+                });
+              },
+              ({ message, code }: ServerError) => {
+                this.kinds.next({ isLoading: false, error: { message, code }, data: [] });
+              }
+            );
+        }
+      });
+  }
 
 }

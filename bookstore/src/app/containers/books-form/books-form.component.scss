@@ -1,14 +1,14 @@
-@import '../../../../../../styles.scss';
+@import '../../../colors.scss';
 
 #books-form {
   background: $white;
   position: relative;
   width: 640px;
+  min-height: 400px;
 
   h2 {
     margin-bottom: 40px;
   }
-
 
   section {
     display: flex;

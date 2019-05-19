@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule,
-  MatDialogModule, MatSnackBarModule
+  MatDialogModule, MatSnackBarModule, MatAutocompleteModule, MatSelectModule
 } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgModule } from '@angular/core';
@@ -40,8 +40,8 @@ import { TableComponent } from './components/table/table.component';
 import { ChangeUserDataPopupComponent } from './containers/change-user-data-popup/change-user-data-popup.component';
 import { BooksTableComponent } from './pages/admin/pages/books/books-table/books-table.component';
 import { SearcherCategorySwitcherComponent } from './components/searcher-category-switcher/searcher-category-switcher.component';
-import { BooksFormComponent } from './pages/admin/pages/books/books-form/books-form.component';
 import { BookDetailsPopupComponent } from './containers/book-details-popup/book-details-popup.component';
+import { BooksFormComponent } from './containers/books-form/books-form.component';
 
 @NgModule({
   declarations: [
@@ -82,10 +82,12 @@ import { BookDetailsPopupComponent } from './containers/book-details-popup/book-
     HttpClientModule,
     MatButtonModule,
     MatInputModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatDialogModule,
     MatStepperModule,
     MatTooltipModule,
+    MatAutocompleteModule,
     MatTabsModule,
     MatIconModule,
     MatToolbarModule,
@@ -94,7 +96,7 @@ import { BookDetailsPopupComponent } from './containers/book-details-popup/book-
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent, 
+  entryComponents: [BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
     UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })
 export class AppModule { }

@@ -5,8 +5,8 @@ import { OrderPopupComponent } from '../containers/order-popup/order-popup.compo
 import { UserOrdersPopupComponent } from '../containers/user-orders-popup/user-orders-popup.component';
 import { ChangeUserDataPopupComponent } from '../containers/change-user-data-popup/change-user-data-popup.component';
 import { BehaviorSubject } from 'rxjs';
-import { BooksFormComponent } from '../pages/admin/pages/books/books-form/books-form.component';
 import { BookDetailsPopupComponent } from '../containers/book-details-popup/book-details-popup.component';
+import { BooksFormComponent } from '../containers/books-form/books-form.component';
 
 @Injectable({
   providedIn: 'root'
