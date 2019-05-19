@@ -41,4 +41,21 @@ export class KindsService {
       });
   }
 
+  addKind(kindOfBookPayload: { name: string }) {
+    return this.apiService.execute('kindOfBooks/add', 'post', kindOfBookPayload);
+  }
+
+  editKind({ name, id }: { name: string, id: number }) {
+    return this.apiService.execute('kindOfBooks', 'patch', { name }, `/${id}`);
+  }
+
+  putKindInKinds(kind: Kind) {
+    this.kinds.pipe(take(1))
+      .subscribe(kinds => {
+        this.kinds.next(
+          { ...kinds, data: [kind, ...kinds.data] }
+        );
+      });
+  }
+
 }
