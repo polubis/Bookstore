@@ -42,6 +42,7 @@ import { BooksTableComponent } from './pages/admin/pages/books/books-table/books
 import { SearcherCategorySwitcherComponent } from './components/searcher-category-switcher/searcher-category-switcher.component';
 import { BookDetailsPopupComponent } from './containers/book-details-popup/book-details-popup.component';
 import { BooksFormComponent } from './containers/books-form/books-form.component';
+import { UserInterfaceService } from './services/UserInterfaceService';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,7 @@ import { BooksFormComponent } from './containers/books-form/books-form.component
     MatCardModule,
     AppRoutingModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService, UserInterfaceService],
   bootstrap: [AppComponent],
   entryComponents: [BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
     UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]

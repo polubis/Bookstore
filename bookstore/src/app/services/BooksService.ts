@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
 import { Book, BookQuery, BooksFilterConfig, Books, AddBookPayload, SlimBook } from '../models/entities/Book';
 import { RequestResponse } from '../models/others/RequestResponse';
@@ -137,6 +137,10 @@ export class BooksService {
 
   deleteBook(bookId: number) {
     return this.apiService.execute('books', 'delete', {}, `/${bookId}`).pipe();
+  }
+
+  editBook(bookId: number, book: AddBookPayload) {
+    return this.apiService.execute('books', 'patch', book, `/${bookId}`);
   }
 
   removeBookFromCache(bookId: number) {

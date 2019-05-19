@@ -10,7 +10,7 @@ import { KindsService } from 'src/app/services/KindsService';
 import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 import { Kind } from 'src/app/models/entities/Kind';
 import { Subscription } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-books-form',
@@ -24,6 +24,10 @@ export class BooksFormComponent implements OnInit, OnDestroy {
 
   kindsSub: Subscription;
   kinds: DataEnhancer<Kind[]> = { isLoading: false, data: [] };
+
+  public form: FormGroup = new FormGroup({
+    kindOfBookName: new FormControl(''),
+  });
 
   pictureBookPreview: string | ArrayBuffer;
 
@@ -55,11 +59,15 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     });
 
     if (this.bookPayload) {
+      const pictureBook = this.bookPayload.pictureBook ?
+        `${environment.bookPicture}${this.bookPayload.pictureBook}` : '';
+
       this.booksFormData = {
         ...this.bookPayload,
-        pictureBook: this.bookPayload.pictureBook ?
-          `${environment.bookPicture}${this.bookPayload.pictureBook}` : ''
+        pictureBook
       };
+
+      this.pictureBookPreview = pictureBook;
     }
   }
 
@@ -94,19 +102,25 @@ export class BooksFormComponent implements OnInit, OnDestroy {
   handleSubmit(e: Event) {
     e.preventDefault();
     this.isSaving = true;
-    this.booksService.createBook(this.booksFormData)
-      .subscribe(
-        ({ successResult: book }: RequestResponse<Book>) => {
-          this.snackBar.open('Pomyślnie dodano książkę', 'ZAMKNIJ', {
-            duration: 2000,
-            panelClass: ['succ-snackbar']
-          });
-          this.dialogRef.close();
-          this.adminBooksService.addBook(book);
-        },
-        () => {
-          this.isSaving = false;
-        }
-      );
+    if (this.bookPayload) {
+      this.booksService.createBook(this.booksFormData)
+        .subscribe(
+          ({ successResult: book }: RequestResponse<Book>) => {
+            this.snackBar.open('Pomyślnie dodano książkę', 'ZAMKNIJ', {
+              duration: 2000,
+              panelClass: ['succ-snackbar']
+            });
+            this.dialogRef.close();
+            this.adminBooksService.addBook(book);
+          },
+          () => {
+            this.isSaving = false;
+          }
+        );
+    } else {
+      // this.booksService.editBook(this.bookPayload)
+      // Fixnac wys xzdjecia, dodac request, dodac uzupelnienie sie gatunku
+    }
+
   }
 }

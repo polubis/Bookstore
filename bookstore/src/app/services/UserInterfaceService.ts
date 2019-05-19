@@ -7,10 +7,9 @@ import { ChangeUserDataPopupComponent } from '../containers/change-user-data-pop
 import { BehaviorSubject } from 'rxjs';
 import { BookDetailsPopupComponent } from '../containers/book-details-popup/book-details-popup.component';
 import { BooksFormComponent } from '../containers/books-form/books-form.component';
+import { Book, AddBookPayload } from '../models/entities/Book';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserInterfaceService {
 
   isLoadingOnAdmin = new BehaviorSubject<boolean>(true);
@@ -45,8 +44,21 @@ export class UserInterfaceService {
     this.dialog.open(ChangeUserDataPopupComponent, dialogConfig);
   }
 
-  openBooksForm() {
+  openBooksForm(book?: any) {
     const dialogConfig = new MatDialogConfig();
+
+    if (book) {
+      const bookPayload: AddBookPayload = {
+        name: book.name,
+        author: book.author,
+        price: book.price,
+        printer: book.printer || '',
+        kindOfBookName: book.kindOfBook.name,
+        description: book.description,
+        pictureBook: book.pictureName
+      };
+      dialogConfig.data = bookPayload;
+    }
 
     this.dialog.open(BooksFormComponent, dialogConfig);
   }
