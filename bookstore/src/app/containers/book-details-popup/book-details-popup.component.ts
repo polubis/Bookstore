@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { BooksService } from 'src/app/services/BooksService';
 import { Book } from 'src/app/models/entities/Book';
 import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
@@ -27,7 +27,8 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
     private dialogRef: MatDialogRef<BookDetailsPopupComponent>,
     private booksService: BooksService,
-    private adminBooksService: AdminBooksService) { }
+    private adminBooksService: AdminBooksService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     const bookId = this.data.id;
@@ -66,7 +67,12 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
           this.sub.unsubscribe();
           this.adminBooksService.removeBook(this.data.id);
           this.booksService.removeBookFromCache(this.data.id);
+          this.snackBar.open('Pomyślnie usunięto książkę', 'ZAMKNIJ', {
+            duration: 2000,
+            panelClass: ['succ-snackbar']
+          });
           this.dialogRef.close();
+
         },
         () => {
           this.isSaving = false;

@@ -67,7 +67,7 @@ export class ApiService {
         const useSnackbar = this.snackBarBlackList.find(item => item === restUrl) === undefined;
         const message = this.extractErrorMessage(err);
         if (useSnackbar) {
-          this.snackBar.open(message, 'CLOSE', {
+          this.snackBar.open(message, 'ZAMKNIJ', {
             duration: 5000,
             panelClass: ['warn-snackbar']
           });

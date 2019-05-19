@@ -38,14 +38,26 @@
       width: 310px;
       box-shadow: $shadow;
       position: relative;
+      display: flex;
+      justify-content: center;
   
+      .no-image {
+        justify-content: center;
+        align-items: center;
+        margin: auto 0;
+
+        p {
+          margin-bottom: 7.5px;
+        }
+      }
+
       img {
         position: absolute;
+        object-fit: cover;
+        max-height: 100%;
         top: 0;
         left: 0;
         width: 100%;
-        object-fit: cover;
-        height: 100%;
       }
     }
 

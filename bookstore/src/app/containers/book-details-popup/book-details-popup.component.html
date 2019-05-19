@@ -15,7 +15,13 @@
 
         <div class="book-content-wrapper flex">
           <figure class="book-image">
-            <img [src]="'../../../assets/it.jpg'" />
+            <img *ngIf="book.pictureName; else noImageTemplate" [src]="book.pictureName" />
+            <ng-template #noImageTemplate>
+              <div class="no-image flex-col">
+                <p>Brak zdjęcia</p>
+                <mat-icon>image</mat-icon>
+              </div>
+            </ng-template>
           </figure>
 
           <div class="book-details flex-col">
