@@ -51,6 +51,7 @@ export interface BooksFilterConfig {
   searchAuthor?: string;
   minPrice?: number;
   maxPrice?: number;
+  kindOfBookId?: number;
 }
 
 export class BookQuery implements BooksFilterConfig {
@@ -64,7 +65,8 @@ export class BookQuery implements BooksFilterConfig {
     public searchAuthor = '',
     public searchPrinter = '',
     public minPrice,
-    public maxPrice
+    public maxPrice,
+    public kindOfBookId
   ) {
     let query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${
       searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
@@ -75,6 +77,10 @@ export class BookQuery implements BooksFilterConfig {
 
     if (maxPrice) {
       query += `&maxPrice=${maxPrice}`;
+    }
+
+    if (kindOfBookId) {
+      query += `&kindOfBookId=${kindOfBookId}`;
     }
 
     this.query = query;

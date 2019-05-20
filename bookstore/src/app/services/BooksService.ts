@@ -91,8 +91,11 @@ export class BooksService {
       );
   }
 
-  getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, minPrice, maxPrice }: BooksFilterConfig) {
-    const bookQuery = new BookQuery(page, pageSize, searchTitle, sortOrder, searchAuthor, searchPrinter, minPrice, maxPrice);
+  getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, minPrice, maxPrice, kindOfBookId }: BooksFilterConfig) {
+    const bookQuery = new BookQuery(
+      page, pageSize, searchTitle, sortOrder,
+      searchAuthor, searchPrinter, minPrice, maxPrice, kindOfBookId
+    );
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
   }
 

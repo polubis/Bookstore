@@ -3,10 +3,23 @@
 <div id="library-view" class="flex-col">
 
   <main>
-    <aside class="lib-nav flex-col">
-      <p>Filtrowanie</p>
 
-      
+    <aside class="lib-nav flex-col">
+      <p>Gatunki</p>
+      <div 
+        class="kinds-wrapper flex-col"
+        (click)="handleKindClick($event)" 
+        [ngClass] filters
+      >
+        <span 
+          [attr.data-sectionvalue]="kind.id" 
+          *ngFor="let kind of (kindsService.kinds | async).data" 
+          [ngClass]="{'selected-kind': filters.kindOfBookId == kind.id, 'kind': true}"
+        >
+          {{kind.name}}
+        </span>
+      </div>
+
     </aside>
 
     <div class="main-content flex-col">
@@ -19,7 +32,7 @@
 
         <section class="books-wrapper">
           <div *ngFor="let book of books" class="book flex-col">
-            
+
             <figure>
               <img appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
             </figure>
@@ -32,8 +45,6 @@
           </div>
 
         </section>
-
-
 
       </ng-template>
 

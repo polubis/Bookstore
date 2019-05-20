@@ -49,6 +49,7 @@ export class LibraryService {
   }
 
   changeFilters(incomingFilters: any) {
+    console.log(incomingFilters);
     this.getCurrentFiltersSnapshot()
       .subscribe(filters => {
         this.filters.next({

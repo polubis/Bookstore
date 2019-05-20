@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BooksService } from 'src/app/services/BooksService';
 import { Subscription, of } from 'rxjs';
 import { ServerError } from 'src/app/models/others/ServerError';
 import { Book, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { LibraryService } from './LibraryService';
 import { switchMap, debounceTime, filter } from 'rxjs/operators';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { KindsService } from 'src/app/services/KindsService';
 
 @AutoUnsubscribe()
 @Component({
@@ -22,7 +22,9 @@ export class LibraryComponent implements OnInit, OnDestroy {
   books: Book[];
   filters: BooksFilterConfig;
 
-  constructor(private booksService: BooksService, private libraryService: LibraryService) { }
+  constructor(
+    private libraryService: LibraryService,
+    private kindsService: KindsService) { }
 
   ngOnInit() {
     this.booksSub = this.libraryService.books
@@ -37,6 +39,15 @@ export class LibraryComponent implements OnInit, OnDestroy {
         this.filters = filters;
         this.libraryService.handleSearching(filters);
       });
+
+    this.kindsService.getKinds();
+  }
+
+  handleKindClick({ target }: any) {
+    const kindOfBookId: number = target.dataset.sectionvalue;
+    if (kindOfBookId !== null) {
+      this.libraryService.changeFilters({ kindOfBookId });
+    }
   }
 
   ngOnDestroy() { }

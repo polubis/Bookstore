@@ -17,14 +17,36 @@
     margin-top: 80px;
 
     aside.lib-nav {
-      height: 100vh;
+      height: calc(100vh - 80px);
       width: 300px;
       padding: 35px;
       position: fixed;
       left: 0;
+      overflow-y: auto;
       top: 80px;
       border-right: 1px solid $border-color;
       background: #fcfcfc;
+
+      p {
+        margin-bottom: 35px;
+      }
+
+      .kinds-wrapper {
+        color: $primary;
+        max-height: 100%;
+
+        .selected-kind {
+          color: red !important;
+        }
+
+        .kind {
+          padding: 10px 0;
+          cursor: pointer;
+          &:last-of-type {
+            margin-bottom: 50px;
+          }
+        }
+      }
     }
 
     .main-content {
@@ -99,5 +121,4 @@
 
 .library-header {
   margin-bottom: 35px;
-
 }
