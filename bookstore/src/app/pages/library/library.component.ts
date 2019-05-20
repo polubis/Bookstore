@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, of } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ServerError } from 'src/app/models/others/ServerError';
 import { Book, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { LibraryService } from './LibraryService';
-import { switchMap, debounceTime, filter } from 'rxjs/operators';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { KindsService } from 'src/app/services/KindsService';
 
@@ -24,7 +23,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
   constructor(
     private libraryService: LibraryService,
-    private kindsService: KindsService) { }
+    private kindsService: KindsService
+  ) { }
 
   ngOnInit() {
     this.booksSub = this.libraryService.books
