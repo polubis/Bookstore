@@ -3,8 +3,10 @@
 <div id="library-view" class="flex-col">
 
   <main>
-    <aside class="lib-nav">
+    <aside class="lib-nav flex-col">
+      <p>Filtrowanie</p>
 
+      
     </aside>
 
     <div class="main-content flex-col">
@@ -24,6 +26,8 @@
 
             <p class="book-name">{{book.name}}</p>
             <span class="author">{{book.author}}</span>
+            <span class="price">{{book.price}} zł</span>
+
             <app-stars-rate [rate]="4.25"></app-stars-rate>
           </div>
 

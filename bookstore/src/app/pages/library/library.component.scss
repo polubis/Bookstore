@@ -16,9 +16,10 @@
     min-height: calc(100vh - 80px);
     margin-top: 80px;
 
-    aside {
+    aside.lib-nav {
       height: 100vh;
       width: 300px;
+      padding: 35px;
       position: fixed;
       left: 0;
       top: 80px;
@@ -63,9 +64,11 @@
       padding: 35px;
       top: 0;
       bottom: 0;
+      cursor: pointer;
     }
 
     .book-img {
+      cursor: pointer;
       position: absolute;
       border-radius: 1px;
       box-shadow: 0 6px 6px rgba(0, 0, 0, 0.14);
@@ -87,6 +90,10 @@
     font-size: 14px;
     margin: 6px 0 12px 0;
     text-transform: capitalize;
+  }
+
+  .price {
+    margin-bottom: 6px;
   }
 }
 
