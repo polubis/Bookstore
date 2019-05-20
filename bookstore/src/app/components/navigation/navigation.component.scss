@@ -43,6 +43,27 @@
   }
 }
 
+.page-logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transform: translateX(0);
+  transition: .3s transform $transition;
+  z-index: 1;
+  
+  .company-name {
+    font-weight: 300;
+    letter-spacing: 1.1px;
+    margin-left: 12.5px;
+  }
+
+  .company-logo {
+    font-size: 32px;
+    height: 32px;
+    width: 32px; 
+  }
+}
+
 nav {
   display: flex;
   z-index: 10;
@@ -50,8 +71,8 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  padding: 15px 45px;
   width: 100%;
+  padding: 15px 45px;
 
   &::before {
     content: '';
@@ -68,24 +89,6 @@ nav {
 
   .page-logo {
     color: $white;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transform: translateX(0);
-    transition: .3s transform $transition;
-    z-index: 1;
-    
-    .company-name {
-      font-weight: 300;
-      letter-spacing: 1.1px;
-      margin-left: 12.5px;
-    }
-
-    .company-logo {
-      font-size: 32px;
-      height: 32px;
-      width: 32px; 
-    }
   }
 
   .navigation-links {
@@ -169,6 +172,29 @@ nav {
         color: $white;
       }
   
+    }
+  }
+}
+
+nav.library-nav {
+  border-bottom: 1px solid $border-color;
+  background: $grey-background;
+  box-shadow: none;
+  padding: 15px 25px;
+
+  .page-logo {
+    color: $primary;
+  }
+
+  .navigation-links {
+    margin-left: 220px;
+    button {
+      color: $white;
+      background: $primary;
+
+      mat-icon {
+        margin-right: 5px;
+      }
     }
   }
 }

@@ -1,1 +1,17 @@
-<app-navigation></app-navigation>
+<app-navigation [navigationClass]="'library-nav'"></app-navigation>
+
+<div id="library-view" class="flex-col">
+
+  <main>
+    <aside class="lib-nav">
+
+    </aside>
+
+    <div class="main-content">
+      <app-loader [positionSet]="'modal'"></app-loader>
+
+    </div>
+
+  </main>
+
+</div>

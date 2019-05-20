@@ -80,7 +80,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BooksFormComponent,
     BookDetailsPopupComponent,
     KindOfBookFormComponent,
-    PrinterFormComponent,
+    PrinterFormComponent
   ],
   imports: [
     BrowserModule,

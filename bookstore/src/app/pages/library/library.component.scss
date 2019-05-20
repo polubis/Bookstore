@@ -1,0 +1,41 @@
+@import '../../../colors.scss';
+
+.bucket-icon-btn {
+  color: $primary;
+  border-color: $primary;
+
+  mat-icon {
+    color: $primary;
+    margin-right: 5px;
+  }
+}
+
+#library-view {
+  min-height: 100vh;
+
+  main {
+    display: flex;
+    min-height: calc(100vh - 80px);
+    margin-top: 80px;
+
+    aside {
+      height: 100vh;
+      width: 300px;
+      position: fixed;
+      left: 0;
+      top: 80px;
+      border-right: 1px solid $border-color;
+      background: $grey-background;
+    }
+
+    .main-content {
+      position: relative;
+      margin-left: 300px;
+      width: calc(100vw - 300px);
+      min-height: 100%;
+      background: #f6f6f6;
+
+    }
+  }
+
+}
