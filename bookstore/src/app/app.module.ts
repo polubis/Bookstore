@@ -46,6 +46,7 @@ import { UserInterfaceService } from './services/UserInterfaceService';
 import { KindOfBookFormComponent } from './containers/kind-of-book-form/kind-of-book-form.component';
 import { PrinterFormComponent } from './containers/printer-form/printer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageDirective } from './helpers/image-directive';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BooksFormComponent,
     BookDetailsPopupComponent,
     KindOfBookFormComponent,
-    PrinterFormComponent
+    PrinterFormComponent,
+    ImageDirective
   ],
   imports: [
     BrowserModule,

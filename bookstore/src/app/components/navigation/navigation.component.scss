@@ -178,16 +178,16 @@ nav {
 
 nav.library-nav {
   border-bottom: 1px solid $border-color;
-  background: $grey-background;
+  background: #fcfcfc;
   box-shadow: none;
-  padding: 15px 25px;
+  padding: 15px 30px;
 
   .page-logo {
     color: $primary;
   }
 
   .navigation-links {
-    margin-left: 220px;
+    margin-left: 215px;
     button {
       color: $white;
       background: $primary;

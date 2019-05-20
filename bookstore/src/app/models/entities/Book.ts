@@ -1,5 +1,5 @@
 
-export interface Book {
+export class Book {
   name: string;
   author: {
     id: number;
@@ -93,3 +93,4 @@ export interface AddBookPayload {
   description: string;
   pictureBook: File | string;
 }
+

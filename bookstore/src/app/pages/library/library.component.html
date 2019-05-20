@@ -7,8 +7,33 @@
 
     </aside>
 
-    <div class="main-content">
-      <app-loader [positionSet]="'modal'"></app-loader>
+    <div class="main-content flex-col">
+
+      <h2 class="library-header">Książki</h2>
+
+      <app-loader *ngIf="isLoading; else content" [positionSet]="'modal'"></app-loader>
+
+      <ng-template #content>
+
+        <section class="books-wrapper">
+          <div *ngFor="let book of books" class="book flex-col">
+            
+            <figure>
+              <img appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
+            </figure>
+
+            <p class="book-name">{{book.name}}</p>
+            <span class="author">{{book.author}}</span>
+            <app-stars-rate [rate]="4.25"></app-stars-rate>
+          </div>
+
+        </section>
+
+
+
+      </ng-template>
+
+
 
     </div>
 
