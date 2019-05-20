@@ -1,15 +1,15 @@
 <div class='slider'>
-  <button *ngIf="!error && !loading" class='slider-btn slider-btn-left' mat-button>
+  <button [disabled]="scrollPosition === 0" (click)="moveLeft()" *ngIf="!error && !loading" class='slider-btn slider-btn-left' mat-button>
     <mat-icon id='company-logo'>arrow_left</mat-icon>
   </button>
-  <div [style.height]="sliderHeight + 120 + 'px'" class='slider-fluid-wrapper'>
+  <div [style.height]="sliderHeight + 120 + 'px'" class='slider-fluid-wrapper' #slider>
     <ng-content *ngIf="!error">
     </ng-content>
 
     <app-error-placeholder [error]="error" *ngIf="error"></app-error-placeholder>
 
   </div>
-  <button *ngIf="!error && !loading" class='slider-btn slider-btn-right' mat-button>
+  <button [disabled]="scrollPosition >= maxScrollPosition - jump" (click)="moveRight()" *ngIf="!error && !loading" class='slider-btn slider-btn-right' mat-button>
     <mat-icon id='company-logo'>arrow_right</mat-icon>
   </button>
 </div>

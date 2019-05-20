@@ -87,7 +87,7 @@
   <h2 class="home-section-title">Najlepiej ocenione</h2>
 
   <section>
-    <app-slider [loading]="recommendedBooks.isLoading" [error]="recommendedBooks.error" [sliderHeight]='340'
+    <app-slider [elementsCount]="recommendedBooks.data.length" [loading]="recommendedBooks.isLoading" [error]="recommendedBooks.error" [sliderHeight]='340'
       [elementWidth]='250' [elementMarginRight]='45'>
       <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let recommendedBook of recommendedBooks.data"
         class="book-cart">
@@ -116,7 +116,7 @@
   <h2 class="home-section-title">Ostatnio dodane</h2>
 
   <section>
-    <app-slider [loading]="newestBooks.isLoading" [error]="newestBooks.error" [sliderHeight]='340' [elementWidth]='250'
+    <app-slider [elementsCount]="newestBooks.data.length" [loading]="newestBooks.isLoading" [error]="newestBooks.error" [sliderHeight]='340' [elementWidth]='250'
       [elementMarginRight]='45'>
       <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let newestBook of newestBooks.data"
         class="book-cart">
