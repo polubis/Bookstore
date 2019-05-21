@@ -25,6 +25,12 @@
         </mat-select>
       </mat-form-field>
 
+      <mat-form-field>
+        <input (input)="changePrices(minLength.value)" #minLength autocomplete="off" min="0" max="5000" type="number" matInput placeholder="Minimalna cena">
+      </mat-form-field>
+      <mat-form-field>
+        <input (input)="changePrices(undefined, maxLength.value)" #maxLength autocomplete="off" min="0" max="5000" type="number" matInput placeholder="Maksymalna cena">
+      </mat-form-field>
     </aside>
 
     <div class="main-content flex-col">

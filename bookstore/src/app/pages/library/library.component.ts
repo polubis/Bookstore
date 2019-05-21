@@ -5,6 +5,7 @@ import { Book, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { LibraryService } from './LibraryService';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { KindsService } from 'src/app/services/KindsService';
+import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 
 @AutoUnsubscribe()
 @Component({
@@ -65,6 +66,12 @@ export class LibraryComponent implements OnInit, OnDestroy {
     });
   }
 
+  @debounceEvent(500)
+  changePrices(minPrice = this.filters.minPrice, maxPrice = this.filters.maxPrice) {
+    this.libraryService.changeFilters({
+      minPrice, maxPrice
+    });
+  }
 
   // handleKindClick(id: number) {
   //   const kindOfBookId: number = target.dataset.sectionvalue;
