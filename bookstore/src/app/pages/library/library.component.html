@@ -95,3 +95,10 @@
   </main>
 
 </div>
+
+<div class="library-pagination">
+  <mat-paginator 
+    (page)="paginationChanged($event)" [length]="libraryService.allBooksCount | async" [pageSize]="filters.pageSize"
+    [pageSizeOptions]="[5, 10, 25, 100, 150, 200]">
+  </mat-paginator>
+</div>

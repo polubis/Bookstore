@@ -6,6 +6,7 @@ import { LibraryService } from './LibraryService';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { KindsService } from 'src/app/services/KindsService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
+import { PageEvent } from '@angular/material';
 
 @AutoUnsubscribe()
 @Component({
@@ -20,6 +21,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   error: ServerError;
   books: Book[];
+  allBooksCount: number;
 
   filters: BooksFilterConfig;
   sortingBy = 'name';
@@ -55,7 +57,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
   @debounceEvent(250)
   changeSortCategory({ value: sortBy }: { value: 'averageOfRatings' | 'price' | 'name' }) {
     this.libraryService.changeFilters({
-      sortOrder: `${sortBy}_${this.sortOrder}`
+      sortOrder: `${sortBy}_${this.sortOrder}`,
+      page: 1
     });
   }
 
@@ -68,11 +71,11 @@ export class LibraryComponent implements OnInit, OnDestroy {
 
   @debounceEvent(250)
   changePrices(minPrice = this.filters.minPrice, maxPrice = this.filters.maxPrice) {
-    this.libraryService.changeFilters({ minPrice, maxPrice });
+    this.libraryService.changeFilters({ minPrice, maxPrice, page: 1 });
   }
 
   handleSearching(value: string) {
-    this.libraryService.changeFilters({ [this.category]: value });
+    this.libraryService.changeFilters({ [this.category]: value, page: 1 });
   }
 
   changeSearchCategory(category: string) {
@@ -82,10 +85,18 @@ export class LibraryComponent implements OnInit, OnDestroy {
         searchTitle: searchTitle && undefined,
         searchAuthor: searchAuthor && undefined,
         searchPrinter: searchPrinter && undefined,
-        [category]: this.filters[this.category]
+        [category]: this.filters[this.category],
+        page: 1
       });
     }
     this.category = category;
+  }
+
+  paginationChanged(data: PageEvent) {
+    this.libraryService.changeFilters({
+      page: data.pageIndex + 1,
+      pageSize: data.pageSize
+    });
   }
 
   ngOnDestroy() { }

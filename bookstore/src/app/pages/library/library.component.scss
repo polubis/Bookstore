@@ -51,7 +51,7 @@
       width: calc(100vw - 300px);
       min-height: 100%;
       background: #f6f6f6;
-      padding: 35px;
+      padding: 35px 35px 60px 35px;
 
       .searcher-and-header {
         justify-content: space-between;
@@ -124,4 +124,14 @@
   .price {
     margin-bottom: 6px;
   }
+}
+
+.library-pagination {
+  position: fixed;
+  bottom: 0;
+  padding: 0 10px;
+  background: $white;
+  box-shadow: $shadow;
+  right: 30px;
+
 }

@@ -12,6 +12,7 @@ import { take } from 'rxjs/operators';
 export class LibraryService {
 
   books = new BehaviorSubject<DataEnhancer<Book[]>>({ isLoading: true, data: [] });
+  allBooksCount = new BehaviorSubject<number>(0);
   filters = new BehaviorSubject<BooksFilterConfig>({
     page: 1,
     pageSize: 50
@@ -32,6 +33,7 @@ export class LibraryService {
     this.booksService.getBooks(config)
       .subscribe(
         ({ successResult }: RequestResponse<Books>) => {
+          this.allBooksCount.next(successResult.rowCount);
           this.books.next({
             isLoading: false,
             error: null,
