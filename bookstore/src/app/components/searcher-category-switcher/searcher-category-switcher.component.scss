@@ -1,6 +1,25 @@
+@import '../../../colors.scss';
+
+.switcher__dark {
+  background: #313d51;
+
+  &::before {
+    background: #334059;
+    border-bottom: 1px solid $white;
+  }
+}
+
+.switcher__light {
+  background: $white;
+
+  &::before {
+    background: rgb(235, 235, 235);
+    border-bottom: 1px solid $primary;
+  }
+}
+
 .switch-wrapper {
   margin-left: 25px;
-  background: #313d51;
   position: relative;
 
   &::before {
@@ -12,8 +31,7 @@
     width: 150px;
     transform: translateX(150px);
     transition: .3s transform;
-    background: #334059;
-    border-bottom: 1px solid white;
+    
   }
 
   .mat-button {

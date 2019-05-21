@@ -35,10 +35,6 @@
         color: $primary;
         max-height: 100%;
 
-        .selected-kind {
-          color: red;
-        }
-
         .kind {
           padding: 10px 0;
           cursor: pointer;
@@ -56,6 +52,14 @@
       min-height: 100%;
       background: #f6f6f6;
       padding: 35px;
+
+      .searcher-and-header {
+        justify-content: space-between;
+
+        .search-cat-wrapper {
+          margin-right: 25px;
+        }
+      }
 
       .filters-wrapper {
         margin: 20px 0 35px 0;
@@ -120,8 +124,4 @@
   .price {
     margin-bottom: 6px;
   }
-}
-
-.library-header {
-  margin-bottom: 35px;
 }

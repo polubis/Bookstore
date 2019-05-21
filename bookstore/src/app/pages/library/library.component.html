@@ -26,16 +26,33 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input (input)="changePrices(minLength.value)" #minLength autocomplete="off" min="0" max="5000" type="number" matInput placeholder="Minimalna cena">
+        <input (input)="changePrices(minLength.value)" #minLength autocomplete="off" min="0" max="5000" type="number"
+          matInput placeholder="Minimalna cena">
       </mat-form-field>
       <mat-form-field>
-        <input (input)="changePrices(undefined, maxLength.value)" #maxLength autocomplete="off" min="0" max="5000" type="number" matInput placeholder="Maksymalna cena">
+        <input (input)="changePrices(undefined, maxLength.value)" #maxLength autocomplete="off" min="0" max="5000" type="number"
+          matInput placeholder="Maksymalna cena">
       </mat-form-field>
     </aside>
 
     <div class="main-content flex-col">
 
-      <h2 class="library-header">Książki {{isLoading ? null : '(' + books.length + ')'}}</h2>
+      <div class="searcher-and-header flex-row">
+        <h2 class="library-header">
+          Książki {{isLoading ? null : '(' + books.length + ')'}}
+        </h2>
+
+        <div class="flex-row">
+          <div class="search-cat-wrapper">
+            <app-searcher-category-switcher [theme]="'light'" (changing)="changeSearchCategory($event)">
+            </app-searcher-category-switcher>
+          </div>
+          <app-searcher (searching)="handleSearching($event, switchRef)" [placeholder]="'Wpisz frazę do wyszukania...'"
+            [searcherType]="'library'"></app-searcher>
+        </div>
+
+      </div>
+
 
       <div class="filters-wrapper flex-row">
 

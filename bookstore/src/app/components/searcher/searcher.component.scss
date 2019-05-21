@@ -31,6 +31,26 @@
   width: 300px;
 }
 
+#searcher__library {
+  width: 300px;
+  background: transparent;
+  box-shadow: none;
+  border: 1px solid $border-color;
+  color: $primary;
+
+  #search-icon {
+    color: inherit;
+  }
+
+  input {
+    color: inherit;
+
+    &::placeholder {
+      color: inherit;
+    }
+  }
+}
+
 .searcher-wrapper {
   display: flex;
   align-items: center;

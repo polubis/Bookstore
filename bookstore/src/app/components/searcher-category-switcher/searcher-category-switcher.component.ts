@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 
 @Component({
@@ -8,6 +8,7 @@ import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 })
 export class SearcherCategorySwitcherComponent implements OnInit {
 
+  @Input() theme = 'dark';
   @Output() changing = new EventEmitter<string>();
 
   currentSelectedCategory: 'searchTitle' | 'searchPrinter' | 'searchAuthor' = 'searchTitle';

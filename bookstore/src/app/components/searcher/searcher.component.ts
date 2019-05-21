@@ -3,7 +3,7 @@ import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { Subject, Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
-import { debounceTime, tap, filter, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, tap, distinctUntilChanged } from 'rxjs/operators';
 
 @AutoUnsubscribe()
 @Component({
@@ -17,7 +17,7 @@ export class SearcherComponent implements OnInit, OnDestroy {
   booksSub: Subscription;
   obs$ = new Subject<string>();
   @Input() isLoading = false;
-  @Input() searcherType: 'home' | 'admin' = 'home';
+  @Input() searcherType: 'home' | 'admin' | 'library' = 'home';
   @Input() placeholder = 'Wpisz nazwę książki';
   @Output() initializing = new EventEmitter<void>();
   @Output() searching = new EventEmitter<string>();
