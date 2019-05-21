@@ -5,26 +5,24 @@
   <main>
 
     <aside class="lib-nav flex-col">
-      <p>Gatunki</p>
-      <div 
-        class="kinds-wrapper flex-col"
-        (click)="handleKindClick($event)" 
-        [ngClass] filters
-      >
-        <span 
-          [attr.data-sectionvalue]="kind.id" 
-          *ngFor="let kind of (kindsService.kinds | async).data" 
-          [ngClass]="{'selected-kind': filters.kindOfBookId == kind.id, 'kind': true}"
-        >
-          {{kind.name}}
-        </span>
-      </div>
-
+      <p>Dodatkowe filtry</p>
     </aside>
 
     <div class="main-content flex-col">
 
       <h2 class="library-header">Książki</h2>
+
+      <div class="filters-wrapper flex-row">
+
+        <ul class="kinds-wrapper flex-row" filters>
+          <app-kind [name]="'Wszystkie'" [selected]="filters.kindOfBookId === undefined" (clicking)="handleKindClick(undefined)">
+          </app-kind>
+          <app-kind *ngFor="let kind of (kindsService.kinds | async).data" [selected]="filters.kindOfBookId == kind.id"
+            (clicking)="handleKindClick(kind.id)" [name]="kind.name">
+          </app-kind>
+        </ul>
+
+      </div>
 
       <app-loader *ngIf="isLoading; else content" [positionSet]="'modal'"></app-loader>
 

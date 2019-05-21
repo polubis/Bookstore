@@ -57,10 +57,13 @@
       background: #f6f6f6;
       padding: 35px;
 
+      .filters-wrapper {
+        margin: 20px 0 35px 0;
+      }
+
       section.books-wrapper {
         display: flex;
         flex-flow: wrap;
-
       }
 
     }

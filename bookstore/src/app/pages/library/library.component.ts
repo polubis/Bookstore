@@ -43,12 +43,16 @@ export class LibraryComponent implements OnInit, OnDestroy {
     this.kindsService.getKinds();
   }
 
-  handleKindClick({ target }: any) {
-    const kindOfBookId: number = target.dataset.sectionvalue;
-    if (kindOfBookId !== null) {
-      this.libraryService.changeFilters({ kindOfBookId });
-    }
+  handleKindClick(kindOfBookId: number | undefined) {
+    this.libraryService.changeFilters({ kindOfBookId });
   }
+
+  // handleKindClick(id: number) {
+  //   const kindOfBookId: number = target.dataset.sectionvalue;
+  //   if (kindOfBookId !== null) {
+  //     this.libraryService.changeFilters({ kindOfBookId });
+  //   }
+  // }
 
   ngOnDestroy() { }
 }
