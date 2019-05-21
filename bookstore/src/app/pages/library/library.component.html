@@ -72,9 +72,9 @@
 
         <section class="books-wrapper">
           <div *ngFor="let book of books" class="book flex-col">
-
+            
             <figure>
-              <img appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
+              <img *ngIf="book.pictureName" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
             </figure>
 
             <p class="book-name">{{book.name}}</p>

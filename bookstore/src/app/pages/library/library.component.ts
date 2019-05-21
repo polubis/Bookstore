@@ -50,6 +50,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
     this.kindsService.getKinds();
   }
 
+  @debounceEvent(100)
   handleKindClick(kindOfBookId: number | undefined) {
     this.libraryService.changeFilters({ kindOfBookId });
   }
@@ -78,6 +79,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
     this.libraryService.changeFilters({ [this.category]: value, page: 1 });
   }
 
+  @debounceEvent(250)
   changeSearchCategory(category: string) {
     const { searchTitle, searchAuthor, searchPrinter } = this.filters;
     if (searchTitle || searchAuthor || searchPrinter) {

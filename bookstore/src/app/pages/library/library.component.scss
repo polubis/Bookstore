@@ -83,11 +83,11 @@
     width: 167px;
     position: relative;
     margin-bottom: 15px;
+    border: 1px solid $border-color;
     
     .broken-image {
       margin: auto;
       position: absolute;
-      border: 1px solid $border-color;
       left: 0;
       right: 0;
       padding: 35px;

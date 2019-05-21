@@ -25,6 +25,7 @@ export class BooksService {
 
   prepareBooksPictures(books: Book[]) {
     return books.map(book => {
+      console.log(book.pictureName);
       return { ...book, pictureName: book.pictureName ? `${environment.bookPicture}${book.pictureName}` : '' };
     });
   }
