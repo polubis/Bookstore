@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BooksService } from 'src/app/services/BooksService';
-import { Books, SlimBook, BooksFilterConfig } from 'src/app/models/entities/Book';
+import { Books, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { RequestResponse } from 'src/app/models/others/RequestResponse';
 import { BooksTable } from 'src/app/models/entities/Order';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
@@ -20,8 +20,6 @@ import { PrinterFormComponent } from 'src/app/containers/printer-form/printer-fo
 })
 export class BooksComponent implements OnInit, OnDestroy {
 
-  books: SlimBook[];
-
   subscription: Subscription;
 
   constructor(
@@ -37,7 +35,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     { key: 'name', name: 'Nazwa', sortable: true },
     { key: 'author', name: 'Autor' },
     { key: 'printer', name: 'Wydawnictwo' },
-    { key: 'kindOfBook', name: 'Rodzaj książki' },
+    { key: 'kindOfBookName', name: 'Rodzaj książki' },
     { key: 'averageOfRatings', name: 'Średnia z ocen', sortable: true },
     { key: 'price', name: 'Cena w zł', sortable: true },
   ];

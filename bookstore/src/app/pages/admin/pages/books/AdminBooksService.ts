@@ -28,13 +28,13 @@ export class AdminBooksService {
       });
   }
 
-  makeBookSlim({ id, name, pictureName, description, price, author, printer, kindOfBook, averageOfRatings }: Book): SlimBook {
+  makeBookSlim({ id, name, pictureName, description, price, author, printer, kindOfBook, averageOfRatings }: any): SlimBook {
     return {
       id,
       name,
       price,
       description,
-      author: author.name,
+      author,
       pictureName: pictureName ? `${environment.bookPicture}${pictureName}` : '',
       printer: printer.name,
       kindOfBookName: kindOfBook.name,

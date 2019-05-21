@@ -13,7 +13,7 @@ export interface Order {
 }
 
 export interface BooksTable {
-  key: 'id' | 'author' | 'averageOfRatings' | 'kindOfBook' | 'name' | 'price' | 'printer';
+  key: 'id' | 'author' | 'averageOfRatings' | 'kindOfBookName' | 'name' | 'price' | 'printer';
   name: string;
   sortable?: boolean;
   icon?: string;

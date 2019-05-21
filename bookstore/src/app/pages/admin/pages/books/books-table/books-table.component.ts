@@ -21,6 +21,7 @@ export class BooksTableComponent implements OnInit {
   constructor(private uiService: UserInterfaceService, private filterService: FiltersService) { }
 
   ngOnInit() {
+    console.log(this.columns, this.items);
   }
 
   @debounceEvent(150)
@@ -56,5 +57,4 @@ export class BooksTableComponent implements OnInit {
     e.preventDefault();
     this.filterService.changePrices(minPrice, maxPrice);
   }
-
 }
