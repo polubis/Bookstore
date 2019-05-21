@@ -9,4 +9,4 @@
     Dodaj nową książkę
   </button>
 </div>
-<app-books-table [columns]="columns" [items]="adminBooksService.books | async"></app-books-table>
+<app-books-table [paginationData]="booksPaginationData" [columns]="columns" [items]="adminBooksService.books | async"></app-books-table>

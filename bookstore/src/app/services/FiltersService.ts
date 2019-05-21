@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
 import { BooksFilterConfig, BooksFilterKeys } from '../models/entities/Book';
 import { take } from 'rxjs/operators';
+import { PageEvent } from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,9 @@ export class FiltersService {
 
     this.filtersConfig.pipe(take(1))
       .subscribe(config => {
-        this.filtersConfig.next({ ...config, ...searchConfig });
+        this.filtersConfig.next({
+          ...config, ...searchConfig, page: 1
+        });
       });
   }
 
@@ -48,11 +51,11 @@ export class FiltersService {
 
         if (isSearchFieldPopulated) {
           if (config.searchTitle) {
-            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchTitle });
+            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchTitle, page: 1 });
           } else if (config.searchPrinter) {
-            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchPrinter });
+            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchPrinter, page: 1 });
           } else {
-            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchAuthor });
+            this.filtersConfig.next({ ...config, ...searchConfig, [key]: config.searchAuthor, page: 1 });
           }
         }
       });
@@ -62,6 +65,17 @@ export class FiltersService {
     this.filtersConfig.pipe(take(1))
       .subscribe(config => {
         this.filtersConfig.next({ ...config, minPrice, maxPrice });
+      });
+  }
+
+  changePageConfig(data: PageEvent) {
+    this.filtersConfig.pipe(take(1))
+      .subscribe(config => {
+        this.filtersConfig.next({
+          ...config,
+          page: data.pageIndex + 1,
+          pageSize: data.pageSize
+        });
       });
   }
 

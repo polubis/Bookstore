@@ -3,6 +3,8 @@ import { BooksFilterConfig } from 'src/app/models/entities/Book';
 import { FiltersService } from 'src/app/services/FiltersService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
+import { PaginationData } from 'src/app/models/others/PaginationWrapper';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-books-table',
@@ -13,6 +15,7 @@ export class BooksTableComponent implements OnInit {
 
   @Input() columns: { key: string, name: string, sortable: boolean }[];
   @Input() items: any[];
+  @Input() paginationData: PaginationData;
   @Output() changing = new EventEmitter<BooksFilterConfig>();
 
   currentSortValue = 'name';
@@ -56,5 +59,9 @@ export class BooksTableComponent implements OnInit {
   handleChangePrices(e: any, minPrice: number, maxPrice: number) {
     e.preventDefault();
     this.filterService.changePrices(minPrice, maxPrice);
+  }
+
+  paginationChanged(data: PageEvent) {
+    this.filterService.changePageConfig(data);
   }
 }

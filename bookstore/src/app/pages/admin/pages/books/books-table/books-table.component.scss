@@ -20,10 +20,43 @@
     }
   }
 
+  .table-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 600px;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      width: 1em;
+    }
+    
+    &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 6px 24px rgba(0,0,0,0.3);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: #b0b0b061;
+    }
+
+  }
+  
+  .paginator-wrapper {
+    margin-top: auto;
+
+    .mat-paginator {
+      background: none;
+      color: $white;
+      * {
+        color: inherit !important;
+      }
+    }
+  }
+
   table {
     border: none;
     table-layout: fixed;
     border-spacing: 0;
+    width: 100%;
 
     tr {
       height: 64px;

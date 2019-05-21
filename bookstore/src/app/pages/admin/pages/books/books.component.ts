@@ -5,12 +5,14 @@ import { RequestResponse } from 'src/app/models/others/RequestResponse';
 import { BooksTable } from 'src/app/models/entities/Order';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { FiltersService } from 'src/app/services/FiltersService';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { AdminBooksService } from './AdminBooksService';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { KindOfBookFormComponent } from 'src/app/containers/kind-of-book-form/kind-of-book-form.component';
 import { PrinterFormComponent } from 'src/app/containers/printer-form/printer-form.component';
+import { PaginationData } from 'src/app/models/others/PaginationWrapper';
+import { debounceTime, switchMap, catchError, tap } from 'rxjs/operators';
 
 @AutoUnsubscribe()
 @Component({
@@ -21,6 +23,7 @@ import { PrinterFormComponent } from 'src/app/containers/printer-form/printer-fo
 export class BooksComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
+  booksPaginationData: PaginationData;
 
   constructor(
     private booksService: BooksService,
@@ -48,6 +51,8 @@ export class BooksComponent implements OnInit, OnDestroy {
           this.adminBooksService.books.next(booksData.results
             .map(book => this.adminBooksService.makeBookSlim(book)));
           this.uiService.isLoadingOnAdmin.next(false);
+          delete booksData.results;
+          this.booksPaginationData = booksData;
         },
         () => {
           this.uiService.isLoadingOnAdmin.next(false);
@@ -67,9 +72,14 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.filtersService.filtersConfig.subscribe(config => {
-      this.handleGetBooks(config);
-    });
+    this.subscription = this.filtersService.filtersConfig
+    .pipe(
+      debounceTime(200),
+      switchMap((config: BooksFilterConfig) => {
+        return of(this.handleGetBooks(config));
+      })
+    )
+    .subscribe();
   }
 
   ngOnDestroy() { }

@@ -7,3 +7,12 @@ export interface PaginationWrapper<S> {
   results: S[];
   rowCount?: number;
 }
+
+export interface PaginationData {
+  currentPage: number;
+  firstRowOnPage: number;
+  lastRowOnPage: number;
+  pageCount: number;
+  pageSize: number;
+  rowCount: number;
+}

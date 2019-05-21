@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatToolbarModule, MatIconModule, MatCardModule, MatInputModule,
-  MatDialogModule, MatSnackBarModule, MatAutocompleteModule, MatSelectModule
+  MatDialogModule, MatSnackBarModule, MatAutocompleteModule, MatSelectModule, MatPaginatorModule, MatPaginatorIntl
 } from '@angular/material';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgModule } from '@angular/core';
@@ -47,6 +47,7 @@ import { KindOfBookFormComponent } from './containers/kind-of-book-form/kind-of-
 import { PrinterFormComponent } from './containers/printer-form/printer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageDirective } from './helpers/image-directive';
+import { getDutchPaginatorIntl } from './dutch-paginator.intl';
 
 @NgModule({
   declarations: [
@@ -98,13 +99,14 @@ import { ImageDirective } from './helpers/image-directive';
     MatAutocompleteModule,
     MatTabsModule,
     MatIconModule,
+    MatPaginatorModule,
     MatToolbarModule,
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
     AppRoutingModule,
   ],
-  providers: [CookieService, UserInterfaceService],
+  providers: [CookieService, UserInterfaceService, { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }],
   bootstrap: [AppComponent],
   entryComponents: [KindOfBookFormComponent, PrinterFormComponent,
     BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
