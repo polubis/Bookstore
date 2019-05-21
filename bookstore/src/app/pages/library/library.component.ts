@@ -44,14 +44,11 @@ export class LibraryComponent implements OnInit, OnDestroy {
         tap(filters => {
           this.filters = filters;
         }),
-        debounceTime(300),
-        switchMap(filters => {
-          return of(
-            this.libraryService.handleSearching(filters)
-          );
-        })
+        debounceTime(300)
       )
-      .subscribe();
+      .subscribe(filters => {
+        this.libraryService.handleSearching(filters);
+      });
 
     this.kindsService.getKinds();
   }
@@ -61,14 +58,12 @@ export class LibraryComponent implements OnInit, OnDestroy {
   }
 
   changeSortCategory({ value: sortBy }: { value: 'averageOfRatings' | 'price' | 'name' }) {
-    console.log(sortBy);
     this.libraryService.changeFilters({
       sortOrder: `${sortBy}_${this.sortOrder}`
     });
   }
 
   changeSortOrder({ value: order }: { value: 'asc' | 'desc' }) {
-    console.log(order);
     this.libraryService.changeFilters({
       sortOrder: `${this.sortingBy}_${order === order ? 'desc' : 'asc'}`
     });
