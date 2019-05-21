@@ -24,7 +24,6 @@ export class BooksTableComponent implements OnInit {
   constructor(private uiService: UserInterfaceService, private filterService: FiltersService) { }
 
   ngOnInit() {
-    console.log(this.columns, this.items);
   }
 
   @debounceEvent(150)

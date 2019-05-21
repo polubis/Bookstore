@@ -19,7 +19,11 @@ export class LibraryComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   error: ServerError;
   books: Book[];
+
   filters: BooksFilterConfig;
+  sortingBy = 'name';
+  sortOrder = 'asc';
+
 
   constructor(
     private libraryService: LibraryService,
@@ -46,6 +50,21 @@ export class LibraryComponent implements OnInit, OnDestroy {
   handleKindClick(kindOfBookId: number | undefined) {
     this.libraryService.changeFilters({ kindOfBookId });
   }
+
+  changeSortCategory({ value: sortBy }: { value: 'averageOfRatings' | 'price' | 'name' }) {
+    console.log(sortBy);
+    this.libraryService.changeFilters({
+      sortOrder: `${sortBy}_${this.sortOrder}`
+    });
+  }
+
+  changeSortOrder({ value: order }: { value: 'asc' | 'desc' }) {
+    console.log(order);
+    this.libraryService.changeFilters({
+      sortOrder: `${this.sortingBy}_${order === order ? 'desc' : 'asc'}`
+    });
+  }
+
 
   // handleKindClick(id: number) {
   //   const kindOfBookId: number = target.dataset.sectionvalue;

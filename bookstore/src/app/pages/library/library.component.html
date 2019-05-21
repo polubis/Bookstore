@@ -6,11 +6,30 @@
 
     <aside class="lib-nav flex-col">
       <p>Dodatkowe filtry</p>
+
+      <mat-form-field>
+        <mat-label>Sortuj po</mat-label>
+        <mat-select [(value)]="sortingBy" (selectionChange)="changeSortCategory($event)">
+          <mat-option [value]="'name'">Nazwie</mat-option>
+          <mat-option [value]="'price'">Cenie</mat-option>
+          <mat-option [value]="'averageOfRatings'">Ocenach</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Kolejność</mat-label>
+        <mat-select [(value)]="sortOrder" (selectionChange)="changeSortOrder($event)">
+          <mat-option [value]="'asc'">Rosnąco</mat-option>
+          <mat-option [value]="'desc'">Malejąco</mat-option>
+        </mat-select>
+      </mat-form-field>
+
     </aside>
 
     <div class="main-content flex-col">
 
-      <h2 class="library-header">Książki</h2>
+      <h2 class="library-header">Książki {{isLoading ? null : '(' + books.length + ')'}}</h2>
 
       <div class="filters-wrapper flex-row">
 
