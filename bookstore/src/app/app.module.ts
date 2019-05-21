@@ -28,7 +28,6 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { SideNavComponent } from './pages/admin/side-nav/side-nav.component';
 import { StatsComponent } from './pages/admin/pages/stats/stats.component';
 import { BooksComponent } from './pages/admin/pages/books/books.component';
-import { BooksKindsComponent } from './pages/admin/pages/books-kinds/books-kinds.component';
 import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
 import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 import { OrderPopupComponent } from './containers/order-popup/order-popup.component';
@@ -48,6 +47,7 @@ import { PrinterFormComponent } from './containers/printer-form/printer-form.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageDirective } from './helpers/image-directive';
 import { getDutchPaginatorIntl } from './dutch-paginator.intl';
+import { BookKindsComponent } from './containers/book-kinds/book-kinds.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +67,6 @@ import { getDutchPaginatorIntl } from './dutch-paginator.intl';
     SideNavComponent,
     StatsComponent,
     BooksComponent,
-    BooksKindsComponent,
     AuthorsComponent,
     OrdersComponent,
     OrderPopupComponent,
@@ -83,7 +82,8 @@ import { getDutchPaginatorIntl } from './dutch-paginator.intl';
     BookDetailsPopupComponent,
     KindOfBookFormComponent,
     PrinterFormComponent,
-    ImageDirective
+    ImageDirective,
+    BookKindsComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,7 +108,8 @@ import { getDutchPaginatorIntl } from './dutch-paginator.intl';
   ],
   providers: [CookieService, UserInterfaceService, { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }],
   bootstrap: [AppComponent],
-  entryComponents: [KindOfBookFormComponent, PrinterFormComponent,
+  entryComponents: [BookKindsComponent,
+    KindOfBookFormComponent, PrinterFormComponent,
     BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
     UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })

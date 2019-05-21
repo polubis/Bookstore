@@ -1,0 +1,36 @@
+<div class="wrapper flex-col">
+  <h2 class="popup-header" mat-dialog-title>
+    <span>Gatunki książek</span>
+    <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+  </h2>
+
+  <app-loader *ngIf="isLoading" [positionSet]="'modal'"></app-loader>
+
+  <form class="flex-row kind-form" (ngSubmit)="handleSubmit()" [formGroup]="kindOfBookForm">
+    <mat-form-field class="kind-of-book-name">
+      <input minlength="3" maxlength="30" formControlName="kindOfBookName" required matInput placeholder="Gatunek">
+    </mat-form-field>
+
+    <button [disabled]="isAdding || isEditing" color="primary" class="add-btn" mat-mini-fab>
+      <mat-icon>{{wantEdit ? 'edit' : 'add'}}</mat-icon>
+    </button>
+  </form>
+
+  <ul class="list">
+    <li *ngFor="let kind of kinds" (click)="selectKind(kind)" [ngClass]="{'selected-kind': selectedKind.id === kind.id, 'not-selected-kind': wantEdit && selectedKind.id !== kind.id}">
+      <span class="kind-name">{{kind.name}}</span>
+    </li>
+  </ul>
+
+
+  <div *ngIf="selectedKind.id !== -1" class="btns-container flex-row">
+    <button [disabled]="isDeleting" (click)="handleDeleteKind()" mat-flat-button class="delete-btn">
+      <mat-icon>delete</mat-icon>
+      Usuń kategorię
+    </button>
+    <button (click)="toggleEditing()" [disabled]="isEditing" mat-flat-button class="edit-btn">
+      <mat-icon>{{wantEdit ? 'close' : 'edit'}}</mat-icon>
+      {{wantEdit ? 'Zakończ edytowanie kategorii' : 'Edytuj kategorię'}}
+    </button>
+  </div>
+</div>

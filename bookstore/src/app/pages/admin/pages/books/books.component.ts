@@ -10,9 +10,9 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { AdminBooksService } from './AdminBooksService';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { KindOfBookFormComponent } from 'src/app/containers/kind-of-book-form/kind-of-book-form.component';
-import { PrinterFormComponent } from 'src/app/containers/printer-form/printer-form.component';
 import { PaginationData } from 'src/app/models/others/PaginationWrapper';
 import { debounceTime, switchMap, catchError, tap } from 'rxjs/operators';
+import { BookKindsComponent } from 'src/app/containers/book-kinds/book-kinds.component';
 
 @AutoUnsubscribe()
 @Component({
@@ -66,12 +66,13 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.dialog.open(KindOfBookFormComponent, config);
   }
 
-  openKindOfBookForm() {
+  openKindsOfBook() {
     const config = new MatDialogConfig();
-    this.dialog.open(PrinterFormComponent, config);
+    this.dialog.open(BookKindsComponent, config);
   }
 
   ngOnInit() {
+    this.openKindsOfBook();
     this.subscription = this.filtersService.filtersConfig
     .pipe(
       debounceTime(200),

@@ -37,7 +37,7 @@ export class AdminBooksService {
       author,
       pictureName: pictureName ? `${environment.bookPicture}${pictureName}` : '',
       printer: printer.name,
-      kindOfBookName: kindOfBook.name,
+      kindOfBookName: kindOfBook ? kindOfBook.name : '',
       averageOfRatings
     };
   }

@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
 })
 export class KindsService {
 
-  kinds = new BehaviorSubject<DataEnhancer<Kind[]>>({ isLoading: true, data: [] });
+  kinds = new BehaviorSubject<DataEnhancer<Kind[]>>({ data: [] });
 
   constructor(private apiService: ApiService) {
 
@@ -46,7 +46,21 @@ export class KindsService {
   }
 
   editKind({ name, id }: { name: string, id: number }) {
-    return this.apiService.execute('kindOfBooks', 'patch', { name }, `/${id}`);
+    return this.apiService.execute('kindOfBooks', 'put', { name }, `/${id}`);
+  }
+
+  deleteKind(id: number) {
+    return this.apiService.execute('kindOfBooks', 'delete', {}, `/${id}`);
+  }
+
+  deleteKindFromKinds(kindId: number) {
+    this.kinds.pipe(take(1))
+      .subscribe(kinds => {
+        this.kinds.next({
+          ...kinds,
+          data: kinds.data.filter(({ id }) => id !== kindId)
+        });
+      });
   }
 
   putKindInKinds(kind: Kind) {
@@ -55,6 +69,18 @@ export class KindsService {
         this.kinds.next(
           { ...kinds, data: [kind, ...kinds.data] }
         );
+      });
+  }
+
+  changeKindInKinds(newKind: Kind) {
+    this.kinds.pipe(take(1))
+      .subscribe(kinds => {
+        this.kinds.next({
+          ...kinds,
+          data: kinds.data.map(kind => {
+            return kind.id === newKind.id ? newKind : kind;
+          })
+        });
       });
   }
 
