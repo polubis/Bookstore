@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { ServerError } from 'src/app/models/others/ServerError';
 import { Book, BooksFilterConfig } from 'src/app/models/entities/Book';
 import { LibraryService } from './LibraryService';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { KindsService } from 'src/app/services/KindsService';
-import { debounceEvent } from 'src/app/helpers/debounce-decorator';
+import { switchMap, tap, debounceTime } from 'rxjs/operators';
 
 @AutoUnsubscribe()
 @Component({
@@ -40,10 +40,18 @@ export class LibraryComponent implements OnInit, OnDestroy {
       });
 
     this.filtersSub = this.libraryService.filters
-      .subscribe(filters => {
-        this.filters = filters;
-        this.libraryService.handleSearching(filters);
-      });
+      .pipe(
+        tap(filters => {
+          this.filters = filters;
+        }),
+        debounceTime(300),
+        switchMap(filters => {
+          return of(
+            this.libraryService.handleSearching(filters)
+          );
+        })
+      )
+      .subscribe();
 
     this.kindsService.getKinds();
   }
@@ -66,7 +74,6 @@ export class LibraryComponent implements OnInit, OnDestroy {
     });
   }
 
-  @debounceEvent(500)
   changePrices(minPrice = this.filters.minPrice, maxPrice = this.filters.maxPrice) {
     this.libraryService.changeFilters({
       minPrice, maxPrice

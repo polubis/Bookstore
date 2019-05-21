@@ -49,7 +49,6 @@ export class LibraryService {
   }
 
   changeFilters(incomingFilters: BooksFilterConfig) {
-    console.log(incomingFilters);
     this.getCurrentFiltersSnapshot()
       .subscribe(filters => {
         this.filters.next({
