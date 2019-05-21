@@ -72,7 +72,6 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.openKindsOfBook();
     this.subscription = this.filtersService.filtersConfig
     .pipe(
       debounceTime(200),

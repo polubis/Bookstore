@@ -9,9 +9,7 @@ import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 const hightLightConfig = {
   '/admin': 0,
   '/admin/books': 1,
-  '/admin/books-kinds': 2,
-  '/admin/authors': 3,
-  '/admin/orders': 4
+  '/admin/orders': 2
 };
 
 @AutoUnsubscribe()

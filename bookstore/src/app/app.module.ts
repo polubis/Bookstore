@@ -28,7 +28,6 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { SideNavComponent } from './pages/admin/side-nav/side-nav.component';
 import { StatsComponent } from './pages/admin/pages/stats/stats.component';
 import { BooksComponent } from './pages/admin/pages/books/books.component';
-import { AuthorsComponent } from './pages/admin/pages/authors/authors.component';
 import { OrdersComponent } from './pages/admin/pages/orders/orders.component';
 import { OrderPopupComponent } from './containers/order-popup/order-popup.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -67,7 +66,6 @@ import { BookKindsComponent } from './containers/book-kinds/book-kinds.component
     SideNavComponent,
     StatsComponent,
     BooksComponent,
-    AuthorsComponent,
     OrdersComponent,
     OrderPopupComponent,
     NavigationComponent,
