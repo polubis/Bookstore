@@ -41,12 +41,12 @@ import { SearcherCategorySwitcherComponent } from './components/searcher-categor
 import { BookDetailsPopupComponent } from './containers/book-details-popup/book-details-popup.component';
 import { BooksFormComponent } from './containers/books-form/books-form.component';
 import { UserInterfaceService } from './services/UserInterfaceService';
-import { KindOfBookFormComponent } from './containers/kind-of-book-form/kind-of-book-form.component';
 import { PrinterFormComponent } from './containers/printer-form/printer-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageDirective } from './helpers/image-directive';
 import { getDutchPaginatorIntl } from './dutch-paginator.intl';
 import { BookKindsComponent } from './containers/book-kinds/book-kinds.component';
+import { KindComponent } from './components/kind/kind.component';
 
 @NgModule({
   declarations: [
@@ -78,10 +78,10 @@ import { BookKindsComponent } from './containers/book-kinds/book-kinds.component
     SearcherCategorySwitcherComponent,
     BooksFormComponent,
     BookDetailsPopupComponent,
-    KindOfBookFormComponent,
     PrinterFormComponent,
     ImageDirective,
     BookKindsComponent,
+    KindComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,7 +107,7 @@ import { BookKindsComponent } from './containers/book-kinds/book-kinds.component
   providers: [CookieService, UserInterfaceService, { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }],
   bootstrap: [AppComponent],
   entryComponents: [BookKindsComponent,
-    KindOfBookFormComponent, PrinterFormComponent,
+    PrinterFormComponent,
     BookDetailsPopupComponent, RegisterComponent, OrderPopupComponent,
     UserOrdersPopupComponent, ChangeUserDataPopupComponent, BooksFormComponent]
 })

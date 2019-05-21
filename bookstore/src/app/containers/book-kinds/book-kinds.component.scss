@@ -12,32 +12,6 @@
   .list {
     height: calc(100% - 210px);
     overflow-y: auto;
-
-    .selected-kind {
-      background: $primary;
-      color: $white;
-      border-color: transparent;
-    }
-
-    .not-selected-kind {
-      opacity: .4;
-    }
-
-    li {
-      transition: .3s opacity $transition;
-      float: left;
-      display: flex;
-      margin: 0 15px 15px 0;
-      align-items: center;
-      justify-content: center;
-      height: 30px;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-size: 13px;
-      cursor: pointer;
-      border: 1px solid $border-color;
-      color: $primary;
-    }
   }
 
   .btns-container {

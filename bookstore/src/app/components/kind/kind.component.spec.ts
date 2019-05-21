@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KindOfBookFormComponent } from './kind-of-book-form.component';
+import { KindComponent } from './kind.component';
 
-describe('KindOfBookFormComponent', () => {
-  let component: KindOfBookFormComponent;
-  let fixture: ComponentFixture<KindOfBookFormComponent>;
+describe('KindComponent', () => {
+  let component: KindComponent;
+  let fixture: ComponentFixture<KindComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KindOfBookFormComponent ]
+      declarations: [ KindComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KindOfBookFormComponent);
+    fixture = TestBed.createComponent(KindComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

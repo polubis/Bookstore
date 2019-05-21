@@ -9,7 +9,6 @@ import { Subscription, of } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { AdminBooksService } from './AdminBooksService';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { KindOfBookFormComponent } from 'src/app/containers/kind-of-book-form/kind-of-book-form.component';
 import { PaginationData } from 'src/app/models/others/PaginationWrapper';
 import { debounceTime, switchMap, catchError, tap } from 'rxjs/operators';
 import { BookKindsComponent } from 'src/app/containers/book-kinds/book-kinds.component';
@@ -63,7 +62,6 @@ export class BooksComponent implements OnInit, OnDestroy {
 
   openPrinterForm() {
     const config = new MatDialogConfig();
-    this.dialog.open(KindOfBookFormComponent, config);
   }
 
   openKindsOfBook() {

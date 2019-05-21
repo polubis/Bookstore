@@ -17,11 +17,15 @@
   </form>
 
   <ul class="list">
-    <li *ngFor="let kind of kinds" (click)="selectKind(kind)" [ngClass]="{'selected-kind': selectedKind.id === kind.id, 'not-selected-kind': wantEdit && selectedKind.id !== kind.id}">
-      <span class="kind-name">{{kind.name}}</span>
-    </li>
+    <app-kind 
+      *ngFor="let kind of kinds" 
+      [name]="kind.name" 
+      (clicking)="selectKind(kind)"
+      [selected]="selectedKind.id === kind.id"
+      [editable]="wantEdit"
+    >
+    </app-kind>
   </ul>
-
 
   <div *ngIf="selectedKind.id !== -1" class="btns-container flex-row">
     <button [disabled]="isDeleting" (click)="handleDeleteKind()" mat-flat-button class="delete-btn">
