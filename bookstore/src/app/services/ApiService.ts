@@ -19,10 +19,11 @@ type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders' | 'orders/getAl
 type AccountsEndpoints = 'accounts/updateUserData' | 'accounts/getUserData';
 type ReportEndpoints = 'reports/generate';
 type StatusesEndpoints = 'statuses';
+type RatingsEndpoints = 'ratings' | 'ratings/add';
 
 type Endpoints = AuthEndpoint | AddressEndpoints |
   BooksEndpoints | KindsEndpoints | OrdersEndpoints | AccountsEndpoints | PrintersEndpoints |
-  ReportEndpoints | StatusesEndpoints;
+  ReportEndpoints | StatusesEndpoints | RatingsEndpoints;
 
 @Injectable({
   providedIn: 'root'
