@@ -19,3 +19,7 @@ export interface BooksTable {
   icon?: string;
 }
 
+export interface OrderStatus {
+  id: 1 | 2 | 3;
+  statusName: 'Oczekuje na przyjęcie do realizacji' | 'Przyjęty do realizacji' | 'Zamówienie zrealizowane';
+}

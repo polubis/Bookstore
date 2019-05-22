@@ -8,4 +8,8 @@ import { ApiService } from 'src/app/services/ApiService';
 export class StatsService {
   constructor(private apiService: ApiService) {
   }
+
+  generateReport() {
+    return this.apiService.execute('reports/generate', 'get');
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { BucketService } from './services/BucketService';
+import { StatusesService } from './services/StatusesService';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,12 @@ export class AppComponent implements OnInit {
     this.bucketService.saveBucketAsCookie();
   }
 
-  constructor(private bucketService: BucketService) { }
+  constructor(
+    private bucketService: BucketService,
+    private statusesService: StatusesService
+  ) { }
 
   ngOnInit() {
-    this.bucketService.bucket.subscribe(value => {
-    });
+    this.statusesService.getStatuses();
   }
 }

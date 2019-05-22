@@ -48,6 +48,7 @@ import { BookKindsComponent } from './containers/book-kinds/book-kinds.component
 import { KindComponent } from './components/kind/kind.component';
 import { AdminTableComponent } from './components/admin-table/admin-table.component';
 import { BookPrintersComponent } from './containers/book-printers/book-printers.component';
+import { StatusesService } from './services/StatusesService';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,7 @@ import { BookPrintersComponent } from './containers/book-printers/book-printers.
     MatCardModule,
     AppRoutingModule,
   ],
-  providers: [CookieService, UserInterfaceService, { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }],
+  providers: [CookieService, StatusesService, UserInterfaceService, { provide: MatPaginatorIntl, useValue: getDutchPaginatorIntl() }],
   bootstrap: [AppComponent],
   entryComponents: [BookKindsComponent,
     BookPrintersComponent,
