@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/services/ApiService';
-import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,5 +12,9 @@ export class AdminOrdersService {
 
   getAllOrders({ page, pageSize }: { page: number, pageSize: number }) {
     return this.apiService.execute('orders/getAllOrders', 'get', {}, `/?page=${page}&pageSize=${pageSize}`);
+  }
+
+  changeOrderStatus(orderId: number, statusId: number) {
+    return this.apiService.execute('orders/changeStatus', 'patch', { }, `/${orderId}?statusId=${statusId}`);
   }
 }

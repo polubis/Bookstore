@@ -21,7 +21,7 @@
       </thead>
 
       <tbody>
-        <tr *ngFor="let item of paginationData?.results" (click)="rowClicking.emit(item)">
+        <tr *ngFor="let item of paginationData?.results" (click)="rowClicking.emit(item)" [ngClass]="{'selected-row': selectedRowId === item.id}">
           <td *ngFor="let column of columns">
             {{item[column.key]}}
           </td>

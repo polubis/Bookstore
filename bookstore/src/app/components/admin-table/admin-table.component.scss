@@ -81,6 +81,10 @@
     }
 
     tbody {
+      tr.selected-row {
+        background: #2c6b90 !important;
+        box-shadow: $shadow !important;
+      }
       tr {
         margin-bottom: 20px;
         cursor: pointer;
@@ -117,11 +121,11 @@
           }
 
           &:first-of-type::before {
-            left: -1px;
+            left: 0;
           }
 
           &:last-of-type::before {
-            right: -1px;
+            right: 0;
           }
         }
 

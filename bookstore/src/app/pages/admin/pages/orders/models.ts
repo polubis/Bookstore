@@ -2,7 +2,7 @@ import { Account } from 'src/app/models/entities/Account';
 import { Book } from 'src/app/models/entities/Book';
 
 export interface OrderStatus {
-  id: 1 | 2 | 3;
+  id: 'Oczekuje na przyjęcie do realizacji' | 'Przyjęty do realizacji' | 'Zamówienie zrealizowane';
   name: string;
 }
 

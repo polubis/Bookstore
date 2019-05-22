@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AdminOrdersService } from './AdminOrdersService';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 import { PaginationWrapper } from 'src/app/models/others/PaginationWrapper';
@@ -13,25 +13,13 @@ import { PageEvent } from '@angular/material';
 })
 export class OrdersComponent implements OnInit {
 
-  readonly orderStatuses: OrderStatus[] = [
-    {
-      id: 1,
-      name: 'Oczekujące'
-    },
-    {
-      id: 2,
-      name: 'W trakcie realizacji'
-    },
-    {
-      id: 3,
-      name: 'Zrealizowane'
-    }
-  ];
+  statuses = {
+    'Przyjęty do realizacji': 1,
+    'Oczekuje na przyjęcie do realizacji': 2,
+    'Zamówienie zrealizowane': 3
+  };
 
-  selectedRowInfo: {
-    status: OrderStatus;
-    id: number;
-  } = { status: null, id: - 1 };
+  statusesKeys = Object.keys(this.statuses);
 
   orders: PaginationWrapper<AdminSlimOrder>;
   columns: AdminOrderTable[] = [
@@ -41,6 +29,8 @@ export class OrdersComponent implements OnInit {
     { key: 'statusName', name: 'Status zamówienia' },
     { key: 'purchaser', name: 'Zamawiający' }
   ];
+
+  selectedOrderInfo: AdminSlimOrder & { statusId: number };
 
   constructor(
     private adminOrdersService: AdminOrdersService,
@@ -80,7 +70,21 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  changeStatus(status: OrderStatus) {
-    console.log(status);
+  onTableRowClick(order: AdminSlimOrder) {
+    this.selectedOrderInfo = { ...order, statusId: this.statuses[order.statusName] };
+  }
+
+  handleStatusChange(statusId: number, statusName: string) {
+    if (statusId !== this.selectedOrderInfo.statusId) {
+      this.orders = {
+        ...this.orders,
+        results: this.orders.results.map(result => {
+          return result.id === this.selectedOrderInfo.id ?
+            { ...result, statusName } : result;
+        })
+      };
+      this.selectedOrderInfo = { ...this.selectedOrderInfo, statusId };
+      this.adminOrdersService.changeOrderStatus(this.selectedOrderInfo.id, statusId).subscribe();
+    }
   }
 }

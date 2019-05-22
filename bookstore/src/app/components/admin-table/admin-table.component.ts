@@ -12,6 +12,7 @@ export class AdminTableComponent implements OnInit {
   @Input() isLoading: boolean;
   @Input() paginationData: PaginationWrapper<any[]>;
   @Input() columns: { key: string, name: string, sortable: boolean }[];
+  @Input() selectedRowId: number;
 
   @Output() paginating = new EventEmitter<PageEvent>();
   @Output() rowClicking = new EventEmitter<any>();

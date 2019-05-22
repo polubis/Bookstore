@@ -1,15 +1,22 @@
 <div class="admin-orders-wrapper flex-col">
 
   <header>
-    <div class="app-searcher-wrapper">
-      <app-searcher-category-switcher [items]="orderStatuses" (changing)="changeStatus($event)">
-      </app-searcher-category-switcher>
-    </div>
+    <app-kind 
+      *ngFor="let key of statusesKeys"
+      [selected]="selectedOrderInfo?.statusId === statuses[key]"
+      [name]="key"
+      (clicking)="handleStatusChange(statuses[key], key)"
+      [editable]="true"
+      [theme]="true"
+    >
 
+    </app-kind>
   </header>
 
   <div class="admin-table-wrapper">
-    <app-admin-table *ngIf="orders" (rowClicking)="changeStatus($event)" (paginating)="paginationChanged($event)"
+    <app-admin-table 
+      [selectedRowId]="selectedOrderInfo?.id"
+      *ngIf="orders" (rowClicking)="onTableRowClick($event, switcherRef)" (paginating)="paginationChanged($event)"
       [paginationData]="orders" [columns]="columns">
 
     </app-admin-table>

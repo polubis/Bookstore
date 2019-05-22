@@ -10,6 +10,11 @@
   opacity: .4;
 }
 
+li.themed-kind {
+  border: none;
+  color: $white;
+}
+
 li {
   transition: .3s opacity $transition;
   float: left;
