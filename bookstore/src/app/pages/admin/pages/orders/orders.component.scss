@@ -1,0 +1,19 @@
+.admin-orders-wrapper {
+  height: 100%;
+  justify-content: space-between;
+
+  .app-searcher-wrapper {
+    margin-left: auto;
+  }
+
+  header {
+    padding: 20px;
+    display: flex;
+    .admin-table-wrapper {
+      margin-top: auto;
+      width: 300px;
+    }
+  }
+
+ 
+}

@@ -1,0 +1,41 @@
+<div class="pagination-table-wrapper flex-col">
+  <section class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">
+            <button *ngIf="column.sortable" (click)="handleSorting(column.key)" mat-button>
+              <span class="item--title">{{column.name}}</span>
+              <mat-icon [ngClass]="{'rotated': (!sortingAscending && currentSortValue === column.key), 
+                'item--icon': true, 'colored': currentSortValue === column.key}">
+                arrow_downward
+              </mat-icon>
+            </button>
+
+            <div *ngIf="!column.sortable" class="flex-row">
+              <span class="item--title">{{column.name}}</span>
+              <mat-icon *ngIf="column.icon" class="item--icon">{{column.icon}}</mat-icon>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of paginationData?.results" (click)="rowClicking.emit(item)">
+          <td *ngFor="let column of columns">
+            {{item[column.key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+
+  <div class="paginator-wrapper">
+    <mat-paginator *ngIf="!isLoading" 
+    (page)="paginating.emit($event)"
+    [length]="paginationData.rowCount" [pageSize]="paginationData.pageSize" 
+    [pageSizeOptions]="[5, 10, 25, 100, 150, 200]">
+    </mat-paginator>
+  </div>
+</div>

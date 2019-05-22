@@ -47,6 +47,7 @@ import { ImageDirective } from './helpers/image-directive';
 import { getDutchPaginatorIntl } from './dutch-paginator.intl';
 import { BookKindsComponent } from './containers/book-kinds/book-kinds.component';
 import { KindComponent } from './components/kind/kind.component';
+import { AdminTableComponent } from './components/admin-table/admin-table.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { KindComponent } from './components/kind/kind.component';
     ImageDirective,
     BookKindsComponent,
     KindComponent,
+    AdminTableComponent,
   ],
   imports: [
     BrowserModule,

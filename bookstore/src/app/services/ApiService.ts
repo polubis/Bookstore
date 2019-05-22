@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
@@ -15,7 +15,7 @@ type AddressEndpoints = 'addresses/add' | 'addresses/';
 type BooksEndpoints = 'books' | 'books/bestrating' | 'books/newest' | 'books/add';
 type KindsEndpoints = 'kindOfBooks' | 'kindOfBooks/add';
 type PrintersEndpoints = 'printers' | 'printers/add';
-type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders';
+type OrdersEndpoints = 'orders/submitOrder' | 'orders/getOrders' | 'orders/getAllOrders';
 type AccountsEndpoints = 'accounts/updateUserData' | 'accounts/getUserData';
 
 type Endpoints = AuthEndpoint | AddressEndpoints |

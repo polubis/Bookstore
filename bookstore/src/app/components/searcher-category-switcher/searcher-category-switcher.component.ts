@@ -9,13 +9,16 @@ import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 export class SearcherCategorySwitcherComponent implements OnInit {
 
   @Input() theme = 'dark';
-  @Output() changing = new EventEmitter<string>();
+  @Input() items?: string[];
+  @Output() changing = new EventEmitter<any>();
 
-  currentSelectedCategory: 'searchTitle' | 'searchPrinter' | 'searchAuthor' = 'searchTitle';
+  currentSelectedCategory: 'searchTitle' | 'searchPrinter' | 'searchAuthor' | string = 'searchTitle';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
 
@@ -23,5 +26,12 @@ export class SearcherCategorySwitcherComponent implements OnInit {
   changeSelectedCategory(key: 'searchTitle' | 'searchPrinter' | 'searchAuthor') {
     this.currentSelectedCategory = key;
     this.changing.emit(key);
+  }
+
+  changeSelectedCategoryFromItems(item: { id: number, name: string }) {
+    this.currentSelectedCategory = item.id === 1 ? 'searchTitle' :
+      item.id === 3 ? 'searchPrinter' : 'searchAuthor';
+    this.changing.emit(item);
+
   }
 }
