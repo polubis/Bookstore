@@ -45,6 +45,7 @@ export interface Books {
 export interface BooksFilterConfig {
   page?: number;
   pageSize?: number;
+  printerId?: number;
   searchTitle?: string;
   sortOrder?: string;
   searchPrinter?: string;
@@ -66,7 +67,8 @@ export class BookQuery implements BooksFilterConfig {
     public searchPrinter = '',
     public minPrice,
     public maxPrice,
-    public kindOfBookId
+    public kindOfBookId,
+    public printerId
   ) {
     let query = `?page=${page}&pageSize=${pageSize}&searchTitle=${searchTitle}&searchPrinter=${
       searchPrinter}&searchAuthor=${searchAuthor}&sortOrder=${sortOrder}`;
@@ -83,12 +85,16 @@ export class BookQuery implements BooksFilterConfig {
       query += `&kindOfBookId=${kindOfBookId}`;
     }
 
+    if (printerId) {
+      query += `&printerId=${printerId}`;
+    }
+
     this.query = query;
   }
 }
 
 export type BooksFilterKeys = 'page' | 'pageSize' | 'searchTitle' |
-'sortOrder' | 'searchAuthor' | 'searchPrinter' | 'minPrice' | 'maxPrice';
+  'sortOrder' | 'searchAuthor' | 'searchPrinter' | 'minPrice' | 'maxPrice' | 'printerId';
 
 export interface AddBookPayload {
   name: string;

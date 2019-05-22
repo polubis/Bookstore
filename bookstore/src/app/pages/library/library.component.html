@@ -26,6 +26,14 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label>Wydawnictwo</mat-label>
+        <mat-select (selectionChange)="changePrinter($event)">
+          <mat-option [value]="-1">Brak</mat-option>
+          <mat-option *ngFor="let printer of (printersService.printers | async).data" [value]="printer.id">{{printer.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
         <input (input)="changePrices(minLength.value)" #minLength autocomplete="off" min="0" max="5000" type="number"
           matInput placeholder="Minimalna cena">
       </mat-form-field>
@@ -72,7 +80,7 @@
 
         <section class="books-wrapper">
           <div *ngFor="let book of books" class="book flex-col">
-            
+
             <figure>
               <img *ngIf="book.pictureName" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
             </figure>
@@ -97,8 +105,7 @@
 </div>
 
 <div class="library-pagination">
-  <mat-paginator 
-    (page)="paginationChanged($event)" [length]="libraryService.allBooksCount | async" [pageSize]="filters.pageSize"
+  <mat-paginator (page)="paginationChanged($event)" [length]="libraryService.allBooksCount | async" [pageSize]="filters.pageSize"
     [pageSizeOptions]="[5, 10, 25, 100, 150, 200]">
   </mat-paginator>
 </div>

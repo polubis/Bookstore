@@ -25,7 +25,6 @@ export class BooksService {
 
   prepareBooksPictures(books: Book[]) {
     return books.map(book => {
-      console.log(book.pictureName);
       return { ...book, pictureName: book.pictureName ? `${environment.bookPicture}${book.pictureName}` : '' };
     });
   }
@@ -92,10 +91,12 @@ export class BooksService {
       );
   }
 
-  getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter, searchTitle, minPrice, maxPrice, kindOfBookId }: BooksFilterConfig) {
+  getBooks({ page, pageSize, sortOrder, searchAuthor, searchPrinter,
+    searchTitle, minPrice, maxPrice, kindOfBookId, printerId }: BooksFilterConfig) {
     const bookQuery = new BookQuery(
       page, pageSize, searchTitle, sortOrder,
-      searchAuthor, searchPrinter, minPrice, maxPrice, kindOfBookId
+      searchAuthor, searchPrinter, minPrice, maxPrice, kindOfBookId,
+      printerId
     );
     return this.apiService.execute('books', 'get', {}, bookQuery.query);
   }

@@ -7,6 +7,7 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { KindsService } from 'src/app/services/KindsService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { PageEvent } from '@angular/material';
+import { PrintersService } from 'src/app/services/PrintersService';
 
 @AutoUnsubscribe()
 @Component({
@@ -29,6 +30,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
   category = 'searchTitle';
 
   constructor(
+    private printersService: PrintersService,
     private libraryService: LibraryService,
     private kindsService: KindsService
   ) { }
@@ -48,6 +50,7 @@ export class LibraryComponent implements OnInit, OnDestroy {
       });
 
     this.kindsService.getKinds();
+    this.printersService.getPrinters();
   }
 
   @debounceEvent(100)
@@ -92,6 +95,13 @@ export class LibraryComponent implements OnInit, OnDestroy {
       });
     }
     this.category = category;
+  }
+
+  @debounceEvent(250)
+  changePrinter({ value: printerId }: { value: number}) {
+    this.libraryService.changeFilters({
+      printerId: printerId === -1 ? undefined : printerId, page: 1
+    });
   }
 
   paginationChanged(data: PageEvent) {
