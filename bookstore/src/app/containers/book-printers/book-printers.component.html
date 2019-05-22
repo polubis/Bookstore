@@ -1,0 +1,41 @@
+
+<div class="wrapper flex-col">
+    <h2 class="popup-header" mat-dialog-title>
+      <span>Wydawnictwa</span>
+      <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
+    </h2>
+  
+    <app-loader *ngIf="isLoading" [positionSet]="'modal'"></app-loader>
+  
+    <form class="flex-row kind-form" (ngSubmit)="handleSubmit()" [formGroup]="printersForm">
+      <mat-form-field class="kind-of-book-name">
+        <input minlength="3" maxlength="30" formControlName="printerName" required matInput placeholder="Wydawnictwo">
+      </mat-form-field>
+  
+      <button [disabled]="isAdding || isEditing" color="primary" class="add-btn" mat-mini-fab>
+        <mat-icon>{{wantEdit ? 'edit' : 'add'}}</mat-icon>
+      </button>
+    </form>
+  
+    <ul class="list">
+      <app-kind 
+        *ngFor="let printer of printers" 
+        [name]="printer.name" 
+        (clicking)="selectPrinter(printer)"
+        [selected]="selectedPrinter.id === printer.id"
+        [editable]="wantEdit"
+      >
+      </app-kind>
+    </ul>
+  
+    <div *ngIf="selectedPrinter.id !== -1" class="btns-container flex-row">
+      <button [disabled]="isDeleting" (click)="handleDeletePrinter()" mat-flat-button class="delete-btn">
+        <mat-icon>delete</mat-icon>
+        Usuń wydawnictwo
+      </button>
+      <button (click)="toggleEditing()" [disabled]="isEditing" mat-flat-button class="edit-btn">
+        <mat-icon>{{wantEdit ? 'close' : 'edit'}}</mat-icon>
+        {{wantEdit ? 'Zakończ edytowanie wydawnictwa' : 'Edytuj wydawnictwo'}}
+      </button>
+    </div>
+  </div>

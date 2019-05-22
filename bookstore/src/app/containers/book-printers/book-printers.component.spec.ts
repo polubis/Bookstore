@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PrinterFormComponent } from './printer-form.component';
+import { BookPrintersComponent } from './book-printers.component';
 
-describe('PrinterFormComponent', () => {
-  let component: PrinterFormComponent;
-  let fixture: ComponentFixture<PrinterFormComponent>;
+describe('BookPrintersComponent', () => {
+  let component: BookPrintersComponent;
+  let fixture: ComponentFixture<BookPrintersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrinterFormComponent ]
+      declarations: [ BookPrintersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PrinterFormComponent);
+    fixture = TestBed.createComponent(BookPrintersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

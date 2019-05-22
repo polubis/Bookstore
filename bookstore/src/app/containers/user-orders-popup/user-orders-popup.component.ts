@@ -45,8 +45,9 @@ export class UserOrdersPopupComponent implements OnInit, OnDestroy {
           return data.results.map(orderItem => {
             return {
               ...orderItem,
-              booksCount: orderItem.purchasedBooks.length
-            };
+              booksCount: orderItem.purchasedBooks.length,
+              status: orderItem.status.statusName
+            } as any;
           });
         }),
       )

@@ -12,6 +12,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { PaginationData } from 'src/app/models/others/PaginationWrapper';
 import { debounceTime, switchMap, catchError, tap } from 'rxjs/operators';
 import { BookKindsComponent } from 'src/app/containers/book-kinds/book-kinds.component';
+import { BookPrintersComponent } from 'src/app/containers/book-printers/book-printers.component';
 
 @AutoUnsubscribe()
 @Component({
@@ -60,8 +61,9 @@ export class BooksComponent implements OnInit, OnDestroy {
       );
   }
 
-  openPrinterForm() {
+  openPrinters() {
     const config = new MatDialogConfig();
+    this.dialog.open(BookPrintersComponent, config);
   }
 
   openKindsOfBook() {

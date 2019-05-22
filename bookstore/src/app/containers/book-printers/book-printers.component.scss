@@ -1,0 +1,49 @@
+@import '../../../colors.scss';
+
+.wrapper {
+  height: 700px;
+  width: 500px;
+  position: relative;
+
+  .popup-header span {
+    margin-left: 0;
+  }
+
+  .list {
+    height: calc(100% - 210px);
+    overflow-y: auto;
+  }
+
+  .btns-container {
+    margin-top: auto;
+
+    .edit-btn {
+      background: $primary;
+      color: $white;
+    } 
+
+    .delete-btn {
+      background: $warn;
+      color: $white;
+      margin-right: 20px;
+    }
+
+    button {
+      mat-icon {
+        margin-right: 5px;
+      }
+      &:disabled {
+        background: $border-color;
+      }
+    }
+  }
+
+  form {
+    height: 60px;
+    margin-bottom: 30px;
+
+    .add-btn {
+      margin-left: 20px;
+    }
+  }
+}
