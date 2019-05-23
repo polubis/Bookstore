@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { BucketService } from './services/BucketService';
-import { StatusesService } from './services/StatusesService';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +15,9 @@ export class AppComponent implements OnInit {
   }
 
   constructor(
-    private bucketService: BucketService,
-    private statusesService: StatusesService
+    private bucketService: BucketService
   ) { }
 
   ngOnInit() {
-    this.statusesService.getStatuses();
   }
 }

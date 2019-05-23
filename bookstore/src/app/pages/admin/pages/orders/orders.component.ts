@@ -68,6 +68,7 @@ export class OrdersComponent implements OnInit {
       page: data.pageIndex + 1,
       pageSize: data.pageSize
     });
+    this.selectedOrderInfo = undefined;
   }
 
   onTableRowClick(order: AdminSlimOrder) {

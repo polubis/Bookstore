@@ -182,6 +182,7 @@ nav.library-nav {
   background: #fcfcfc;
   box-shadow: none;
   padding: 15px 30px;
+  height: 81px;
 
   .page-logo {
     color: $primary;
@@ -197,5 +198,15 @@ nav.library-nav {
         margin-right: 5px;
       }
     }
+  }
+
+  #sign-in-btn {
+    border-color: $primary !important;
+    color: $primary !important;
+  }
+
+  #sign-up-btn {
+    background: $primary !important;
+    color: $white !important;
   }
 }

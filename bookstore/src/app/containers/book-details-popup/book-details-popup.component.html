@@ -32,11 +32,11 @@
             </div>
             <div *ngIf="book.printer" class="detail">
               <span>Wydawnictwo: </span>
-              <span>{{book.printer}}</span>
+              <span>{{book.printer ? book.printer.name : 'Nie podano'}}</span>
             </div>
             <div class="detail">
               <span>Gatunek: </span>
-              <span>{{book.kindOfBook.name}}</span>
+              <span>{{book.kindOfBook ? book.kindOfBook.name : 'Nie podano'}}</span>
             </div>
 
             <div class="detail flex-col">

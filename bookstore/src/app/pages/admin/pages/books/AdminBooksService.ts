@@ -17,12 +17,12 @@ export class AdminBooksService {
       });
   }
 
-  updateBook({ bookPayload, bookId }: { bookPayload: AddBookPayload, bookId: number }) {
+  updateBook(updatedBook: Book) {
     this.books.pipe(take(1))
       .subscribe(books => {
         this.books.next(
           books.map(book => {
-            return +book.id === bookId ? { ...book } : book;
+            return book.id === updatedBook.id ? this.makeBookSlim(updatedBook) : book;
           })
         );
       });

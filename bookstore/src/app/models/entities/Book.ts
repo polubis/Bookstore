@@ -5,11 +5,11 @@ export class Book {
     id: number;
     name: string;
   };
-  printer: {
+  printer?: {
     id: number;
     name: string;
   };
-  kindOfBook: {
+  kindOfBook?: {
     id: number;
     name: string;
   };
@@ -18,6 +18,20 @@ export class Book {
   pictureName: string;
   id: string;
   averageOfRatings: number;
+  ratings?: any[];
+}
+
+export interface BookDetails {
+  id: number;
+  author: string;
+  averageOfRatings: number;
+  description: string;
+  name: string;
+  price: number;
+  pictureName?: string;
+  kindOfBook?: { id: number, name: string };
+  printer?: { id: number, name: string };
+  ratings: any[];
 }
 
 export interface SlimBook {

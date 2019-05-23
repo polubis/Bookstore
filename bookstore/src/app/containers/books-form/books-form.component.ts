@@ -10,6 +10,8 @@ import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 import { Kind } from 'src/app/models/entities/Kind';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup } from '@angular/forms';
+import { PrintersService } from 'src/app/services/PrintersService';
+import { Printer } from 'src/app/models/entities/Printer';
 
 @Component({
   selector: 'app-books-form',
@@ -20,6 +22,9 @@ export class BooksFormComponent implements OnInit, OnDestroy {
 
   isSaving = false;
   isAddingFile = false;
+
+  printersSub: Subscription;
+  printers: DataEnhancer<Printer[]> = { isLoading: false, data: [] };
 
   kindsSub: Subscription;
   kinds: DataEnhancer<Kind[]> = { isLoading: false, data: [] };
@@ -48,13 +53,19 @@ export class BooksFormComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private adminBooksService: AdminBooksService,
     private kindsService: KindsService,
+    private printersService: PrintersService,
     @Inject(MAT_DIALOG_DATA) public bookPayload: { bookPayload: AddBookPayload, bookId: number }) { }
 
   ngOnInit() {
     this.kindsService.getKinds();
+    this.printersService.getPrinters();
 
     this.kindsSub = this.kindsService.kinds.subscribe(kinds => {
       this.kinds = kinds;
+    });
+
+    this.printersSub = this.printersService.printers.subscribe(printers => {
+      this.printers = printers;
     });
 
     if (this.bookPayload) {
@@ -74,6 +85,11 @@ export class BooksFormComponent implements OnInit, OnDestroy {
   @debounceEvent(100)
   onChangeKind(kindOfBookName: string) {
     this.booksFormData = { ...this.booksFormData, kindOfBookName };
+  }
+
+  @debounceEvent(100)
+  onChangePrinter(printer: string) {
+    this.booksFormData = { ...this.booksFormData, printer };
   }
 
   onChangeFileInput({ target }: Event) {
@@ -98,10 +114,14 @@ export class BooksFormComponent implements OnInit, OnDestroy {
       this.booksService.editBook(this.bookPayload.bookId, this.booksFormData)
         .subscribe(
           (book) => {
-            console.log(book);
             this.isSaving = false;
+            this.snackBar.open('Pomyślnie edytowano książkę', 'ZAMKNIJ', {
+              duration: 2000,
+              panelClass: ['succ-snackbar']
+            });
+            this.dialogRef.close();
             this.booksService.removeBookFromCache(this.bookPayload.bookId);
-            this.adminBooksService.updateBook(this.bookPayload);
+            this.adminBooksService.updateBook(book.successResult);
           },
           () => {
             this.isSaving = false;

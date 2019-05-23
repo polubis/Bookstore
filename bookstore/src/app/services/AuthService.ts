@@ -58,10 +58,10 @@ export class AuthService {
   }
 
   logout() {
-    this.apiService.execute('accounts/logout', 'post').subscribe();
     this.cookieService.delete('loggedUser');
     this.loggedUser.next(this.initiaLoggedUser);
     this.router.navigate(['/']);
+    this.apiService.execute('accounts/logout', 'post').subscribe();
   }
 
   createAccount = (user: User) => this.apiService.execute('accounts/register', 'post', user);

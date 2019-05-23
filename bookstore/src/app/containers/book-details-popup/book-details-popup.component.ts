@@ -65,18 +65,16 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   goToBookEdition() {
     const dialogConfig = new MatDialogConfig();
     const { book } = this as any;
-
     const bookPayload: AddBookPayload = {
       name: book.name,
-      author: book.author,
+      author: book.author || '',
       price: book.price,
-      printer: book.printer || '',
-      kindOfBookName: book.kindOfBook.name,
-      description: book.description,
-      pictureBook: book.pictureName
+      printer: book.printer ? book.printer.name : '',
+      kindOfBookName: book.kindOfBook ? book.kindOfBook.name : '',
+      description: book.description || '',
+      pictureBook: book.pictureName || ''
     };
     dialogConfig.data = { bookPayload, bookId: book.id };
-
     this.dialog.open(BooksFormComponent, dialogConfig);
     this.dialogRef.close();
   }

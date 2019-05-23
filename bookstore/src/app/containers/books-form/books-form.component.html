@@ -5,7 +5,7 @@
     <mat-icon class="close-icon" (click)="dialogRef.close()">close</mat-icon>
   </h2>
 
-  <app-loader *ngIf="kinds.isLoading; else bookFormContent" [positionSet]="'modal'"></app-loader>
+  <app-loader *ngIf="kinds.isLoading || printers.isLoading; else bookFormContent" [positionSet]="'modal'"></app-loader>
 
   <ng-template #bookFormContent>
     <section>
@@ -19,14 +19,17 @@
           <input [value]="booksFormData.author" required [name]="'author'" (input)="onChangeInput($event)" matInput
             placeholder="Autor">
         </mat-form-field>
-        <mat-form-field>
-          <input [value]="booksFormData.printer" required [name]="'printer'" (input)="onChangeInput($event)" matInput
-            placeholder="Wydawnictwo">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Wydawnictwo</mat-label>
+          <mat-select #printerVal [(value)]="booksFormData.printer" (selectionChange)="onChangePrinter(printerVal.value)">
+            <mat-option *ngFor="let printer of printers.data" [value]="printer.name">{{printer.name}}</mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field class="example-full-width">
           <mat-label>Gatunek</mat-label>
-          <mat-select [(value)]="booksFormData.kindOfBookName" (selectionChange)="onChangeKind(kindVal.value)">
+          <mat-select #kindVal [(value)]="booksFormData.kindOfBookName" (selectionChange)="onChangeKind(kindVal.value)">
             <mat-option *ngFor="let kind of kinds.data" [value]="kind.name">{{kind.name}}</mat-option>
           </mat-select>
         </mat-form-field>

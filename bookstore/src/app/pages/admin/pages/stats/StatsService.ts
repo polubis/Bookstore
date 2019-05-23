@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/services/ApiService';
 
 @Injectable({
@@ -12,4 +11,9 @@ export class StatsService {
   generateReport() {
     return this.apiService.execute('reports/generate', 'get');
   }
+
+  getStats() {
+    return this.apiService.execute('stats');
+  }
+
 }
