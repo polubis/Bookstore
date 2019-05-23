@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { ApiService } from './ApiService';
-import { DataEnhancer } from '../models/others/DataEnhancer';
-import { RequestResponse } from '../models/others/RequestResponse';
-import { OrderStatus } from '../pages/admin/pages/orders/models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +14,8 @@ export class RatingsService {
     return this.apiService.execute('ratings', 'get', {}, `/${bookId}`);
   }
 
-  addRating() {
-    return this.apiService.execute('ratings/add', 'post', {});
+  addRating(bookId: number, rate: { value: number, description: string }) {
+    return this.apiService.execute('ratings/add', 'post', rate, `?bookId=${bookId}`);
   }
 
   deleteRating(ratingId: number) {

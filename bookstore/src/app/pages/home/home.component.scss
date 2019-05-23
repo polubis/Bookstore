@@ -193,6 +193,13 @@ section {
         text-transform: capitalize;
       }
 
+      .price {
+        margin-top: 10px;
+        font-size: 15px;
+        font-weight: 300;
+        color: $white;
+      }
+
       .description {
         margin: 10px 0 25px 0;
         font-weight: 300;

@@ -8,6 +8,9 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AdminBooksService } from 'src/app/pages/admin/pages/books/AdminBooksService';
 import { BooksFormComponent } from '../books-form/books-form.component';
+import { AuthService } from 'src/app/services/AuthService';
+import { FormGroup, FormControl } from '@angular/forms';
+import { RatingsService } from 'src/app/services/RatingsService';
 
 @Component({
   selector: 'app-book-details-popup',
@@ -24,6 +27,13 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
   wantDeleteBook = false;
   isSaving = false;
 
+  isWatchingOpinions = false;
+
+  opinionFormGroup = new FormGroup({
+    value: new FormControl(),
+    description: new FormControl()
+  });
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { id: number },
     private dialog: MatDialog,
@@ -31,7 +41,9 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
     private booksService: BooksService,
     private adminBooksService: AdminBooksService,
     private snackBar: MatSnackBar,
-    ) { }
+    private authService: AuthService,
+    private ratingsService: RatingsService
+  ) { }
 
   ngOnInit() {
     const bookId = this.data.id;
@@ -94,6 +106,22 @@ export class BookDetailsPopupComponent implements OnInit, OnDestroy {
           this.dialogRef.close();
         },
         () => {
+          this.isSaving = false;
+        }
+      );
+  }
+
+  handleAddRate() {
+    this.isSaving = true;
+
+    this.ratingsService.addRating(+this.book.id, this.opinionFormGroup.value)
+      .subscribe(
+        value => {
+          console.log(value);
+          this.isSaving = false;
+
+        },
+        err => {
           this.isSaving = false;
         }
       );

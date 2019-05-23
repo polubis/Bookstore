@@ -5,6 +5,8 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 import { Subscription } from 'rxjs';
 import { DataEnhancer } from 'src/app/models/others/DataEnhancer';
 import { BucketService } from 'src/app/services/BucketService';
+import { Router } from '@angular/router';
+import { LibraryService } from '../library/LibraryService';
 
 @AutoUnsubscribe()
 @Component({
@@ -22,7 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private booksService: BooksService,
-    private bucketService: BucketService
+    private bucketService: BucketService,
+    private libraryService: LibraryService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,8 +47,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   handleSearchingBooks(searchTitle: string) {
     this.booksService.findBooks(
       { page: 1, pageSize: 15, searchTitle },
-      () => {
+      books => {
         this.isSearchingBooks = false;
+        if (books.results.length > 0) {
+          this.libraryService.changeFilters({ searchTitle });
+          this.router.navigate(['/library']);
+        }
       },
       () => {
         this.isSearchingBooks = false;

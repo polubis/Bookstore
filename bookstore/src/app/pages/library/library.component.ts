@@ -8,6 +8,7 @@ import { KindsService } from 'src/app/services/KindsService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { PageEvent } from '@angular/material';
 import { PrintersService } from 'src/app/services/PrintersService';
+import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
 
 @AutoUnsubscribe()
 @Component({
@@ -32,7 +33,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
   constructor(
     private printersService: PrintersService,
     private libraryService: LibraryService,
-    private kindsService: KindsService
+    private kindsService: KindsService,
+    private uiService: UserInterfaceService
   ) { }
 
   ngOnInit() {

@@ -81,7 +81,7 @@
         <section class="books-wrapper">
           <div *ngFor="let book of books" class="book flex-col">
 
-            <figure>
+            <figure (click)="uiService.openBookDetailsPopup(book.id)">
               <img *ngIf="book.pictureName" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
             </figure>
 

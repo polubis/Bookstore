@@ -26,7 +26,8 @@
       specjalny formularz
     </p>
     <div class="searcher-wrapper">
-      <app-searcher [isLoading]="isSearchingBooks" (initializing)="initializeSearching()" (searching)="handleSearchingBooks($event)"></app-searcher>
+      <app-searcher [isLoading]="isSearchingBooks" (initializing)="initializeSearching()" 
+        (searching)="handleSearchingBooks($event)"></app-searcher>
     </div>
   </div>
 
@@ -68,7 +69,8 @@
       </div>
 
       <div class="jumbo">
-        <button mat-fab color="primary" id='arrow-down-btn'>
+        <button (click)="sectionToScroll.scrollIntoView({ behaviour: 'smooth', block: 'start'})" mat-fab color="primary"
+          id='arrow-down-btn'>
           <mat-icon>arrow_downward</mat-icon>
         </button>
       </div>
@@ -84,29 +86,31 @@
 
   </section>
 
-  <h2 class="home-section-title">Najlepiej ocenione</h2>
+  <h2 #sectionToScroll class="home-section-title">Najlepiej ocenione</h2>
 
   <section>
-    <app-slider [elementsCount]="recommendedBooks.data.length" [loading]="recommendedBooks.isLoading" [error]="recommendedBooks.error" [sliderHeight]='340'
-      [elementWidth]='250' [elementMarginRight]='45'>
+    <app-slider [elementsCount]="recommendedBooks.data.length" [loading]="recommendedBooks.isLoading" [error]="recommendedBooks.error"
+      [sliderHeight]='340' [elementWidth]='250' [elementMarginRight]='45'>
       <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let recommendedBook of recommendedBooks.data"
         class="book-cart">
-        <img src="{{recommendedBook.pictureName}}" />
+        <img src="{{recommendedBook.pictureName}}" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" />
 
         <div class="book-overlay flex-col">
           <span class="title">{{recommendedBook.name}}</span>
           <span class="author">{{recommendedBook.author}}</span>
+
           <article class="description">
             {{recommendedBook.description | cut: 80}}
           </article>
 
           <app-stars-rate [rate]="4.25"></app-stars-rate>
 
+          <span class="price">Cena: {{recommendedBook.price}} zł</span>
+
           <button (click)="bucketService.addBookToBucket(recommendedBook)" mat-button class="add-to-bucket">
             <mat-icon>add_shopping_cart</mat-icon>
             Do koszyka
           </button>
-          <!-- <span class="price">{{recommendedBook.price}}</span> -->
         </div>
 
       </div>
@@ -116,11 +120,11 @@
   <h2 class="home-section-title">Ostatnio dodane</h2>
 
   <section>
-    <app-slider [elementsCount]="newestBooks.data.length" [loading]="newestBooks.isLoading" [error]="newestBooks.error" [sliderHeight]='340' [elementWidth]='250'
-      [elementMarginRight]='45'>
+    <app-slider [elementsCount]="newestBooks.data.length" [loading]="newestBooks.isLoading" [error]="newestBooks.error"
+      [sliderHeight]='340' [elementWidth]='250' [elementMarginRight]='45'>
       <div [style.height]="'340px'" [style.width]="'250px'" [style.marginRight]="'45px'" *ngFor="let newestBook of newestBooks.data"
         class="book-cart">
-        <img src="{{newestBook.pictureName}}" />
+        <img src="{{newestBook.pictureName}}" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" />
 
         <div class="book-overlay flex-col">
           <span class="title">{{newestBook.name}}</span>
@@ -130,6 +134,8 @@
           </article>
 
           <app-stars-rate [rate]="4.25"></app-stars-rate>
+
+          <span class="price">Cena: {{newestBook.price}} zł</span>
 
           <button (click)="bucketService.addBookToBucket(newestBook)" mat-button class="add-to-bucket">
             <mat-icon>add_shopping_cart</mat-icon>

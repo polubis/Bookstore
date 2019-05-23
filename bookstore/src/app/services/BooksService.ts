@@ -72,7 +72,7 @@ export class BooksService {
       );
   }
 
-  findBooks(config: BooksFilterConfig, onSuccess: () => void = () => { }, onFailure: () => void = () => { }) {
+  findBooks(config: BooksFilterConfig, onSuccess: (books?: any) => void = () => { }, onFailure: () => void = () => { }) {
     this.foundBooks.next({ isLoading: true, error: null, data: [] });
     this.getBooks(config)
       .subscribe(
@@ -82,7 +82,7 @@ export class BooksService {
             error: null,
             data: this.prepareBooksPictures(successResult.results)
           });
-          onSuccess();
+          onSuccess(successResult);
         },
         ({ message, code }: ServerError) => {
           this.foundBooks.next({ isLoading: false, error: { message, code }, data: [] });

@@ -134,5 +134,23 @@
       background: $warn;
       color: $white;
     }
+
+    .opinion-btn {
+      margin-left: auto;
+    }
+  }
+}
+
+.opinions-wrapper {
+  height: 100%;
+  padding: 20px;
+  justify-content: space-between;
+ 
+  .add-opinion-form {
+    width: 250px;
+    .form-item {
+      width: 100%;
+      margin-bottom: 30px;
+    }
   }
 }
