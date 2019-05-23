@@ -26,7 +26,7 @@ export class BookPrintersComponent implements OnInit, OnDestroy {
   isAdding: boolean;
 
   printersForm = new FormGroup({
-    printerName: new FormControl
+    printerName: new FormControl()
   });
 
   isEditing: boolean;

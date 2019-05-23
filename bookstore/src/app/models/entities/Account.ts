@@ -1,5 +1,9 @@
 export interface Account {
-  address: string | null;
+  address?: {
+    street: string;
+    postcode: string;
+    city: string;
+  };
   email: string | null;
   firstName: string;
   lastName: string;

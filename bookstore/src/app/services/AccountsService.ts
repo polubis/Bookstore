@@ -19,8 +19,18 @@ export class AccountsService {
 
   loggedUserAccountDetails = new BehaviorSubject<DataEnhancer<Account>>({ isLoading: false, error: null, data: null });
 
-  updateLoggedUserData(formData: { firstName: string, lastName: string, email: string, address: string, phoneNumber: string }) {
-    return this.apiService.execute('accounts/updateUserData', 'post', formData);
+  updateLoggedUserData(formData: any) {
+    return this.apiService.execute('accounts/updateUserData', 'patch', {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email: formData.email,
+      phoneNumber: formData.phoneNumber,
+      address: {
+          street: formData.street,
+          postcode: formData.postcode,
+          city: formData.city
+      }
+    });
   }
 
   getLoggedUserData() {

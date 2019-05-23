@@ -1,4 +1,4 @@
-<form id='change-user-data-form' (submit)="handleUpdateLoggedUserData($event)">
+<form id='change-user-data-form' (ngSubmit)="handleUpdateLoggedUserData($event)" [formGroup]="accountsFormGroup">
   <h2 class="popup-header" mat-dialog-title>
     <mat-icon color="primary">settings</mat-icon>
     <span>Zmień ustawienia swojego konta</span>
@@ -7,11 +7,41 @@
 
   <ng-container *ngIf="!isLoading">
     <div class="dialog-content">
-      <mat-form-field *ngFor="let key of formKeys; let i = index">
-        <input [name]="key" [value]="accountFormData[key]" (input)="onChange($event)" matInput [placeholder]="formLabels[i]">
+
+      <mat-form-field>
+        <input minlength="3" maxlength="30" formControlName="firstName" required matInput placeholder="Imię">
       </mat-form-field>
+
+      <mat-form-field>
+        <input minlength="3" maxlength="30" formControlName="lastName" required matInput placeholder="Nazwisko">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="email" formControlName="email" matInput placeholder="Email">
+      </mat-form-field>
+
+      <mat-form-field>
+        <span matPrefix>+48 &nbsp;</span>
+        <input type="tel" formControlName="phoneNumber" required matInput placeholder="Number telefonu">
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input minlength="3" maxlength="30" formControlName="street" matInput placeholder="Ulica">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input #postalCode maxlength="5" formControlName="postcode" matInput placeholder="Kod pocztowy">
+        <mat-hint [align]="end">{{postalCode.value.length}} / 5</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input formControlName="city" maxlength="100" matInput placeholder="Miasto">
+      </mat-form-field>
+
     </div>
-    <button [disabled]="isLoading" class="relative" id="save-btn" type="submit" mat-flat-button color="primary">
+    <button [disabled]="!accountsFormGroup.valid" class="relative" id="save-btn" type="submit" mat-flat-button color="primary">
       Save
     </button>
   </ng-container>

@@ -27,7 +27,7 @@ export class BookKindsComponent implements OnInit, OnDestroy {
   isAdding: boolean;
 
   kindOfBookForm = new FormGroup({
-    kindOfBookName: new FormControl
+    kindOfBookName: new FormControl()
   });
 
   isEditing: boolean;

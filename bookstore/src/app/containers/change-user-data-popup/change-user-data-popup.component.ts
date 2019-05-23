@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { AccountsService } from 'src/app/services/AccountsService';
 import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @AutoUnsubscribe()
 @Component({
@@ -14,14 +15,23 @@ import { AutoUnsubscribe } from 'ngx-auto-unsubscribe';
 })
 export class ChangeUserDataPopupComponent implements OnInit, OnDestroy {
   isLoading: boolean;
-  accountFormData = { firstName: '', lastName: '', email: '', address: '', phoneNumber: '' };
-  formLabels = ['First Name', 'Last Name', 'Email', 'Address', 'Phone Number'];
-  formKeys = ['firstName', 'lastName', 'email', 'address', 'phoneNumber'];
+
+  accountsFormGroup = new FormGroup({
+    firstName: new FormControl(),
+    lastName: new FormControl(),
+    email: new FormControl(),
+    street: new FormControl(),
+    postcode: new FormControl(),
+    city: new FormControl(),
+    phoneNumber: new FormControl()
+  });
 
   sub: Subscription;
 
   constructor(
-    private dialogRef: MatDialogRef<ChangeUserDataPopupComponent>, private accountsService: AccountsService) { }
+    private snackBar: MatSnackBar,
+    private dialogRef: MatDialogRef<ChangeUserDataPopupComponent>, private accountsService: AccountsService
+  ) { }
 
   ngOnInit() {
     this.accountsService.loggedUserAccountDetails.pipe(take(1))
@@ -34,29 +44,29 @@ export class ChangeUserDataPopupComponent implements OnInit, OnDestroy {
       this.isLoading = isLoading;
       if (data) {
         const { firstName, lastName, email, address, phoneNumber } = data;
-        this.accountFormData = {
+        this.accountsFormGroup.setValue({
           firstName, lastName,
           email: email || '',
-          address: address || '',
+          street: address ? address.street : '',
+          postcode: address ? address.postcode : '',
+          city: address ? address.city : '',
           phoneNumber: phoneNumber || ''
-        };
+        });
       }
     });
-  }
-
-  @debounceEvent(150)
-  onChange({ target }: any) {
-    const key = target.name;
-    this.accountFormData = { ...this.accountFormData, [key]: target.value };
   }
 
   handleUpdateLoggedUserData(e: any) {
     e.preventDefault();
     this.isLoading = true;
-    this.accountsService.updateLoggedUserData(this.accountFormData)
+    this.accountsService.updateLoggedUserData(this.accountsFormGroup.value as any)
       .subscribe(
         value => {
           this.isLoading = false;
+          this.snackBar.open('Pomyślnie zapisano zmiany w ustawieniach', 'ZAMKNIJ', {
+            duration: 2000,
+            panelClass: ['succ-snackbar']
+          });
         },
         err => {
           this.isLoading = false;
