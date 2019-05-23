@@ -83,6 +83,10 @@
 
             <figure (click)="uiService.openBookDetailsPopup(book.id)">
               <img *ngIf="book.pictureName" appImage [baseClass]="'book-img'" [imageClass]="'broken-image'" [src]="book.pictureName" />
+              <button (click)="$event.stopPropagation(); bucketService.addBookToBucket(book)" mat-mini-fab
+                class="add-shopping">
+                <mat-icon>add_shopping_cart</mat-icon>
+              </button>
             </figure>
 
             <p class="book-name">{{book.name}}</p>

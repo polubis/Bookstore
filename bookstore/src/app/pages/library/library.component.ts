@@ -9,6 +9,7 @@ import { debounceEvent } from 'src/app/helpers/debounce-decorator';
 import { PageEvent } from '@angular/material';
 import { PrintersService } from 'src/app/services/PrintersService';
 import { UserInterfaceService } from 'src/app/services/UserInterfaceService';
+import { BucketService } from 'src/app/services/BucketService';
 
 @AutoUnsubscribe()
 @Component({
@@ -34,7 +35,8 @@ export class LibraryComponent implements OnInit, OnDestroy {
     private printersService: PrintersService,
     private libraryService: LibraryService,
     private kindsService: KindsService,
-    private uiService: UserInterfaceService
+    private uiService: UserInterfaceService,
+    private bucketService: BucketService
   ) { }
 
   ngOnInit() {
